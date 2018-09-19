@@ -206,7 +206,8 @@
 <p>2、下载mysql 5.7源码包<br>下载地址：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a><br>在”select operating system”中选择”source code”，我下载的版本是mysql-5.7.23</p>
 <p>3、解压缩<br>tar zxvf mysql-5.7.23.tar.gz -C /usr/local<br>cd /usr/local/mysql-5.7.23/</p>
 <p>4、编译安装<br>cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_PERFSCHEMA_STORAGE_ENGINE=1 -DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 -DWITHOUT_FEDERATED_STORAGE_ENGINE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_EXTRA_CHARSETS=all -DENABLED_LOCAL_INFILE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DMYSQL_USER=mysql -DCOMPILATION_COMMENT=”lq-edition” -DENABLE_DTRACE=0 -DOPTIMIZER_TRACE=1 -DWITH_DEBUG=1</p>
-<p>运行到这一步，出现报错信息:<br>“CMake Error at cmake/boost.cmake:81 (MESSAGE):<br>  You can download it with -DDOWNLOAD_BOOST=1 -DWITH_BOOST=<directory><br>“<br>提示需要安装boost库，安装步骤:<br>(1)</directory></p>
+<p>运行到这一步，出现报错信息:<br>“CMake Error at cmake/boost.cmake:81 (MESSAGE):<br>  You can download it with -DDOWNLOAD_BOOST=1 -DWITH_BOOST=<directory><br>“<br>提示需要安装boost库，安装参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/</a></directory></p>
+<p>make<br>make install</p>
 
     
 	</div>
