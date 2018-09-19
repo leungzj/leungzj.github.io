@@ -3,15 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>ubuntu16.04 搭建Hexo博客 | Hexo</title>
   <meta name="viewport" content="width=device-width">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="一、安装Node.js1、安装curlapt install curl 2、安装node.jscurl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -apt install -y nodejs 3、检查版本(有版本号输出表示安装完成)node -vnpm -v  二、安装Hexo1、npm install -g hexo-cli">
+<meta name="keywords" content="Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu16.04 搭建Hexo博客">
+<meta property="og:url" content="http://yoursite.com/2018/09/19/ubuntu16-04-搭建Hexo博客/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、安装Node.js1、安装curlapt install curl 2、安装node.jscurl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -apt install -y nodejs 3、检查版本(有版本号输出表示安装完成)node -vnpm -v  二、安装Hexo1、npm install -g hexo-cli">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-1.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-2.png">
+<meta property="og:updated_time" content="2018-09-19T08:03:24.708Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="ubuntu16.04 搭建Hexo博客">
+<meta name="twitter:description" content="一、安装Node.js1、安装curlapt install curl 2、安装node.jscurl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -apt install -y nodejs 3、检查版本(有版本号输出表示安装完成)node -vnpm -v  二、安装Hexo1、npm install -g hexo-cli">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-1.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -43,9 +51,7 @@
 	</div>
 </header>
     <div id="main">
-      
-  
-    <article id="post-ubuntu16-04-搭建Hexo博客" class="post">
+      <article id="post-ubuntu16-04-搭建Hexo博客" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
 			<a href="/2018/09/19/ubuntu16-04-搭建Hexo博客/" class="article-date">
@@ -61,8 +67,8 @@
 	<header class="entry-header">
 		
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/09/19/ubuntu16-04-搭建Hexo博客/">ubuntu16.04 搭建Hexo博客</a>
+    <h1 class="article-title entry-title" itemprop="name">
+      ubuntu16.04 搭建Hexo博客
     </h1>
   
 
@@ -111,119 +117,26 @@
 		</div>
 	</footer>
 	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-安装篇-ubuntu16-04-安装mysql5-7" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/09/19/安装篇-ubuntu16-04-安装mysql5-7/" class="article-date">
-  <time datetime="2018-09-19T05:36:00.000Z" itemprop="datePublished">2018-09-19</time>
-</a>
-		</span>
-		<span class="meta-elements author">Jim</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/09/19/安装篇-ubuntu16-04-安装mysql5-7/">ubuntu16.04 源码安装mysql5.7</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>1、安装依赖<br>sudo apt-get install make cmake gcc g++ bison libncurses5-dev build-essential</p>
-<p>2、下载mysql 5.7源码包<br>下载地址：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a><br>在”select operating system”中选择”source code”，我下载的版本是mysql-5.7.23</p>
-<p>3、解压缩<br>tar zxvf mysql-5.7.23.tar.gz -C /usr/local<br>cd /usr/local/mysql-5.7.23/</p>
-<p>4、编译安装<br>cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_PERFSCHEMA_STORAGE_ENGINE=1 -DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 -DWITHOUT_FEDERATED_STORAGE_ENGINE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_EXTRA_CHARSETS=all -DENABLED_LOCAL_INFILE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DMYSQL_USER=mysql -DCOMPILATION_COMMENT=”lq-edition” -DENABLE_DTRACE=0 -DOPTIMIZER_TRACE=1 -DWITH_DEBUG=1</p>
-<p>运行到这一步，出现报错信息:<br>“CMake Error at cmake/boost.cmake:81 (MESSAGE):<br>  You can download it with -DDOWNLOAD_BOOST=1 -DWITH_BOOST=<directory><br>“<br>提示需要安装boost库，安装步骤:<br>(1)</directory></p>
-
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/安装篇/">安装篇</a>
-  </div>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/19/安装篇-ubuntu16-04-安装mysql5-7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          ubuntu16.04 源码安装mysql5.7
+        
+      </div>
+    </a>
+  
+</nav>
 
-			</span>
-			<span class="tags">
-				
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-
-			</span>
-		</div>
-	</footer>
-	
+  
 </article>
 
 
-	<hr class="article-devider">
 
-
-
-  
-    <article id="post-Untitled" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2018/09/05/Untitled/" class="article-date">
-  <time datetime="2018-09-05T08:36:16.000Z" itemprop="datePublished">2018-09-05</time>
-</a>
-		</span>
-		<span class="meta-elements author">Jim</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/09/05/Untitled/">Untitled</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<p>test</p>
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-  
 
     </div>
     <div class="mb-search">
