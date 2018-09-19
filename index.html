@@ -45,6 +45,65 @@
     <div id="main">
       
   
+    <article id="post-ubuntu16-04-源码编译安装boost1-59-0" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2018/09/19/ubuntu16-04-源码编译安装boost1-59-0/" class="article-date">
+  <time datetime="2018-09-19T08:31:00.000Z" itemprop="datePublished">2018-09-19</time>
+</a>
+		</span>
+		<span class="meta-elements author">Jim</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2018/09/19/ubuntu16-04-源码编译安装boost1-59-0/">ubuntu16.04 源码编译安装boost1_59_0</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>1、下载源码包<br>wget <a href="https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz" target="_blank" rel="noopener">https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz</a></p>
+<p>2、解压缩<br>tar zxvf boost_1_59_0.tar.gz</p>
+<p>3、进入解压缩目录<br>cd boost_1_59_0/</p>
+<p>4、运行bootstrap.sh脚本<br>./bootstrap.sh –with-libraries=all –with-toolset=gcc<br>参数解释:<br>–with-libraries指定编译哪些boost库，all的话就是全部编译，只想编译部分库的话就把库的名称写上，用逗号分隔即可<br>–with-toolset指定编译时使用哪种编译器，Linux下使用gcc即可，如果系统中安装了多个版本的gcc，在这里可以指定gcc的版本，比如–with-toolset=gcc-4.4</p>
+<p>5、编译boost<br>./b2 toolset=gcc</p>
+<p>6、安装boost<br>./b2 install<br>可以加–prefix参数:用来指定boost的安装目录，不加此参数的话默认的头文件在/usr/local/include/boost目录下，库文件在/usr/local/lib/目录下</p>
+<p>7、更新系统的动态链接库<br>ldconfig</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/安装篇/">安装篇</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/boost/">boost</a></li></ul>
+
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-ubuntu16-04-搭建Hexo博客" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -136,7 +195,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2018/09/19/安装篇-ubuntu16-04-安装mysql5-7/">ubuntu16.04 源码安装mysql5.7</a>
+      <a class="article-title" href="/2018/09/19/安装篇-ubuntu16-04-安装mysql5-7/">ubuntu16.04 源码编译安装mysql5.7</a>
     </h1>
   
 
