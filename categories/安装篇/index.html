@@ -1,27 +1,21 @@
-extends ./_partial/layout.pug
+extends base
+
+block nav
+    - var pageName = "ARCHIVES"
+    include _partial/menu
+
+block header
+    - var tag = __("site_tags");
+    - var pageHeader = tag + " : " + page.tag
+    include _partial/body_header
+
 block content
-  include ./_partial/page_header.pug
-  ul.post-list(style='max-width:'+ theme.content_width +'px')
-    each post in page.posts.data
-      li 
-        p.date #{time(post.date, 'LL')}
-        if post.title
-          h4.title
-            a(href=url_for(post.path)) #{post.title}
-          .excerpt !{post.excerpt}
-        else
-          .no-title !{post.content}
-        if post.photos && post.photos.length
-          a(href=url_for(post.path))
-            img.photo(src=post.photos[0])
-        ul.meta
-          li
-            i.icon.icon-author
-            | #{config.author}
-          li
-            i.icon.icon-clock
-            | #{parseInt(post.content ? post.content.length/900 : 0)} Minutes
-          li
-            i.icon.icon-category
-            | !{list_categories(post.categories)}
-  include ./_partial/pagination.pug
+    div.body__content.archive__content
+        each post in page.posts.toArray()
+            a(href=url_for(post.path), title=post.title).body__item.post__title
+                span!= post.title
+                - var d = new Date(post.date)
+                - var dstr = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate()
+                span(class="archive_date")!= dstr
+    div.body__pagination
+        div.pull-right!= paginator()
