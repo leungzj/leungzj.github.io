@@ -112,6 +112,87 @@ var _hmt = _hmt || [];
 
   
     
+    <h3 class="article-title"><a href="/2018/09/20/secureCRT显示中文乱码/"><span>secureCRT连接ubuntu显示中文乱码的解决方法</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/20/secureCRT显示中文乱码/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-20T05:33:00.000Z">
+          2018-09-20
+        </time>
+      </a>
+    </span>
+    <br />
+    
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+          <p>一、ubuntu设置<br>1、在/var/lib/locales/supported.d/local文件中添加一行:<br>zh_CN.UTF-8 UTF-8</p>
+<p><img src="/images/pasted-3.png" alt="upload successful"><br>执行sudo locale-gen下载文件</p>
+<p>2、在/etc/environment文件中添加两行:<br>LANG=”zh_CN.UTF-8”<br>LC_ALL=”zh_CN.UTF-8”</p>
+<p><img src="/images/pasted-4.png" alt="upload successful"></p>
+<p>3、在~/.profile文件中添加两行:<br>export LANG=”zh_CN.UTF-8”<br>export LC_ALL=”zh_CN.UTF-8</p>
+<p><img src="/images/pasted-5.png" alt="upload successful"><br>执行source ~/.profile</p>
+<p>二、secureCRT设置<br>1、选择options – session options，弹出设置窗口<br>2、选择terminal – emulation，terminal下拉表选择linux，并在”ansi color”前面方框打上勾</p>
+<p><img src="/images/pasted-6.png" alt="upload successful"></p>
+<p>3、选择terminal – appearance，”current color scheme”选择traditional</p>
+<p><img src="/images/pasted-7.png" alt="upload successful"><br>font字体选择fangsong，script选择”Chinese GB2312”</p>
+<p><img src="/images/pasted-8.png" alt="upload successful"><br>character encoding下拉表选择utf-8</p>
+<p><img src="/images/pasted-9.png" alt="upload successful"></p>
+<p>退出当前crt窗口，重新登录试试！</p>
+
+      
+    </div>
+    
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/工具篇/">工具篇</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/secureCRT/">secureCRT</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+  
+    
+    <h3 class="article-read"><a href="/2018/09/20/secureCRT显示中文乱码/"><span>more</span></a></h3>
+    
+  
+</article>
+
+
+
+
+
+  <article class="article-container ">
+
+  
+    
     <h3 class="article-title"><a href="/2018/09/19/ubuntu16-04-源码编译安装boost1-59-0/"><span>ubuntu16.04 源码编译安装boost1_59_0</span></a></h3>
     
   
@@ -445,6 +526,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         <p>归档:</p>
             
                 <a href="/categories/安装篇/" title="安装篇" rel="2">安装篇</a>
+            
+                <a href="/categories/工具篇/" title="工具篇" rel="1">工具篇</a>
             
                 <a href="/categories/搭建篇/" title="搭建篇" rel="1">搭建篇</a>
             
