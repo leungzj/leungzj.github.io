@@ -3,28 +3,27 @@
 <head >
   <meta charset="utf-8">
   
-  <title>ubuntu16.04 源码编译安装boost1_59_0 | Hexo</title>
+  <title>ubuntu 16.04搭建Hexo博客后台管理系统 | Hexo</title>
 
   
   <meta name="author" content="Jim">
   
 
   
-  <meta name="description" content="1、下载源码包wget https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz
-2、解压缩tar zxvf boost_1_59_0.tar.gz
-3、进入解压缩目录cd boost_1_59_0/">
+  <meta name="description" content="1、安装Hexo-adminnpm install –save hexo-admin
+#之前已经介绍安装Hexo,参考链接:https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A">
   
 
   
   
-  <meta name="keywords" content="boost">
+  <meta name="keywords" content="Hexo">
   
 
   <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="ubuntu16.04 源码编译安装boost1_59_0"/>
+  <meta property="og:title" content="ubuntu 16.04搭建Hexo博客后台管理系统"/>
 
   <meta property="og:site_name" content="Hexo"/>
 
@@ -117,15 +116,15 @@ var _hmt = _hmt || [];
 
   
     
-    <h3 class="article-title"><span>ubuntu16.04 源码编译安装boost1_59_0</span></h3>
+    <h3 class="article-title"><span>ubuntu 16.04搭建Hexo博客后台管理系统</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2018/09/19/ubuntu16-04-源码编译安装boost1-59-0/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-19T08:31:00.000Z">
-          2018-09-19
+      <a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-20T06:40:00.000Z">
+          2018-09-20
         </time>
       </a>
     </span>
@@ -143,13 +142,19 @@ var _hmt = _hmt || [];
   <div class="article-content">
     <div class="entry">
       
-          <p>1、下载源码包<br>wget <a href="https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz" target="_blank" rel="noopener">https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz</a></p>
-<p>2、解压缩<br>tar zxvf boost_1_59_0.tar.gz</p>
-<p>3、进入解压缩目录<br>cd boost_1_59_0/</p>
-<p>4、运行bootstrap.sh脚本<br>./bootstrap.sh –with-libraries=all –with-toolset=gcc<br>参数解释:<br>–with-libraries指定编译哪些boost库，all的话就是全部编译，只想编译部分库的话就把库的名称写上，用逗号分隔即可<br>–with-toolset指定编译时使用哪种编译器，Linux下使用gcc即可，如果系统中安装了多个版本的gcc，在这里可以指定gcc的版本，比如–with-toolset=gcc-4.4</p>
-<p>5、编译boost<br>./b2 toolset=gcc</p>
-<p>6、安装boost<br>./b2 install<br>可以加–prefix参数:用来指定boost的安装目录，不加此参数的话默认的头文件在/usr/local/include/boost目录下，库文件在/usr/local/lib/目录下</p>
-<p>7、更新系统的动态链接库<br>ldconfig</p>
+          <p>1、安装Hexo-admin<br>npm install –save hexo-admin</p>
+<p>#之前已经介绍安装Hexo,参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</a></p>
+<p>2、启动服务<br>hexo s &amp; </p>
+<p>3、访问后台<br>http://你的ip地址:4000/admin</p>
+<p>4、后台启用密码登录(默认无密码)<br>点击”Setup authentification here”</p>
+<p><img src="/images/pasted-10.png" alt="upload successful"><br>弹出设置窗口，按要求填入登录用户名和密码，然后将”admin config section”下面那一段代码复制到Hexo的配置文件_config.yml即可</p>
+<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+<p>5、重启Hexo<br>killall hexo<br>hexo s &amp;</p>
+<p>6、更换Hexo主题<br>先切换到Hexo所在安装目录，通过git下载主题文件到本地文件夹<br>git clone <a href="https://github.com/BosenY/Lap.git" target="_blank" rel="noopener">https://github.com/BosenY/Lap.git</a> theme/lap</p>
+<p>#Hexo主题汇总链接:<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+<p>7、修改Hexo配置文件_config.yml</p>
+<p><img src="/images/pasted-12.png" alt="upload successful"></p>
+<p>8、保存配置文件，重新生成并重启Hexo服务<br>hexo g<br>hexo d<br>killall hexo<br>hexo s &amp;</p>
 
       
     </div>
@@ -164,7 +169,7 @@ var _hmt = _hmt || [];
 
     <span class="post-categories">
       <i class="icon-categories"></i>
-        <a href="/categories/安装篇/">安装篇</a>
+        <a href="/categories/搭建篇/">搭建篇</a>
     </span>
     
 
@@ -173,7 +178,7 @@ var _hmt = _hmt || [];
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/boost/">boost</a>
+        <a href="/tags/Hexo/">Hexo</a>
     </span>
     
 
@@ -262,7 +267,7 @@ var _hmt = _hmt || [];
 			return "\\u" + RegExp["$1"].charCodeAt(0).toString(16);
 			});
 		}
-		var title = 'ubuntu16.04 源码编译安装boost1_59_0'
+		var title = 'ubuntu 16.04搭建Hexo博客后台管理系统'
 		var GitHub_id = 'Boseny'
 		var client_id = 'f40c67d0359a2646d2b1'
 		var client_secret = '1cbedbd1a1a2e4b42901aee3d7afe1856c1b7e2d'

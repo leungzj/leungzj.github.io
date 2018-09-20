@@ -112,6 +112,96 @@ var _hmt = _hmt || [];
 
   
     
+    <h3 class="article-title"><a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/"><span>ubuntu 16.04搭建Hexo博客后台管理系统</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-20T06:40:00.000Z">
+          2018-09-20
+        </time>
+      </a>
+    </span>
+    <br />
+    
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+          <p>1、安装Hexo-admin<br>npm install –save hexo-admin</p>
+<p>#之前已经介绍安装Hexo,参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</a></p>
+<p>2、启动服务<br>hexo s &amp; </p>
+<p>3、访问后台<br>http://你的ip地址:4000/admin</p>
+<p>4、后台启用密码登录(默认无密码)<br>点击”Setup authentification here”</p>
+<p><img src="/images/pasted-10.png" alt="upload successful"><br>弹出设置窗口，按要求填入登录用户名和密码，然后将”admin config section”下面那一段代码复制到Hexo的配置文件_config.yml即可</p>
+<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+<p>5、重启Hexo<br>killall hexo<br>hexo s &amp;</p>
+<p>6、更换Hexo主题<br>先切换到Hexo所在安装目录，通过git下载主题文件到本地文件夹<br>git clone <a href="https://github.com/BosenY/Lap.git" target="_blank" rel="noopener">https://github.com/BosenY/Lap.git</a> theme/lap</p>
+<p>#Hexo主题汇总链接:<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+<p>7、修改Hexo配置文件_config.yml</p>
+<p><img src="/images/pasted-12.png" alt="upload successful"></p>
+<p>8、保存配置文件，重新生成并重启Hexo服务<br>hexo g<br>hexo d<br>killall hexo<br>hexo s &amp;</p>
+
+      
+    </div>
+    
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/搭建篇/">搭建篇</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Hexo/">Hexo</a>
+    </span>
+    
+
+    </div>
+
+    
+    <div class="article-meta pull-right">
+      <span>
+        <i class="icon-comments"></i>
+        <span>
+          <a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/#comment">Comments</a>
+        </span>
+      </span>
+    </div>
+    
+  </div>
+  
+    
+    <h3 class="article-read"><a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/"><span>more</span></a></h3>
+    
+  
+</article>
+
+
+
+
+
+  <article class="article-container ">
+
+  
+    
     <h3 class="article-title"><a href="/2018/09/20/secureCRT显示中文乱码/"><span>secureCRT连接ubuntu显示中文乱码的解决方法</span></a></h3>
     
   
@@ -574,7 +664,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
                 <a href="/categories/工具篇/" title="工具篇" rel="1">工具篇</a>
             
-                <a href="/categories/搭建篇/" title="搭建篇" rel="1">搭建篇</a>
+                <a href="/categories/搭建篇/" title="搭建篇" rel="2">搭建篇</a>
             
     </div>
 
@@ -585,19 +675,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
         <p>Links:</p>
             
                 
-                    <li class="social-item"><i class="fa fa-fw fa-github"></i><a href="https://github.com/Boseny">GitHub</a></li>
-                
-            
-                
-                    <li class="social-item"><i class="fa fa-fw fa-weibo"></i><a href="https://weibo.com/boseny">微博</a></li>
-                
-            
-                
-                    <li class="social-item"><i class=" fa fa-fw zhihu-icon"></i><a href="https://www.zhihu.com/people/boseny">知乎</a></li>
-                
-            
-                
-                    <li class="social-item"><i class=" fa fa-fw lofter-icon"></i><a href="http://boseny.lofter.com/">Lofter</a></li>
+                    <li class="social-item"><i class="fa fa-fw fa-github"></i><a href="https://github.com/leungzj">GitHub</a></li>
                 
             
     </div>
