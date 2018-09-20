@@ -208,6 +208,12 @@
 <p>4、编译安装<br>cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_PERFSCHEMA_STORAGE_ENGINE=1 -DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 -DWITHOUT_FEDERATED_STORAGE_ENGINE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_EXTRA_CHARSETS=all -DENABLED_LOCAL_INFILE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DMYSQL_USER=mysql -DCOMPILATION_COMMENT=”lq-edition” -DENABLE_DTRACE=0 -DOPTIMIZER_TRACE=1 -DWITH_DEBUG=1</p>
 <p>运行到这一步，出现报错信息:<br>“CMake Error at cmake/boost.cmake:81 (MESSAGE):<br>  You can download it with -DDOWNLOAD_BOOST=1 -DWITH_BOOST=<directory><br>“<br>提示需要安装boost库，安装参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/</a></directory></p>
 <p>make<br>make install</p>
+<p>5、配置mysql<br>(1)创建用户和用户组<br>groupadd mysql<br>useradd -g mysql mysql</p>
+<p>(2)设置mysql安装目录的权限<br>cd /usr/local/mysql<br>chown -R mysql:mysql ./</p>
+<p>(3)mysql初始化 #这里会生成一个mysql临时登录密码，需要记下来，稍后登录mysql会用到<br>bin/mysqld –initialize –user=mysql</p>
+<p>(4)启动mysql<br>support-files/mysql.server start</p>
+<p>(5)修改mysql登录密码<br>bin/mysql -u root -p<br>SET PASSWORD FOR ‘root‘@’localhost’ = PASSWORD(‘newpassword’);</p>
+<p>6、远程连接mysql<br>用类似navicat的客户端连接mysql，如果出现提示”is not allowed to connect”，需要在mysql命令行上设置远程连接权限，检查iptables是否开放3306端口<br>(1)GRANT ALL ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘password’ WITH GRANT OPTION;<br>(2)iptables -A INPUT -P tcp –dport 3306 -j ACCEPT</p>
 
     
 	</div>
