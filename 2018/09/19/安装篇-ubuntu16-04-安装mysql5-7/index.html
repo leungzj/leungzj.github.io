@@ -1,20 +1,326 @@
-extends base
+<!DOCTYPE HTML>
+<html>
+<head >
+  <meta charset="utf-8">
+  
+  <title>ubuntu16.04 源码编译安装mysql5.7 | Hexo</title>
 
-block nav
-    - var pageName = "POST"
-    include _partial/menu
+  
+  <meta name="author" content="Jim">
+  
 
-block header
-    - var pageHeader = page.title
-    include _partial/body_header
+  
+  <meta name="description" content="1、安装依赖sudo apt-get install make cmake gcc g++ bison libncurses5-dev build-essential
+2、下载mysql 5.7源码包下载地址：https://dev.mysql.com/downloads/mysql/在”selec">
+  
 
-block content
-    div.body__content
-        if page.tags.length > 0
-            div.body__item.post_tags
-                for tag in page.tags.toArray()
-                    a(href=url_for(tag.path) class="post_tag")= tag.name
-        if page.content.length > 0
-            div.body__item
-                != page.more
-    div#disqus_thread
+  
+  
+  <meta name="keywords" content="mysql">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ubuntu16.04 源码编译安装mysql5.7"/>
+
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+  
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5005349780815724",
+    enable_page_level_ads: true
+  });
+</script>
+
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?223eea22355699157e147870eb124b24";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  <link rel="manifest" href="/manifest.json">
+  <link href="/favicon.ico" rel="icon">
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    
+
+    <header class="header-container" style="background-image: url('/images/blog-bg.jpg');">
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+          <button type="button" id="tglBtn" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jim</a>
+        </div>
+        <div id="bosenyblog-navbar">
+          <div class="navbar-collapse" id="bs-example-navbar-collapse-6">
+            <ul class="nav navbar-nav navbar-right">
+            
+              <li><a href="/">Home</a></li>
+            
+              <li><a href="/archives">Archives</a></li>
+            
+              <li><a href="/about">About</a></li>
+            
+              <li><a href="/tags">Tags</a></li>
+            
+            </ul>
+          </div>
+        </div>
+
+    </div>
+ </nav>
+ <div class="gotop-btn">
+
+ </div>
+</header>
+
+        
+          <div class="container ">
+          <div class="row">
+            <main class="site-main posts-loop col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container" style="position: inherit;">
+            <article class="article-container ">
+
+  
+    
+    <h3 class="article-title"><span>ubuntu16.04 源码编译安装mysql5.7</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/19/安装篇-ubuntu16-04-安装mysql5-7/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-19T05:36:00.000Z">
+          2018-09-19
+        </time>
+      </a>
+    </span>
+    <br />
+    
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+    
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+          <p>1、安装依赖<br>sudo apt-get install make cmake gcc g++ bison libncurses5-dev build-essential</p>
+<p>2、下载mysql 5.7源码包<br>下载地址：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a><br>在”select operating system”中选择”source code”，我下载的版本是mysql-5.7.23</p>
+<p>3、解压缩<br>tar zxvf mysql-5.7.23.tar.gz -C /usr/local<br>cd /usr/local/mysql-5.7.23/</p>
+<p>4、编译安装<br>cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_PERFSCHEMA_STORAGE_ENGINE=1 -DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 -DWITHOUT_FEDERATED_STORAGE_ENGINE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_EXTRA_CHARSETS=all -DENABLED_LOCAL_INFILE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DMYSQL_USER=mysql -DCOMPILATION_COMMENT=”lq-edition” -DENABLE_DTRACE=0 -DOPTIMIZER_TRACE=1 -DWITH_DEBUG=1</p>
+<p>运行到这一步，出现报错信息:<br>“CMake Error at cmake/boost.cmake:81 (MESSAGE):<br>  You can download it with -DDOWNLOAD_BOOST=1 -DWITH_BOOST=<directory><br>“<br>提示需要安装boost库，安装参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/</a></directory></p>
+<p>make<br>make install</p>
+<p>5、配置mysql<br>(1)创建用户和用户组<br>groupadd mysql<br>useradd -g mysql mysql</p>
+<p>(2)设置mysql安装目录的权限<br>cd /usr/local/mysql<br>chown -R mysql:mysql ./</p>
+<p>(3)mysql初始化 #这里会生成一个mysql临时登录密码，需要记下来，稍后登录mysql会用到<br>bin/mysqld –initialize –user=mysql</p>
+<p>(4)启动mysql<br>support-files/mysql.server start</p>
+<p>(5)修改mysql登录密码<br>bin/mysql -u root -p<br>SET PASSWORD FOR ‘root‘@’localhost’ = PASSWORD(‘newpassword’);</p>
+<p>6、远程连接mysql<br>用类似navicat的客户端连接mysql，如果出现提示”is not allowed to connect”，需要在mysql命令行上设置远程连接权限，检查iptables是否开放3306端口<br>(1)GRANT ALL ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘password’ WITH GRANT OPTION;<br>(2)iptables -A INPUT -P tcp –dport 3306 -j ACCEPT</p>
+
+      
+    </div>
+    
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/安装篇/">安装篇</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/mysql/">mysql</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+  
+    
+    
+  
+</article>
+   
+    <div id="toc" class="toc-article ">
+    <div class="toc-title">目录</div>
+    
+</div>
+
+
+  
+
+	<!-- async load  -->
+	<script>
+			function async(u, c) {
+				var d = document, t = 'script',
+						o = d.createElement(t),
+						s = d.getElementsByTagName(t)[0];
+				o.src = u;
+				if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+				s.parentNode.insertBefore(o, s);
+			}
+	</script>
+	<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+	<script>
+			async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+					anchors.options = {
+						visible: 'hover',
+						placement: 'left',
+						// icon: '#'
+					};
+					anchors.add().remove('.article-title').remove('.subheading').remove('.sidebar-container h5');
+			})
+	</script>
+	<style>
+			/* place left on bigger screen */
+			@media all and (min-width: 800px) {
+					.anchorjs-link{
+							position: absolute;
+							left: -0.75em;
+							font-size: 1.1em;
+							margin-top : -0.1em;
+					}
+			}
+	</style>
+
+
+
+
+<!-- UY BEGIN -->
+	<div id="gitment-container"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script src="/js/web-pinyin.js"></script>
+	<script>
+		function toUnicode(s){ 
+			return s.replace(/([\u4E00-\u9FA5]|[\uFE30-\uFFA0])/g,function(){
+			return "\\u" + RegExp["$1"].charCodeAt(0).toString(16);
+			});
+		}
+		var title = 'ubuntu16.04 源码编译安装mysql5.7'
+		var GitHub_id = 'Boseny'
+		var client_id = 'f40c67d0359a2646d2b1'
+		var client_secret = '1cbedbd1a1a2e4b42901aee3d7afe1856c1b7e2d'
+		var repo = 'boseny.me'
+		var gitment = new Gitment({
+		// id: '页面 ID', // 可选。默认为 location.href
+		// id:"11" ,
+		id: title,
+		title: title,
+		owner: GitHub_id,//'你的 GitHub ID',
+		repo: repo,//'存储评论的 repo',
+		oauth: {
+			client_id: client_id,//'你的 client ID',
+			client_secret: client_secret,//'你的 client secret',
+		},
+		})
+		gitment.render('gitment-container')
+	</script>
+<!-- UY END -->
+
+
+
+
+            </main>
+          </div>
+        </div>
+       
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/BosenY/Lap" target="_blank">Lap</a>
+    <br/><span id="busuanzi_container_site_uv"> 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+    </br>
+    
+      
+        &copy; 2018 Jim
+      
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-92842840-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+
+  </div>
+
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/draw-something/dist/draw.min.js"></script>
+  <script>
+    let maxNum = Number.parseInt('10')
+    let iconText = '❤'
+    let color = 'red'
+    new Draw({maxNum, iconText, color})
+  </script>
+
+<script src="/js/index.js"></script>
+<script src="/js/search.js"></script>
+
+</body>
+</html>

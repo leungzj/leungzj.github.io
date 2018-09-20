@@ -1,20 +1,337 @@
-extends base
+<!DOCTYPE HTML>
+<html>
+<head >
+  <meta charset="utf-8">
+  
+  <title>ubuntu16.04 搭建Hexo博客 | Hexo</title>
 
-block nav
-    - var pageName = "POST"
-    include _partial/menu
+  
+  <meta name="author" content="Jim">
+  
 
-block header
-    - var pageHeader = page.title
-    include _partial/body_header
+  
+  <meta name="description" content="一、安装Node.js1、安装curlapt install curl
+2、安装node.jscurl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -apt install -y nodejs
+3、检查版本(有版本号输出表示安装完成">
+  
 
-block content
-    div.body__content
-        if page.tags.length > 0
-            div.body__item.post_tags
-                for tag in page.tags.toArray()
-                    a(href=url_for(tag.path) class="post_tag")= tag.name
-        if page.content.length > 0
-            div.body__item
-                != page.more
-    div#disqus_thread
+  
+  
+  <meta name="keywords" content="Hexo">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ubuntu16.04 搭建Hexo博客"/>
+
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+  
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5005349780815724",
+    enable_page_level_ads: true
+  });
+</script>
+
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?223eea22355699157e147870eb124b24";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  <link rel="manifest" href="/manifest.json">
+  <link href="/favicon.ico" rel="icon">
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    
+
+    <header class="header-container" style="background-image: url('/images/blog-bg.jpg');">
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+          <button type="button" id="tglBtn" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jim</a>
+        </div>
+        <div id="bosenyblog-navbar">
+          <div class="navbar-collapse" id="bs-example-navbar-collapse-6">
+            <ul class="nav navbar-nav navbar-right">
+            
+              <li><a href="/">Home</a></li>
+            
+              <li><a href="/archives">Archives</a></li>
+            
+              <li><a href="/about">About</a></li>
+            
+              <li><a href="/tags">Tags</a></li>
+            
+            </ul>
+          </div>
+        </div>
+
+    </div>
+ </nav>
+ <div class="gotop-btn">
+
+ </div>
+</header>
+
+        
+          <div class="container ">
+          <div class="row">
+            <main class="site-main posts-loop col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container" style="position: inherit;">
+            <article class="article-container ">
+
+  
+    
+    <h3 class="article-title"><span>ubuntu16.04 搭建Hexo博客</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/19/ubuntu16-04-搭建Hexo博客/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-19T06:56:00.000Z">
+          2018-09-19
+        </time>
+      </a>
+    </span>
+    <br />
+    
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+    
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+          <p>一、安装Node.js<br>1、安装curl<br>apt install curl</p>
+<p>2、安装node.js<br>curl -sL <a href="https://deb.nodesource.com/setup_8.x" target="_blank" rel="noopener">https://deb.nodesource.com/setup_8.x</a> | sudo -E bash -<br>apt install -y nodejs</p>
+<p>3、检查版本(有版本号输出表示安装完成)<br>node -v<br>npm -v </p>
+<p>二、安装Hexo<br>1、npm install -g hexo-cli</p>
+<p>2、进入你希望建站的文件夹(必须是一个空的文件夹)，执行初始化命令:<br>hexo init</p>
+<p>3、安装依赖包:<br>npm install</p>
+<p>至此，Hexo本地博客搭建完成。</p>
+<p>三、Hexo常用命令<br>hexo help:查看帮助<br>hexo init:初始化一个目录<br>hexo generate:生成网页，在public目录查看整个网站的文件，简写为hexo g<br>hexo server:用来启动本地站点，执行后即可在浏览器中输localhost:4000查看，简写为hexo s<br>hexo deploy:部署.deploy目录，可以简化为hexo d<br>hexo clean:清除缓存，强烈建议每次部署deploy之前先清理缓存</p>
+<p>四、使用github pages服务部署hexo<br>Giuhub Page介绍:我们用来托管博客的服务叫做 Github Pages，它是 Github 用来提供给个人/组织或者项目的网页服务，只需要部署到你的 Github Repository，推送代码，便可以实时呈现。</p>
+<p>1、首先要使用邮箱注册Github账号</p>
+<p>2、设置git<br>git config –global user.email “<a href="mailto:you@example.com" target="_blank" rel="noopener">you@example.com</a>“<br>git config –global user.name “Your Name”</p>
+<p>3、安装插件<br>npm install hexo-deployer-git –save</p>
+<p>#为了部署到Github上，需要安装hexo-deployer-git插件</p>
+<p>4、生成ssh秘钥<br>ssh-keygen -t rsa -C <a href="mailto:you@example.com" target="_blank" rel="noopener">you@example.com</a> #-C后面跟住你在github的用户名邮箱，这样公钥才会被github认可</p>
+<p>5、查看你的公钥，添加到Github账户的sshkey中<br>less ~/.ssh/id_rsa.pub</p>
+<p>6、Github上新建项目，项目名称为”用户名.github.io”，例如我的用户名是<br>leungzj，则创建的项目名为leungzj.github.io</p>
+<p>7、在setting–SSH and GPG keys中，添加生成的公钥，也就是将~/.ssh/id_rsa.pub的内容添加到这里</p>
+<p><img src="/images/pasted-1.png" alt="upload successful"></p>
+<p>8、修改Hexo配置文件</p>
+<p><img src="/images/pasted-2.png" alt="upload successful"></p>
+<p>9、编译并上传部署到Github<br>hexo generate #编译<br>hexo deploy #将hexo部署到Github io上</p>
+<p>10、访问Hexo博客<br>通过用户名.github.io就可以Hexo博客啦！<br>例如我的博客:<a href="https://leungzj.github.io/" target="_blank" rel="noopener">https://leungzj.github.io/</a></p>
+
+      
+    </div>
+    
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/搭建篇/">搭建篇</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Hexo/">Hexo</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+  
+    
+    
+  
+</article>
+   
+    <div id="toc" class="toc-article ">
+    <div class="toc-title">目录</div>
+    
+</div>
+
+
+  
+
+	<!-- async load  -->
+	<script>
+			function async(u, c) {
+				var d = document, t = 'script',
+						o = d.createElement(t),
+						s = d.getElementsByTagName(t)[0];
+				o.src = u;
+				if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+				s.parentNode.insertBefore(o, s);
+			}
+	</script>
+	<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+	<script>
+			async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+					anchors.options = {
+						visible: 'hover',
+						placement: 'left',
+						// icon: '#'
+					};
+					anchors.add().remove('.article-title').remove('.subheading').remove('.sidebar-container h5');
+			})
+	</script>
+	<style>
+			/* place left on bigger screen */
+			@media all and (min-width: 800px) {
+					.anchorjs-link{
+							position: absolute;
+							left: -0.75em;
+							font-size: 1.1em;
+							margin-top : -0.1em;
+					}
+			}
+	</style>
+
+
+
+
+<!-- UY BEGIN -->
+	<div id="gitment-container"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script src="/js/web-pinyin.js"></script>
+	<script>
+		function toUnicode(s){ 
+			return s.replace(/([\u4E00-\u9FA5]|[\uFE30-\uFFA0])/g,function(){
+			return "\\u" + RegExp["$1"].charCodeAt(0).toString(16);
+			});
+		}
+		var title = 'ubuntu16.04 搭建Hexo博客'
+		var GitHub_id = 'Boseny'
+		var client_id = 'f40c67d0359a2646d2b1'
+		var client_secret = '1cbedbd1a1a2e4b42901aee3d7afe1856c1b7e2d'
+		var repo = 'boseny.me'
+		var gitment = new Gitment({
+		// id: '页面 ID', // 可选。默认为 location.href
+		// id:"11" ,
+		id: title,
+		title: title,
+		owner: GitHub_id,//'你的 GitHub ID',
+		repo: repo,//'存储评论的 repo',
+		oauth: {
+			client_id: client_id,//'你的 client ID',
+			client_secret: client_secret,//'你的 client secret',
+		},
+		})
+		gitment.render('gitment-container')
+	</script>
+<!-- UY END -->
+
+
+
+
+            </main>
+          </div>
+        </div>
+       
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/BosenY/Lap" target="_blank">Lap</a>
+    <br/><span id="busuanzi_container_site_uv"> 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+    </br>
+    
+      
+        &copy; 2018 Jim
+      
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-92842840-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+
+  </div>
+
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/draw-something/dist/draw.min.js"></script>
+  <script>
+    let maxNum = Number.parseInt('10')
+    let iconText = '❤'
+    let color = 'red'
+    new Draw({maxNum, iconText, color})
+  </script>
+
+<script src="/js/index.js"></script>
+<script src="/js/search.js"></script>
+
+</body>
+</html>
