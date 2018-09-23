@@ -112,87 +112,6 @@ var _hmt = _hmt || [];
 
   
     
-    <h3 class="article-title"><a href="/2018/09/22/keepalived安装及配置/"><span>keepalived在centos7中的安装及配置</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/22/keepalived安装及配置/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-22T10:06:00.000Z">
-          2018-09-22
-        </time>
-      </a>
-    </span>
-    <br />
-    
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-          <p>keepalived目前已经被官方收录进linux版本当中，在centos中使用yum就可以下载安装keepalived<br>yum info keepalived #查看系统中的keepalived版本<br>yun install keepalived #安装keepalived<br>rpm -ql keepalived #查看安装keepalived生成了哪些文件<br>cat /usr/lib/systemd/system/keepalived.service #查看keepalived的启动等配置信息<br>cat /etc/sysconfig/keepalived #查看keepalived支持的参数帮助</p>
-<p>keepalived配置文件:分为三部分<br>1、global configuration<br>2、vrrp configuration #分两段，第一段vrrp instance，第二段vrrp synchonization group<br>3、lvs configuration #根据配置文件生成lvs规则</p>
-<p>man keepalived.conf #查看keepalived配置文件的配置帮助<br>详细配置:<br>1、global_defs:<br>notification_email<br>notification_email_from<br>smtp_server<br>smtp_connection_timeout<br>router_id #即hostanme<br>vrrp_mcast_group 224.x.x.x #定义多播地址，224固定不变，后面三位可以变化</p>
-<p>2、vrrp_instance:<br>state #master或backup<br>interface #在centos7中，int dev的名字是eno16777736<br>virtual_router_id #vrid是唯一的，跟虚拟Mac相关，虚拟Mac的格式是00-00-5E-00-01-{vrid} #根据Mac格式，前面是固定的，后面补上vrid。温馨提示，master和backup的virtual_router_id</p>
-
-      
-    </div>
-    
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/高可用web/">高可用web</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/keepalived/">keepalived</a>
-    </span>
-    
-
-    </div>
-
-    
-    <div class="article-meta pull-right">
-      <span>
-        <i class="icon-comments"></i>
-        <span>
-          <a href="/2018/09/22/keepalived安装及配置/#comment">Comments</a>
-        </span>
-      </span>
-    </div>
-    
-  </div>
-  
-    
-    <h3 class="article-read"><a href="/2018/09/22/keepalived安装及配置/"><span>more</span></a></h3>
-    
-  
-</article>
-
-
-
-
-
-  <article class="article-container ">
-
-  
-    
     <h3 class="article-title"><a href="/2018/09/22/eepalived简介、组件及配置文件/"><span>初探Keepalived</span></a></h3>
     
   
@@ -831,7 +750,7 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
             
                 <a href="/categories/搭建篇/" title="搭建篇" rel="2">搭建篇</a>
             
-                <a href="/categories/高可用web/" title="高可用web" rel="2">高可用web</a>
+                <a href="/categories/高可用web/" title="高可用web" rel="1">高可用web</a>
             
     </div>
 
