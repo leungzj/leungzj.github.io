@@ -112,6 +112,171 @@ var _hmt = _hmt || [];
 
   
     
+    <h3 class="article-title"><a href="/2018/09/22/keepalived安装及配置/"><span>keepalived在centos7中的安装及配置</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/22/keepalived安装及配置/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-22T10:06:00.000Z">
+          2018-09-22
+        </time>
+      </a>
+    </span>
+    <br />
+    
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+          <p>keepalived目前已经被官方收录进linux版本当中，在centos中使用yum就可以下载安装keepalived<br>yum info keepalived #查看系统中的keepalived版本<br>yun install keepalived #安装keepalived<br>rpm -ql keepalived #查看安装keepalived生成了哪些文件<br>cat /usr/lib/systemd/system/keepalived.service #查看keepalived的启动等配置信息<br>cat /etc/sysconfig/keepalived #查看keepalived支持的参数帮助</p>
+<p>keepalived配置文件:分为三部分<br>1、global configuration<br>2、vrrp configuration #分两段，第一段vrrp instance，第二段vrrp synchonization group<br>3、lvs configuration #根据配置文件生成lvs规则</p>
+<p>man keepalived.conf #查看keepalived配置文件的配置帮助<br>详细配置:<br>1、global_defs:<br>notification_email<br>notification_email_from<br>smtp_server<br>smtp_connection_timeout<br>router_id #即hostanme<br>vrrp_mcast_group 224.x.x.x #定义多播地址，224固定不变，后面三位可以变化</p>
+<p>2、vrrp_instance:<br>state #master或backup<br>interface #在centos7中，int dev的名字是eno16777736<br>virtual_router_id #vrid是唯一的，跟虚拟Mac相关，虚拟Mac的格式是00-00-5E-00-01-{vrid} #根据Mac格式，前面是固定的，后面补上vrid。温馨提示，master和backup的virtual_router_id</p>
+
+      
+    </div>
+    
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/高可用web/">高可用web</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/keepalived/">keepalived</a>
+    </span>
+    
+
+    </div>
+
+    
+    <div class="article-meta pull-right">
+      <span>
+        <i class="icon-comments"></i>
+        <span>
+          <a href="/2018/09/22/keepalived安装及配置/#comment">Comments</a>
+        </span>
+      </span>
+    </div>
+    
+  </div>
+  
+    
+    <h3 class="article-read"><a href="/2018/09/22/keepalived安装及配置/"><span>more</span></a></h3>
+    
+  
+</article>
+
+
+
+
+
+  <article class="article-container ">
+
+  
+    
+    <h3 class="article-title"><a href="/2018/09/22/eepalived简介、组件及配置文件/"><span>初探Keepalived</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/22/eepalived简介、组件及配置文件/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-22T08:16:00.000Z">
+          2018-09-22
+        </time>
+      </a>
+    </span>
+    <br />
+    
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+          <p>keepalived是vrrp协议在linux主机上的实现，能够根据配置文件自动生成ipvs规则，对各RS做健康状态检查。<br>1、特点<br>(1)轻量级<br>(2)以守护进程的形式<br>(3)节点类型分为active/passive</p>
+<p>2、组件<br>(1)vrrp stack<br>(2)checkers<br>(3)ipvs wrapper</p>
+<p>3、keepalived涉及的协议<br>(1)组播:主服务器发送hello信息给从服务器，证明”I am alive”<br>配置同进退vrrp实例时，要注意多播地址，每一组实例默认会分配一个组播地址。如果是在配置文件中指定一个组播地址，则只能配置一组实例；如果需要配置多组实例(不让其中一台主机有空闲)，则需要在各组实例的配置中配置上组播地址</p>
+<p>(2)ntp:network time protocol<br>格式:ntpdate timeserver_ip，以这个时间服务器的时间为准，同步自己的时间<br>date命令调整时间的格式:”date 月日时分年.秒”</p>
+<p>(3)vrrp:virtual routing redundent protocol，虚拟路由冗余协议(vrrp是路由交换协议，keepalived是vrrp在linux上的实现)<br>vrrp是一种容错协议，保证当主机的下一跳路由出现故障时，由另一台路由器来代替出故障的路由器进行工作，从而保障网络通信的连续性和可靠性。在vrrp协议中，分为master和backup两种角色。</p>
+<p>vrrp中的一些概念:<br>  vrid:虚拟路由器标识，有相同vrid的一组路由器构成一个虚拟路由器<br>  虚拟Mac:一个虚拟路由器拥有一个虚拟Mac，通常情况下虚拟路由器回应arp请求使用的是虚拟Mac<br>  优先级:vrrp根据优先级来确定虚拟路由器中每台路由器的地位<br>  非抢占模式:即使backup路由器的优先级比master高，也不会抢占master的地位<br>  抢占模式:根据优先级的大小来确定谁是master</p>
+<p>vrrp工作原理:<br>  a.虚拟路由器中的路由器根据优先级选举出master，master路由器通过发送免费arp报文，将自己的虚拟Mac地址通知给其他与其连接的设备或主机，从而承担报文转发任务<br>  b.master路由器周期性发送vrrp报文，以公布其配置信息(优先级)和工作状况<br>  c.如果master路由器出现故障，虚拟路由器中的backup路由器将根据优先级重新选举新的master<br>  d.虚拟路由器切换时，master路由器由一台设备切换成另外一台设备，新的master路由器只是简单的发送一个携带虚拟路由器的Mac地址和虚拟ip地址信息的免费arp报文，这样就可以更新与之连接的设备或主机的arp信息<br>  e.backup路由器优先级高于master的时候，由backup路由器的工作方式(抢占或非抢占)来决定是否重新选举master<br>  vrrp认证方式:<br>  a.无认证<br>  b.简单字符认证(将认证字符插入到vrrp报文中)<br>  c.md5认证(利用认证字符和MD5算法对vrrp报文进行加密)</p>
+
+      
+    </div>
+    
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/高可用web/">高可用web</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/keepalived/">keepalived</a>
+    </span>
+    
+
+    </div>
+
+    
+    <div class="article-meta pull-right">
+      <span>
+        <i class="icon-comments"></i>
+        <span>
+          <a href="/2018/09/22/eepalived简介、组件及配置文件/#comment">Comments</a>
+        </span>
+      </span>
+    </div>
+    
+  </div>
+  
+    
+    <h3 class="article-read"><a href="/2018/09/22/eepalived简介、组件及配置文件/"><span>more</span></a></h3>
+    
+  
+</article>
+
+
+
+
+
+  <article class="article-container ">
+
+  
+    
     <h3 class="article-title"><a href="/2018/09/20/小麦/"><span>小麦</span></a></h3>
     
   
@@ -665,6 +830,8 @@ inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
                 <a href="/categories/工具篇/" title="工具篇" rel="1">工具篇</a>
             
                 <a href="/categories/搭建篇/" title="搭建篇" rel="2">搭建篇</a>
+            
+                <a href="/categories/高可用web/" title="高可用web" rel="2">高可用web</a>
             
     </div>
 
