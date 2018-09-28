@@ -17,115 +17,55 @@
 <meta name="twitter:title" content="初探Keepalived">
 <meta name="twitter:description" content="keepalived是vrrp协议在linux主机上的实现，能够根据配置文件自动生成ipvs规则，对各RS做健康状态检查。1、特点(1)轻量级(2)以守护进程的形式(3)节点类型分为active/passive 2、组件(1)vrrp stack(2)checkers(3)ipvs wrapper 3、keepalived涉及的协议(1)组播:主服务器发送hello信息给从服务器，证明”I am">
   
+    <link rel="alternate" href="/atom.xml" title="Jim&#39;s Blog" type="application/atom+xml">
   
-    <link rel="icon" href="/favicon.png">
   
-  <link type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/scrollUp/image.css">
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/fancybox/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/lib/jquery/dist/jquery.min.js"></script>
+  
+  
+  
   
 </head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <div class="logo">
-        <img src="/logo.png" alt="Profile Picture">
-      </div>
-      <div id="title">Jim's Blog</div>
+  <div id="wrapper">
+    <header id="header" class="clearfix">
+	<a id="logo" href="/" title="Jim&#39;s Blog">Jim&#39;s Blog</a>
+	
+	<nav id="nav-menu" class="clearfix">
+		<form id="search" method="post" action="./" role="search">
+			<input id="search-input" type="text" name="s" class="inputbox" value="Search" onfocus="if (value =='Search'){value =''}" onblur="if (value ==''){value='Search'}">
+		</form>
+		<ul>
       
-       <ul class="my-socials">
-  
- 
-</ul>
-    </div>
-  </div>
-  <div id="header-inner" class="">
-    <nav id="main-nav">
-      <a id="main-nav-toggle" class="nav-icon"></a>
-      <!--
-        
-          
-            <a class="main-nav-link" href="/">首页</a>
-          
-            <a class="main-nav-link" href="/categories/life">生活</a>
-          
-            <a class="main-nav-link" href="/archives">归档</a>
-          
-        
-      -->
-    </nav>
-    <nav id="title-nav" style="display:none">
-      <a href="/">Jim&#39;s Blog</a>
-      <img src="/logo.png" alt="Profile Picture">
-      <!--
-      <span id="title-nav-socials">
-        
-       
-     </span>
-      -->
-    </nav>
-    <nav id="sub-nav">
+				
+        <li><a class="main-nav-link" href="/">Home</a></li>
       
-      <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-    </nav>
-    <div id="search-form-wrap">
-      <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-        <input type="submit" value="" class="search-form-submit">
-        <input name=tn type=hidden value="bds">
-        <input name=cl type=hidden value="3">
-        <input name=ct type=hidden value="2097152">
-        <input type="hidden" name="si" value="yoursite.com">
-      </form>
-    </div>
-  </div>
-  <div class="site-nav" style="display: none;">
-    <ul>
+				
+        <li><a class="main-nav-link" href="/archives">Archives</a></li>
       
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/categories/life">生活</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-      
-    </ul>
-  </div>
+		</ul>
+	</nav>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-eepalived简介、组件及配置文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/22/eepalived简介、组件及配置文件/" class="article-date">
-  <time datetime="2018-09-22T08:16:00.000Z" itemprop="datePublished">2018-09-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/高可用web/">高可用web</a>►<a class="article-category-link" href="/categories/高可用web/keepalived/">keepalived</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+    <section id="main" class="clearfix"><article class="post-detail">
+  <h1 class="post-title"><a href="/">初探Keepalived</a></h1>
+  <ul class="post-meta">
+  <li><i class="fa fa-user"></i> Author Jim</li>
+  <li><i class="fa fa-calendar"></i> Date Sep 22</li>
+  <li><i class="fa fa-folder"></i> Categories
   
-    <h1 class="article-title" itemprop="name">
-      初探Keepalived
-    </h1>
+    <a class="article-category-link" href="/categories/高可用web/">高可用web</a> <i class="fa fa-caret-right"></i> <a class="article-category-link" href="/categories/高可用web/keepalived/">keepalived</a>
   
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+  </li>
+</ul>
+  <div class="post-content">
       
-        <p>keepalived是vrrp协议在linux主机上的实现，能够根据配置文件自动生成ipvs规则，对各RS做健康状态检查。<br>1、特点<br>(1)轻量级<br>(2)以守护进程的形式<br>(3)节点类型分为active/passive</p>
+      <p>keepalived是vrrp协议在linux主机上的实现，能够根据配置文件自动生成ipvs规则，对各RS做健康状态检查。<br>1、特点<br>(1)轻量级<br>(2)以守护进程的形式<br>(3)节点类型分为active/passive</p>
 <p>2、组件<br>(1)vrrp stack<br>(2)checkers<br>(3)ipvs wrapper</p>
 <p>3、keepalived涉及的协议<br>(1)组播:主服务器发送hello信息给从服务器，证明”I am alive”<br>配置同进退vrrp实例时，要注意多播地址，每一组实例默认会分配一个组播地址。如果是在配置文件中指定一个组播地址，则只能配置一组实例；如果需要配置多组实例(不让其中一台主机有空闲)，则需要在各组实例的配置中配置上组播地址</p>
 <p>(2)ntp:network time protocol<br>格式:ntpdate timeserver_ip，以这个时间服务器的时间为准，同步自己的时间<br>date命令调整时间的格式:”date 月日时分年.秒”</p>
@@ -133,81 +73,24 @@
 <p>vrrp中的一些概念:<br>  vrid:虚拟路由器标识，有相同vrid的一组路由器构成一个虚拟路由器<br>  虚拟Mac:一个虚拟路由器拥有一个虚拟Mac，通常情况下虚拟路由器回应arp请求使用的是虚拟Mac<br>  优先级:vrrp根据优先级来确定虚拟路由器中每台路由器的地位<br>  非抢占模式:即使backup路由器的优先级比master高，也不会抢占master的地位<br>  抢占模式:根据优先级的大小来确定谁是master</p>
 <p>vrrp工作原理:<br>  a.虚拟路由器中的路由器根据优先级选举出master，master路由器通过发送免费arp报文，将自己的虚拟Mac地址通知给其他与其连接的设备或主机，从而承担报文转发任务<br>  b.master路由器周期性发送vrrp报文，以公布其配置信息(优先级)和工作状况<br>  c.如果master路由器出现故障，虚拟路由器中的backup路由器将根据优先级重新选举新的master<br>  d.虚拟路由器切换时，master路由器由一台设备切换成另外一台设备，新的master路由器只是简单的发送一个携带虚拟路由器的Mac地址和虚拟ip地址信息的免费arp报文，这样就可以更新与之连接的设备或主机的arp信息<br>  e.backup路由器优先级高于master的时候，由backup路由器的工作方式(抢占或非抢占)来决定是否重新选举master<br>  vrrp认证方式:<br>  a.无认证<br>  b.简单字符认证(将认证字符插入到vrrp报文中)<br>  c.md5认证(利用认证字符和MD5算法对vrrp报文进行加密)</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/09/22/eepalived简介、组件及配置文件/" data-id="cjmlr9edr0002vtr03mq14wpq" class="article-share-link">Share</a>
-      
-
-      
-    </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2018/09/23/keepalived在centos7中的安装及配置/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          keepalived在centos7中的安装和配置文件
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/09/20/小麦/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">小麦</div>
-    </a>
-  
-</nav>
 
-  
 </article>
 
-</section>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Jim<br>
-      Theme <a href="https://github.com/henryhuang/oishi" target="_blank">Oishi</a>, Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <!--
-      <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/categories/life" class="mobile-nav-link">生活</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-</nav>
-    -->
-    
+<!-- Comments -->
 
-<!-- 百度分享 start -->
-
-<!-- 百度分享 end -->
-
-<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-
-
-
-<script src="/js/jquery.scrollUp.min.js"></script>
-<script src="/js/jquery.transform.js"></script>
-<script src="/js/menu.js"></script>
-
-<script src="/js/script.js"></script>
-<script src="/js/scrollUp.js"></script>
+<!-- End Comments --></section>
+    <footer id="footer" role="contentinfo">
+    <div>&copy; 2018 <a href="/">Jim&#39;s Blog</a>.
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Designed by <a href="http://rainylog.com" target="_blank">Rainy.</a>
+	</div>
+</footer><!-- end #footer -->
 
   </div>
+  <script src="/lib/fancybox/dist/jquery.fancybox.min.js"></script>
+
+  <script src="/js/helper.js"></script>
+  <script src="/js/_third-party/gitment.js"></script>
 </body>
 </html>

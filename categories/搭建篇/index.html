@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: 搭建篇 | Jim&#39;s Blog</title>
+  <title>category: 搭建篇 | Jim&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Jim&#39;s Blog">
@@ -13,181 +13,121 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jim&#39;s Blog">
   
+    <link rel="alternate" href="/atom.xml" title="Jim&#39;s Blog" type="application/atom+xml">
   
-    <link rel="icon" href="/favicon.png">
   
-  <link type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/scrollUp/image.css">
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/fancybox/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/lib/jquery/dist/jquery.min.js"></script>
+  
+  
+  
   
 </head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <div class="logo">
-        <img src="/logo.png" alt="Profile Picture">
-      </div>
-      <div id="title">Jim's Blog</div>
+  <div id="wrapper">
+    <header id="header" class="clearfix">
+	<a id="logo" href="/" title="Jim&#39;s Blog">Jim&#39;s Blog</a>
+	
+	<nav id="nav-menu" class="clearfix">
+		<form id="search" method="post" action="./" role="search">
+			<input id="search-input" type="text" name="s" class="inputbox" value="Search" onfocus="if (value =='Search'){value =''}" onblur="if (value ==''){value='Search'}">
+		</form>
+		<ul>
       
-       <ul class="my-socials">
-  
- 
-</ul>
-    </div>
-  </div>
-  <div id="header-inner" class="">
-    <nav id="main-nav">
-      <a id="main-nav-toggle" class="nav-icon"></a>
-      <!--
-        
-          
-            <a class="main-nav-link" href="/">首页</a>
-          
-            <a class="main-nav-link" href="/categories/life">生活</a>
-          
-            <a class="main-nav-link" href="/archives">归档</a>
-          
-        
-      -->
-    </nav>
-    <nav id="title-nav" style="display:none">
-      <a href="/">Jim&#39;s Blog</a>
-      <img src="/logo.png" alt="Profile Picture">
-      <!--
-      <span id="title-nav-socials">
-        
-       
-     </span>
-      -->
-    </nav>
-    <nav id="sub-nav">
+				
+        <li><a class="main-nav-link" href="/">Home</a></li>
       
-      <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-    </nav>
-    <div id="search-form-wrap">
-      <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-        <input type="submit" value="" class="search-form-submit">
-        <input name=tn type=hidden value="bds">
-        <input name=cl type=hidden value="3">
-        <input name=ct type=hidden value="2097152">
-        <input type="hidden" name="si" value="yoursite.com">
-      </form>
-    </div>
-  </div>
-  <div class="site-nav" style="display: none;">
-    <ul>
+				
+        <li><a class="main-nav-link" href="/archives">Archives</a></li>
       
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/categories/life">生活</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-      
-    </ul>
-  </div>
+		</ul>
+	</nav>
 </header>
-      <div class="outer">
-        <section id="main">
+    <section id="main" class="clearfix">
+  <article class="post-detail">
+    <h1 class="post-title"><a href="/">ubuntu 16.04搭建Hexo博客后台管理系统</a></h1>
+    <ul class="post-meta">
+  <li><i class="fa fa-user"></i> Author Jim</li>
+  <li><i class="fa fa-calendar"></i> Date Sep 20</li>
+  <li><i class="fa fa-folder"></i> Categories
   
+    <a class="article-category-link" href="/categories/搭建篇/">搭建篇</a>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/" class="archive-article-date">
-  <time datetime="2018-09-20T06:40:00.000Z" itemprop="datePublished">Sep 20</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/">ubuntu 16.04搭建Hexo博客后台管理系统</a>
-    </h1>
-  
+  </li>
+</ul>
+    <div class="post-content">
+      <p>1、安装Hexo-admin<br>npm install –save hexo-admin</p>
+<p>#之前已经介绍安装Hexo,参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</a></p>
+<p>2、启动服务<br>hexo s &amp; </p>
+<p>3、访问后台<br>http://你的ip地址:4000/admin</p>
+<p>4、后台启用密码登录(默认无密码)<br>点击”Setup authentification here”</p>
+<p><img src="/images/pasted-10.png" alt="upload successful"><br>弹出设置窗口，按要求填入登录用户名和密码，然后将”admin config section”下面那一段代码复制到Hexo的配置文件_config.yml即可</p>
+<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+<p>5、重启Hexo<br>killall hexo<br>hexo s &amp;</p>
+<p>6、更换Hexo主题<br>先切换到Hexo所在安装目录，通过git下载主题文件到本地文件夹<br>git clone <a href="https://github.com/BosenY/Lap.git" target="_blank" rel="noopener">https://github.com/BosenY/Lap.git</a> theme/lap</p>
+<p>#Hexo主题汇总链接:<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+<p>7、修改Hexo配置文件_config.yml</p>
+<p><img src="/images/pasted-12.png" alt="upload successful"></p>
+<p>8、保存配置文件，重新生成并重启Hexo服务<br>hexo g<br>hexo d<br>killall hexo<br>hexo s &amp;</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/19/ubuntu16-04-搭建Hexo博客/" class="archive-article-date">
-  <time datetime="2018-09-19T06:56:00.000Z" itemprop="datePublished">Sep 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/19/ubuntu16-04-搭建Hexo博客/">ubuntu16.04 搭建Hexo博客</a>
-    </h1>
-  
+    </div>
+  </article>
 
-    </header>
-  </div>
-</article>
+  <article class="post-detail">
+    <h1 class="post-title"><a href="/">ubuntu16.04 搭建Hexo博客</a></h1>
+    <ul class="post-meta">
+  <li><i class="fa fa-user"></i> Author Jim</li>
+  <li><i class="fa fa-calendar"></i> Date Sep 19</li>
+  <li><i class="fa fa-folder"></i> Categories
   
+    <a class="article-category-link" href="/categories/搭建篇/">搭建篇</a>
   
-    </div></section>
-  
+  </li>
+</ul>
+    <div class="post-content">
+      <p>一、安装Node.js<br>1、安装curl<br>apt install curl</p>
+<p>2、安装node.js<br>curl -sL <a href="https://deb.nodesource.com/setup_8.x" target="_blank" rel="noopener">https://deb.nodesource.com/setup_8.x</a> | sudo -E bash -<br>apt install -y nodejs</p>
+<p>3、检查版本(有版本号输出表示安装完成)<br>node -v<br>npm -v </p>
+<p>二、安装Hexo<br>1、npm install -g hexo-cli</p>
+<p>2、进入你希望建站的文件夹(必须是一个空的文件夹)，执行初始化命令:<br>hexo init</p>
+<p>3、安装依赖包:<br>npm install</p>
+<p>至此，Hexo本地博客搭建完成。</p>
+<p>三、Hexo常用命令<br>hexo help:查看帮助<br>hexo init:初始化一个目录<br>hexo generate:生成网页，在public目录查看整个网站的文件，简写为hexo g<br>hexo server:用来启动本地站点，执行后即可在浏览器中输localhost:4000查看，简写为hexo s<br>hexo deploy:部署.deploy目录，可以简化为hexo d<br>hexo clean:清除缓存，强烈建议每次部署deploy之前先清理缓存</p>
+<p>四、使用github pages服务部署hexo<br>Giuhub Page介绍:我们用来托管博客的服务叫做 Github Pages，它是 Github 用来提供给个人/组织或者项目的网页服务，只需要部署到你的 Github Repository，推送代码，便可以实时呈现。</p>
+<p>1、首先要使用邮箱注册Github账号</p>
+<p>2、设置git<br>git config –global user.email “<a href="mailto:you@example.com" target="_blank" rel="noopener">you@example.com</a>“<br>git config –global user.name “Your Name”</p>
+<p>3、安装插件<br>npm install hexo-deployer-git –save</p>
+<p>#为了部署到Github上，需要安装hexo-deployer-git插件</p>
+<p>4、生成ssh秘钥<br>ssh-keygen -t rsa -C <a href="mailto:you@example.com" target="_blank" rel="noopener">you@example.com</a> #-C后面跟住你在github的用户名邮箱，这样公钥才会被github认可</p>
+<p>5、查看你的公钥，添加到Github账户的sshkey中<br>less ~/.ssh/id_rsa.pub</p>
+<p>6、Github上新建项目，项目名称为”用户名.github.io”，例如我的用户名是<br>leungzj，则创建的项目名为leungzj.github.io</p>
+<p>7、在setting–SSH and GPG keys中，添加生成的公钥，也就是将~/.ssh/id_rsa.pub的内容添加到这里</p>
+<p><img src="/images/pasted-1.png" alt="upload successful"></p>
+<p>8、修改Hexo配置文件</p>
+<p><img src="/images/pasted-2.png" alt="upload successful"></p>
+<p>9、编译并上传部署到Github<br>hexo generate #编译<br>hexo deploy #将hexo部署到Github io上</p>
+<p>10、访问Hexo博客<br>通过用户名.github.io就可以Hexo博客啦！<br>例如我的博客:<a href="https://leungzj.github.io/" target="_blank" rel="noopener">https://leungzj.github.io/</a></p>
+
+    </div>
+  </article>
+
+
 </section>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Jim<br>
-      Theme <a href="https://github.com/henryhuang/oishi" target="_blank">Oishi</a>, Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <!--
-      <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/categories/life" class="mobile-nav-link">生活</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-</nav>
-    -->
-    
-
-<!-- 百度分享 start -->
-
-<!-- 百度分享 end -->
-
-<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-
-
-
-<script src="/js/jquery.scrollUp.min.js"></script>
-<script src="/js/jquery.transform.js"></script>
-<script src="/js/menu.js"></script>
-
-<script src="/js/script.js"></script>
-<script src="/js/scrollUp.js"></script>
+    <footer id="footer" role="contentinfo">
+    <div>&copy; 2018 <a href="/">Jim&#39;s Blog</a>.
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Designed by <a href="http://rainylog.com" target="_blank">Rainy.</a>
+	</div>
+</footer><!-- end #footer -->
 
   </div>
+  <script src="/lib/fancybox/dist/jquery.fancybox.min.js"></script>
+
+  <script src="/js/helper.js"></script>
+  <script src="/js/_third-party/gitment.js"></script>
 </body>
 </html>
