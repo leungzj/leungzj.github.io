@@ -2,9 +2,22 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
   
-  <title>category: 搭建篇 | Jim&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <title>Category: 搭建篇 | Hexo</title>
   <meta property="og:type" content="website">
 <meta property="og:title" content="Jim&#39;s Blog">
 <meta property="og:url" content="http://yoursite.com/categories/搭建篇/index.html">
@@ -12,122 +25,448 @@
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jim&#39;s Blog">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/categories/搭建篇/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Jim&#39;s Blog" type="application/atom+xml">
   
   
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
-  <link rel="stylesheet" href="/lib/fancybox/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/css/main.css">
-  <script src="/lib/jquery/dist/jquery.min.js"></script>
-  
-  
-  
-  
+    
+    
+
 </head>
-<body>
-  <div id="wrapper">
-    <header id="header" class="clearfix">
-	<a id="logo" href="/" title="Jim&#39;s Blog">Jim&#39;s Blog</a>
-	
-	<nav id="nav-menu" class="clearfix">
-		<form id="search" method="post" action="./" role="search">
-			<input id="search-input" type="text" name="s" class="inputbox" value="Search" onfocus="if (value =='Search'){value =''}" onblur="if (value ==''){value='Search'}">
-		</form>
-		<ul>
-      
-				
-        <li><a class="main-nav-link" href="/">Home</a></li>
-      
-				
-        <li><a class="main-nav-link" href="/archives">Archives</a></li>
-      
-		</ul>
-	</nav>
-</header>
-    <section id="main" class="clearfix">
-  <article class="post-detail">
-    <h1 class="post-title"><a href="/">ubuntu 16.04搭建Hexo博客后台管理系统</a></h1>
-    <ul class="post-meta">
-  <li><i class="fa fa-user"></i> Author Jim</li>
-  <li><i class="fa fa-calendar"></i> Date Sep 20</li>
-  <li><i class="fa fa-folder"></i> Categories
-  
-    <a class="article-category-link" href="/categories/搭建篇/">搭建篇</a>
-  
-  </li>
-</ul>
-    <div class="post-content">
-      <p>1、安装Hexo-admin<br>npm install –save hexo-admin</p>
-<p>#之前已经介绍安装Hexo,参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</a></p>
-<p>2、启动服务<br>hexo s &amp; </p>
-<p>3、访问后台<br>http://你的ip地址:4000/admin</p>
-<p>4、后台启用密码登录(默认无密码)<br>点击”Setup authentification here”</p>
-<p><img src="/images/pasted-10.png" alt="upload successful"><br>弹出设置窗口，按要求填入登录用户名和密码，然后将”admin config section”下面那一段代码复制到Hexo的配置文件_config.yml即可</p>
-<p><img src="/images/pasted-11.png" alt="upload successful"></p>
-<p>5、重启Hexo<br>killall hexo<br>hexo s &amp;</p>
-<p>6、更换Hexo主题<br>先切换到Hexo所在安装目录，通过git下载主题文件到本地文件夹<br>git clone <a href="https://github.com/BosenY/Lap.git" target="_blank" rel="noopener">https://github.com/BosenY/Lap.git</a> theme/lap</p>
-<p>#Hexo主题汇总链接:<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
-<p>7、修改Hexo配置文件_config.yml</p>
-<p><img src="/images/pasted-12.png" alt="upload successful"></p>
-<p>8、保存配置文件，重新生成并重启Hexo服务<br>hexo g<br>hexo d<br>killall hexo<br>hexo s &amp;</p>
 
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">大象</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">运维工程师</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
-  </article>
-
-  <article class="post-detail">
-    <h1 class="post-title"><a href="/">ubuntu16.04 搭建Hexo博客</a></h1>
-    <ul class="post-meta">
-  <li><i class="fa fa-user"></i> Author Jim</li>
-  <li><i class="fa fa-calendar"></i> Date Sep 19</li>
-  <li><i class="fa fa-folder"></i> Categories
-  
-    <a class="article-category-link" href="/categories/搭建篇/">搭建篇</a>
-  
-  </li>
-</ul>
-    <div class="post-content">
-      <p>一、安装Node.js<br>1、安装curl<br>apt install curl</p>
-<p>2、安装node.js<br>curl -sL <a href="https://deb.nodesource.com/setup_8.x" target="_blank" rel="noopener">https://deb.nodesource.com/setup_8.x</a> | sudo -E bash -<br>apt install -y nodejs</p>
-<p>3、检查版本(有版本号输出表示安装完成)<br>node -v<br>npm -v </p>
-<p>二、安装Hexo<br>1、npm install -g hexo-cli</p>
-<p>2、进入你希望建站的文件夹(必须是一个空的文件夹)，执行初始化命令:<br>hexo init</p>
-<p>3、安装依赖包:<br>npm install</p>
-<p>至此，Hexo本地博客搭建完成。</p>
-<p>三、Hexo常用命令<br>hexo help:查看帮助<br>hexo init:初始化一个目录<br>hexo generate:生成网页，在public目录查看整个网站的文件，简写为hexo g<br>hexo server:用来启动本地站点，执行后即可在浏览器中输localhost:4000查看，简写为hexo s<br>hexo deploy:部署.deploy目录，可以简化为hexo d<br>hexo clean:清除缓存，强烈建议每次部署deploy之前先清理缓存</p>
-<p>四、使用github pages服务部署hexo<br>Giuhub Page介绍:我们用来托管博客的服务叫做 Github Pages，它是 Github 用来提供给个人/组织或者项目的网页服务，只需要部署到你的 Github Repository，推送代码，便可以实时呈现。</p>
-<p>1、首先要使用邮箱注册Github账号</p>
-<p>2、设置git<br>git config –global user.email “<a href="mailto:you@example.com" target="_blank" rel="noopener">you@example.com</a>“<br>git config –global user.name “Your Name”</p>
-<p>3、安装插件<br>npm install hexo-deployer-git –save</p>
-<p>#为了部署到Github上，需要安装hexo-deployer-git插件</p>
-<p>4、生成ssh秘钥<br>ssh-keygen -t rsa -C <a href="mailto:you@example.com" target="_blank" rel="noopener">you@example.com</a> #-C后面跟住你在github的用户名邮箱，这样公钥才会被github认可</p>
-<p>5、查看你的公钥，添加到Github账户的sshkey中<br>less ~/.ssh/id_rsa.pub</p>
-<p>6、Github上新建项目，项目名称为”用户名.github.io”，例如我的用户名是<br>leungzj，则创建的项目名为leungzj.github.io</p>
-<p>7、在setting–SSH and GPG keys中，添加生成的公钥，也就是将~/.ssh/id_rsa.pub的内容添加到这里</p>
-<p><img src="/images/pasted-1.png" alt="upload successful"></p>
-<p>8、修改Hexo配置文件</p>
-<p><img src="/images/pasted-2.png" alt="upload successful"></p>
-<p>9、编译并上传部署到Github<br>hexo generate #编译<br>hexo deploy #将hexo部署到Github io上</p>
-<p>10、访问Hexo博客<br>通过用户名.github.io就可以Hexo博客啦！<br>例如我的博客:<a href="https://leungzj.github.io/" target="_blank" rel="noopener">https://leungzj.github.io/</a></p>
-
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
     </div>
-  </article>
-
-
-</section>
-    <footer id="footer" role="contentinfo">
-    <div>&copy; 2018 <a href="/">Jim&#39;s Blog</a>.
-    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Designed by <a href="http://rainylog.com" target="_blank">Rainy.</a>
-	</div>
-</footer><!-- end #footer -->
-
   </div>
-  <script src="/lib/fancybox/dist/jquery.fancybox.min.js"></script>
+</div>
 
-  <script src="/js/helper.js"></script>
-  <script src="/js/_third-party/gitment.js"></script>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ansible/">ansible</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ansible/安装篇/">安装篇</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/keepalived/">keepalived</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 14px;">Hexo</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/mysql/" style="font-size: 13px;">mysql</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ansible/">ansible</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/ansible/安装篇/">安装篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/26/ubuntu安装ansible/" class="title">ubuntu安装ansible</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-26T08:13:00.000Z" itemprop="datePublished">2018-09-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/mysql/">mysql</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/26/Untitled/" class="title">navicat连接mysql提示&#34;not allowed to connect&#34;</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-26T03:47:00.000Z" itemprop="datePublished">2018-09-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/高可用web/">高可用web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/23/集群的概念/" class="title">集群的概念</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-23T10:31:00.000Z" itemprop="datePublished">2018-09-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/高可用web/">高可用web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/高可用web/keepalived/">keepalived</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/23/keepalived配置实例/" class="title">keepalived配置实例</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-23T09:53:00.000Z" itemprop="datePublished">2018-09-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/高可用web/">高可用web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/高可用web/keepalived/">keepalived</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/23/keepalived在centos7中的安装及配置/" class="title">keepalived在centos7中的安装和配置文件</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-23T09:37:00.000Z" itemprop="datePublished">2018-09-23</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  <main class="main" role="main">
+  <article class="content article article-categories article-type-list" itemscope="">
+    <header class="article-header">
+      <h1 itemprop="name" class="hidden-xs">Category: 搭建篇</h1>
+      <p class="hidden-xs">Total 2 articles</p>
+      <nav role="navigation" id="nav-main" class="okayNav">
+        <ul>
+          <li><a href="/categories">All</a></li>
+          
+          <li><a href="/categories/mysql/">mysql</a></li>
+          
+          <li><a href="/categories/高可用web/">高可用web</a></li>
+          
+          <li><a href="/categories/工具篇/">工具篇</a></li>
+          
+          <li><a href="/categories/搭建篇/">搭建篇</a></li>
+          
+          <li><a href="/categories/高可用web/keepalived/">keepalived</a></li>
+          
+          <li><a href="/categories/安装篇/">安装篇</a></li>
+          
+          <li><a href="/categories/ansible/">ansible</a></li>
+          
+          <li><a href="/categories/ansible/安装篇/">安装篇</a></li>
+          
+        </ul>
+      </nav>
+    </header>
+    <!-- /header -->
+    <div class="article-body">
+      <div class="panel panel-default b-no">
+    <div class="panel-heading" role="tab">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse搭建篇" aria-expanded="true">
+              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
+              搭建篇
+            </a>
+            <small class="text-muted">(Total 2 articles)</small>
+        </h4>
+    </div>
+    <div id="collapse搭建篇" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading搭建篇">
+        <div class="panel-body">
+            <div class="collection">
+              
+                
+<a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/" class="collection-item" target="_blank" itemprop="url">
+  <time datetime="2018-09-20T06:40:00.000Z" itemprop="datePublished">2018-09-20</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> ubuntu 16.04搭建Hexo博客后台管理系统
+</a>
+
+
+              
+                
+<a href="/2018/09/19/ubuntu16-04-搭建Hexo博客/" class="collection-item" target="_blank" itemprop="url">
+  <time datetime="2018-09-19T06:56:00.000Z" itemprop="datePublished">2018-09-19</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> ubuntu16.04 搭建Hexo博客
+</a>
+
+
+              
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+  </article>
+   
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+    
+    
+
+
+
 </body>
 </html>

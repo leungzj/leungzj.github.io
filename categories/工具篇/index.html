@@ -2,9 +2,22 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
   
-  <title>category: 工具篇 | Jim&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <title>Category: 工具篇 | Hexo</title>
   <meta property="og:type" content="website">
 <meta property="og:title" content="Jim&#39;s Blog">
 <meta property="og:url" content="http://yoursite.com/categories/工具篇/index.html">
@@ -12,84 +25,440 @@
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jim&#39;s Blog">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/categories/工具篇/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Jim&#39;s Blog" type="application/atom+xml">
   
   
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
-  <link rel="stylesheet" href="/lib/fancybox/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/css/main.css">
-  <script src="/lib/jquery/dist/jquery.min.js"></script>
-  
-  
-  
-  
-</head>
-<body>
-  <div id="wrapper">
-    <header id="header" class="clearfix">
-	<a id="logo" href="/" title="Jim&#39;s Blog">Jim&#39;s Blog</a>
-	
-	<nav id="nav-menu" class="clearfix">
-		<form id="search" method="post" action="./" role="search">
-			<input id="search-input" type="text" name="s" class="inputbox" value="Search" onfocus="if (value =='Search'){value =''}" onblur="if (value ==''){value='Search'}">
-		</form>
-		<ul>
-      
-				
-        <li><a class="main-nav-link" href="/">Home</a></li>
-      
-				
-        <li><a class="main-nav-link" href="/archives">Archives</a></li>
-      
-		</ul>
-	</nav>
-</header>
-    <section id="main" class="clearfix">
-  <article class="post-detail">
-    <h1 class="post-title"><a href="/">secureCRT连接ubuntu显示中文乱码的解决方法</a></h1>
-    <ul class="post-meta">
-  <li><i class="fa fa-user"></i> Author Jim</li>
-  <li><i class="fa fa-calendar"></i> Date Sep 20</li>
-  <li><i class="fa fa-folder"></i> Categories
-  
-    <a class="article-category-link" href="/categories/工具篇/">工具篇</a>
-  
-  </li>
-</ul>
-    <div class="post-content">
-      <p>一、ubuntu设置<br>1、在/var/lib/locales/supported.d/local文件中添加一行:<br>zh_CN.UTF-8 UTF-8</p>
-<p><img src="/images/pasted-3.png" alt="upload successful"><br>执行sudo locale-gen下载文件</p>
-<p>2、在/etc/environment文件中添加两行:<br>LANG=”zh_CN.UTF-8”<br>LC_ALL=”zh_CN.UTF-8”</p>
-<p><img src="/images/pasted-4.png" alt="upload successful"></p>
-<p>3、在~/.profile文件中添加两行:<br>export LANG=”zh_CN.UTF-8”<br>export LC_ALL=”zh_CN.UTF-8</p>
-<p><img src="/images/pasted-5.png" alt="upload successful"><br>执行source ~/.profile</p>
-<p>二、secureCRT设置<br>1、选择options – session options，弹出设置窗口<br>2、选择terminal – emulation，terminal下拉表选择linux，并在”ansi color”前面方框打上勾</p>
-<p><img src="/images/pasted-6.png" alt="upload successful"></p>
-<p>3、选择terminal – appearance，”current color scheme”选择traditional</p>
-<p><img src="/images/pasted-7.png" alt="upload successful"><br>font字体选择fangsong，script选择”Chinese GB2312”</p>
-<p><img src="/images/pasted-8.png" alt="upload successful"><br>character encoding下拉表选择utf-8</p>
-<p><img src="/images/pasted-9.png" alt="upload successful"></p>
-<p>退出当前crt窗口，重新登录试试！</p>
+    
+    
 
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">大象</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">运维工程师</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ansible/">ansible</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ansible/安装篇/">安装篇</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/keepalived/">keepalived</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 14px;">Hexo</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/mysql/" style="font-size: 13px;">mysql</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ansible/">ansible</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/ansible/安装篇/">安装篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/26/ubuntu安装ansible/" class="title">ubuntu安装ansible</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-26T08:13:00.000Z" itemprop="datePublished">2018-09-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/mysql/">mysql</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/26/Untitled/" class="title">navicat连接mysql提示&#34;not allowed to connect&#34;</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-26T03:47:00.000Z" itemprop="datePublished">2018-09-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/高可用web/">高可用web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/23/集群的概念/" class="title">集群的概念</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-23T10:31:00.000Z" itemprop="datePublished">2018-09-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/高可用web/">高可用web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/高可用web/keepalived/">keepalived</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/23/keepalived配置实例/" class="title">keepalived配置实例</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-23T09:53:00.000Z" itemprop="datePublished">2018-09-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/高可用web/">高可用web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/高可用web/keepalived/">keepalived</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/09/23/keepalived在centos7中的安装及配置/" class="title">keepalived在centos7中的安装和配置文件</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-09-23T09:37:00.000Z" itemprop="datePublished">2018-09-23</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  <main class="main" role="main">
+  <article class="content article article-categories article-type-list" itemscope="">
+    <header class="article-header">
+      <h1 itemprop="name" class="hidden-xs">Category: 工具篇</h1>
+      <p class="hidden-xs">Total 1 articles</p>
+      <nav role="navigation" id="nav-main" class="okayNav">
+        <ul>
+          <li><a href="/categories">All</a></li>
+          
+          <li><a href="/categories/mysql/">mysql</a></li>
+          
+          <li><a href="/categories/高可用web/">高可用web</a></li>
+          
+          <li><a href="/categories/工具篇/">工具篇</a></li>
+          
+          <li><a href="/categories/搭建篇/">搭建篇</a></li>
+          
+          <li><a href="/categories/高可用web/keepalived/">keepalived</a></li>
+          
+          <li><a href="/categories/安装篇/">安装篇</a></li>
+          
+          <li><a href="/categories/ansible/">ansible</a></li>
+          
+          <li><a href="/categories/ansible/安装篇/">安装篇</a></li>
+          
+        </ul>
+      </nav>
+    </header>
+    <!-- /header -->
+    <div class="article-body">
+      <div class="panel panel-default b-no">
+    <div class="panel-heading" role="tab">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse工具篇" aria-expanded="true">
+              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
+              工具篇
+            </a>
+            <small class="text-muted">(Total 1 articles)</small>
+        </h4>
+    </div>
+    <div id="collapse工具篇" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading工具篇">
+        <div class="panel-body">
+            <div class="collection">
+              
+                
+<a href="/2018/09/20/secureCRT显示中文乱码/" class="collection-item" target="_blank" itemprop="url">
+  <time datetime="2018-09-20T05:33:00.000Z" itemprop="datePublished">2018-09-20</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> secureCRT连接ubuntu显示中文乱码的解决方法
+</a>
+
+
+              
+            </div>
+        </div>
+    </div>
+</div>
     </div>
   </article>
+   
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+    
+    
 
 
-</section>
-    <footer id="footer" role="contentinfo">
-    <div>&copy; 2018 <a href="/">Jim&#39;s Blog</a>.
-    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Designed by <a href="http://rainylog.com" target="_blank">Rainy.</a>
-	</div>
-</footer><!-- end #footer -->
 
-  </div>
-  <script src="/lib/fancybox/dist/jquery.fancybox.min.js"></script>
-
-  <script src="/js/helper.js"></script>
-  <script src="/js/_third-party/gitment.js"></script>
 </body>
 </html>
