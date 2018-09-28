@@ -1,153 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>keepalived配置实例 | Hexo</title>
+extends base
 
-  
-  <meta name="author" content="Jim">
-  
+block nav
+    - var pageName = "POST"
+    include _partial/menu
 
-  
-  <meta name="description" content="实例一启动keepalived之后找不到配置文件:1、编辑/etc/rsyslog.conf #指明各类日志文件中的信息加上一句，local3.* /var/log/keepalived.log
-2、编辑/etc/sysconfig/keepalived,加上一句，KEEPALIVED_OPTION">
-  
+block header
+    - var pageHeader = page.title
+    include _partial/body_header
 
-  
-  
-  <meta name="keywords" content="">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="keepalived配置实例"/>
-
-  <meta property="og:site_name" content="Hexo"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-</head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Hexo</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>keepalived配置实例</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/23/keepalived配置实例/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-23T09:53:00.000Z">
-          2018-09-23
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>实例一<br>启动keepalived之后找不到配置文件:<br>1、编辑/etc/rsyslog.conf #指明各类日志文件中的信息<br>加上一句，<br>local3.* /var/log/keepalived.log</p>
-<p>2、编辑/etc/sysconfig/keepalived,<br>加上一句，<br>KEEPALIVED_OPTIONS=”-D -S 3” #指明keepalived日志文件的facility(等级)为3</p>
-<p>3、重启rsyslog,keepalived服务<br>在centos7中，<br>systemctl restart rsyslog.service<br>systemctl restart keepalived.service</p>
-<p>实例二<br>手动调度vip在两台主机中转移<br>在配置文件中，<br>1、vrrp实例之外加上一个函数<br>vrrp_script chk_maintainnance{<br>  script “[[ -f /etc/keepalived/down]] &amp;&amp; exit 1 || exit 0”<br>  interval 1<br>  weight -2<br>}</p>
-<p>2、vrrp实例之内调用这个函数<br>track_script{<br>  chk_maintainnance<br>}<br>用法:只需要touch /etc/keepalived/down,vip就会转移；<br>删除down文件又会转移到另一台主机</p>
-<p>实例三<br>配置虚拟路由器组<br>vrrp_sync_group VG_1{<br>  group {<br>   VI_1<br>   VI_2<br>  }<br>}</p>
-<p>vrrp_instance VI_1{<br>  eth0<br>  vip #对外部客户<br>}</p>
-<p>vrrp_instance VI_2{<br>  eth1<br>  dip #对内部主机<br>}</p>
-<p>实例四<br>主机状态发生改变时发送通知:在vrrp实例中定义</p>
-<p>#notify scripts,alert as above –自定义脚本<br>  notify_master <string>|<quoted-string> #当前节点转换为master时，发送相应消息<br>  notify_backup <string>|<quoted-string> #当前节点转换为backup时，发送相应消息<br>  notify_fault <string>|&lt;QUOTED_STRING&gt; #当前节点转换为fault(发生故障)时，发送相应消息<br>  notify <string>|<quoted-string><br>  smtp_alert<br>实例:””括起来的内容就是表示QUOTED_STRING<br>notify_master “/etc/keepalived/notify.sh master”<br>notify_backup “/etc/keepalived/notify.sh backup”<br>notify_fault “/etc/keepalived/notify.sh fault”</quoted-string></string></string></quoted-string></string></quoted-string></string></p>
-<p>下面是一个notify脚本的简单示例:</p>
-<p>#!/bin/bash<br>vip=172.16.100.1<br>contact=‘root@localhost’</p>
-<p>notify(){<br>  mailsubject=”<code>hostname</code> to be $1:$vip floating”<br>  mailbody=”<code>date &#39;+%F %H:%M:%S&#39;</code>:vrrp transtion,<code>hostname</code> change to be $1”<br>  echo $mailbody|mail -s “$mailsubject” $contact<br>}</p>
-<p>case “$1” in<br>  master)<br>    notify master</p>
-<pre><code>#/etc/rc.d/init.d/haproxy start
-exit 0
-</code></pre><p>  ;;<br>  backup)<br>    notify backup</p>
-<pre><code>#/etc/rc.d/init.d/haproxy stop
-exit 0
-</code></pre><p>  ;;<br>  fault)<br>    notify fault</p>
-<pre><code>#/etc/rc.d/init.d/haproxy stop
-exit 0
-</code></pre><p>  ;;<br> *)<br>   echo “Usage:<code>basename $0</code> {master|backup|fault}”<br>   exit 1<br> ;;<br>esac</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/高可用web/">高可用web</a>, <a href="/categories/高可用web/keepalived/">keepalived</a>
-    </span>
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2018 Jim
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
-</body>
-</html>
+block content
+    div.body__content
+        if page.tags.length > 0
+            div.body__item.post_tags
+                for tag in page.tags.toArray()
+                    a(href=url_for(tag.path) class="post_tag")= tag.name
+        if page.content.length > 0
+            div.body__item
+                != page.more
+    div#disqus_thread

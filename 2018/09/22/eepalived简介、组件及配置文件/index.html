@@ -1,138 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>初探Keepalived | Hexo</title>
+extends base
 
-  
-  <meta name="author" content="Jim">
-  
+block nav
+    - var pageName = "POST"
+    include _partial/menu
 
-  
-  <meta name="description" content="keepalived是vrrp协议在linux主机上的实现，能够根据配置文件自动生成ipvs规则，对各RS做健康状态检查。1、特点(1)轻量级(2)以守护进程的形式(3)节点类型分为active/passive
-2、组件(1)vrrp stack(2)checkers(3)ipvs wrapper
-">
-  
+block header
+    - var pageHeader = page.title
+    include _partial/body_header
 
-  
-  
-  <meta name="keywords" content="">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="初探Keepalived"/>
-
-  <meta property="og:site_name" content="Hexo"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-</head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Hexo</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>初探Keepalived</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/22/eepalived简介、组件及配置文件/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-22T08:16:00.000Z">
-          2018-09-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>keepalived是vrrp协议在linux主机上的实现，能够根据配置文件自动生成ipvs规则，对各RS做健康状态检查。<br>1、特点<br>(1)轻量级<br>(2)以守护进程的形式<br>(3)节点类型分为active/passive</p>
-<p>2、组件<br>(1)vrrp stack<br>(2)checkers<br>(3)ipvs wrapper</p>
-<p>3、keepalived涉及的协议<br>(1)组播:主服务器发送hello信息给从服务器，证明”I am alive”<br>配置同进退vrrp实例时，要注意多播地址，每一组实例默认会分配一个组播地址。如果是在配置文件中指定一个组播地址，则只能配置一组实例；如果需要配置多组实例(不让其中一台主机有空闲)，则需要在各组实例的配置中配置上组播地址</p>
-<p>(2)ntp:network time protocol<br>格式:ntpdate timeserver_ip，以这个时间服务器的时间为准，同步自己的时间<br>date命令调整时间的格式:”date 月日时分年.秒”</p>
-<p>(3)vrrp:virtual routing redundent protocol，虚拟路由冗余协议(vrrp是路由交换协议，keepalived是vrrp在linux上的实现)<br>vrrp是一种容错协议，保证当主机的下一跳路由出现故障时，由另一台路由器来代替出故障的路由器进行工作，从而保障网络通信的连续性和可靠性。在vrrp协议中，分为master和backup两种角色。</p>
-<p>vrrp中的一些概念:<br>  vrid:虚拟路由器标识，有相同vrid的一组路由器构成一个虚拟路由器<br>  虚拟Mac:一个虚拟路由器拥有一个虚拟Mac，通常情况下虚拟路由器回应arp请求使用的是虚拟Mac<br>  优先级:vrrp根据优先级来确定虚拟路由器中每台路由器的地位<br>  非抢占模式:即使backup路由器的优先级比master高，也不会抢占master的地位<br>  抢占模式:根据优先级的大小来确定谁是master</p>
-<p>vrrp工作原理:<br>  a.虚拟路由器中的路由器根据优先级选举出master，master路由器通过发送免费arp报文，将自己的虚拟Mac地址通知给其他与其连接的设备或主机，从而承担报文转发任务<br>  b.master路由器周期性发送vrrp报文，以公布其配置信息(优先级)和工作状况<br>  c.如果master路由器出现故障，虚拟路由器中的backup路由器将根据优先级重新选举新的master<br>  d.虚拟路由器切换时，master路由器由一台设备切换成另外一台设备，新的master路由器只是简单的发送一个携带虚拟路由器的Mac地址和虚拟ip地址信息的免费arp报文，这样就可以更新与之连接的设备或主机的arp信息<br>  e.backup路由器优先级高于master的时候，由backup路由器的工作方式(抢占或非抢占)来决定是否重新选举master<br>  vrrp认证方式:<br>  a.无认证<br>  b.简单字符认证(将认证字符插入到vrrp报文中)<br>  c.md5认证(利用认证字符和MD5算法对vrrp报文进行加密)</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/高可用web/">高可用web</a>, <a href="/categories/高可用web/keepalived/">keepalived</a>
-    </span>
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2018 Jim
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
-</body>
-</html>
+block content
+    div.body__content
+        if page.tags.length > 0
+            div.body__item.post_tags
+                for tag in page.tags.toArray()
+                    a(href=url_for(tag.path) class="post_tag")= tag.name
+        if page.content.length > 0
+            div.body__item
+                != page.more
+    div#disqus_thread

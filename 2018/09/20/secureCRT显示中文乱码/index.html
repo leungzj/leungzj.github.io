@@ -1,151 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>secureCRT连接ubuntu显示中文乱码的解决方法 | Hexo</title>
+extends base
 
-  
-  <meta name="author" content="Jim">
-  
+block nav
+    - var pageName = "POST"
+    include _partial/menu
 
-  
-  <meta name="description" content="一、ubuntu设置1、在/var/lib/locales/supported.d/local文件中添加一行:zh_CN.UTF-8 UTF-8
-执行sudo locale-gen下载文件
-2、在/etc/environment文件中添加两行:LANG=”zh_CN.UTF-8”LC_ALL=”zh">
-  
+block header
+    - var pageHeader = page.title
+    include _partial/body_header
 
-  
-  
-  <meta name="keywords" content="secureCRT">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="secureCRT连接ubuntu显示中文乱码的解决方法"/>
-
-  <meta property="og:site_name" content="Hexo"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-</head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Hexo</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>secureCRT连接ubuntu显示中文乱码的解决方法</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/20/secureCRT显示中文乱码/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-20T05:33:00.000Z">
-          2018-09-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>一、ubuntu设置<br>1、在/var/lib/locales/supported.d/local文件中添加一行:<br>zh_CN.UTF-8 UTF-8</p>
-<p><img src="/images/pasted-3.png" alt="upload successful"><br>执行sudo locale-gen下载文件</p>
-<p>2、在/etc/environment文件中添加两行:<br>LANG=”zh_CN.UTF-8”<br>LC_ALL=”zh_CN.UTF-8”</p>
-<p><img src="/images/pasted-4.png" alt="upload successful"></p>
-<p>3、在~/.profile文件中添加两行:<br>export LANG=”zh_CN.UTF-8”<br>export LC_ALL=”zh_CN.UTF-8</p>
-<p><img src="/images/pasted-5.png" alt="upload successful"><br>执行source ~/.profile</p>
-<p>二、secureCRT设置<br>1、选择options – session options，弹出设置窗口<br>2、选择terminal – emulation，terminal下拉表选择linux，并在”ansi color”前面方框打上勾</p>
-<p><img src="/images/pasted-6.png" alt="upload successful"></p>
-<p>3、选择terminal – appearance，”current color scheme”选择traditional</p>
-<p><img src="/images/pasted-7.png" alt="upload successful"><br>font字体选择fangsong，script选择”Chinese GB2312”</p>
-<p><img src="/images/pasted-8.png" alt="upload successful"><br>character encoding下拉表选择utf-8</p>
-<p><img src="/images/pasted-9.png" alt="upload successful"></p>
-<p>退出当前crt窗口，重新登录试试！</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/工具篇/">工具篇</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/secureCRT/">secureCRT</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2018 Jim
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
-</body>
-</html>
+block content
+    div.body__content
+        if page.tags.length > 0
+            div.body__item.post_tags
+                for tag in page.tags.toArray()
+                    a(href=url_for(tag.path) class="post_tag")= tag.name
+        if page.content.length > 0
+            div.body__item
+                != page.more
+    div#disqus_thread

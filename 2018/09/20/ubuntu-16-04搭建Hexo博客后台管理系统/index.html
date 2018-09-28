@@ -1,150 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>ubuntu 16.04搭建Hexo博客后台管理系统 | Hexo</title>
+extends base
 
-  
-  <meta name="author" content="Jim">
-  
+block nav
+    - var pageName = "POST"
+    include _partial/menu
 
-  
-  <meta name="description" content="1、安装Hexo-adminnpm install –save hexo-admin
-#之前已经介绍安装Hexo,参考链接:https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A">
-  
+block header
+    - var pageHeader = page.title
+    include _partial/body_header
 
-  
-  
-  <meta name="keywords" content="Hexo">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="ubuntu 16.04搭建Hexo博客后台管理系统"/>
-
-  <meta property="og:site_name" content="Hexo"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-</head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Hexo</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>ubuntu 16.04搭建Hexo博客后台管理系统</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/20/ubuntu-16-04搭建Hexo博客后台管理系统/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-20T06:40:00.000Z">
-          2018-09-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>1、安装Hexo-admin<br>npm install –save hexo-admin</p>
-<p>#之前已经介绍安装Hexo,参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</a></p>
-<p>2、启动服务<br>hexo s &amp; </p>
-<p>3、访问后台<br>http://你的ip地址:4000/admin</p>
-<p>4、后台启用密码登录(默认无密码)<br>点击”Setup authentification here”</p>
-<p><img src="/images/pasted-10.png" alt="upload successful"><br>弹出设置窗口，按要求填入登录用户名和密码，然后将”admin config section”下面那一段代码复制到Hexo的配置文件_config.yml即可</p>
-<p><img src="/images/pasted-11.png" alt="upload successful"></p>
-<p>5、重启Hexo<br>killall hexo<br>hexo s &amp;</p>
-<p>6、更换Hexo主题<br>先切换到Hexo所在安装目录，通过git下载主题文件到本地文件夹<br>git clone <a href="https://github.com/BosenY/Lap.git" target="_blank" rel="noopener">https://github.com/BosenY/Lap.git</a> theme/lap</p>
-<p>#Hexo主题汇总链接:<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
-<p>7、修改Hexo配置文件_config.yml</p>
-<p><img src="/images/pasted-12.png" alt="upload successful"></p>
-<p>8、保存配置文件，重新生成并重启Hexo服务<br>hexo g<br>hexo d<br>killall hexo<br>hexo s &amp;</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/搭建篇/">搭建篇</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Hexo/">Hexo</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2018 Jim
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
-</body>
-</html>
+block content
+    div.body__content
+        if page.tags.length > 0
+            div.body__item.post_tags
+                for tag in page.tags.toArray()
+                    a(href=url_for(tag.path) class="post_tag")= tag.name
+        if page.content.length > 0
+            div.body__item
+                != page.more
+    div#disqus_thread

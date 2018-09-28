@@ -1,145 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>ubuntu16.04 源码编译安装boost1_59_0 | Hexo</title>
+extends base
 
-  
-  <meta name="author" content="Jim">
-  
+block nav
+    - var pageName = "POST"
+    include _partial/menu
 
-  
-  <meta name="description" content="1、下载源码包wget https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz
-2、解压缩tar zxvf boost_1_59_0.tar.gz
-3、进入解压缩目录cd boost_1_59_0/">
-  
+block header
+    - var pageHeader = page.title
+    include _partial/body_header
 
-  
-  
-  <meta name="keywords" content="boost">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="ubuntu16.04 源码编译安装boost1_59_0"/>
-
-  <meta property="og:site_name" content="Hexo"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-</head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Hexo</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>ubuntu16.04 源码编译安装boost1_59_0</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/19/ubuntu16-04-源码编译安装boost1-59-0/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-19T08:31:00.000Z">
-          2018-09-19
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>1、下载源码包<br>wget <a href="https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz" target="_blank" rel="noopener">https://iweb.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz</a></p>
-<p>2、解压缩<br>tar zxvf boost_1_59_0.tar.gz</p>
-<p>3、进入解压缩目录<br>cd boost_1_59_0/</p>
-<p>4、运行bootstrap.sh脚本<br>./bootstrap.sh –with-libraries=all –with-toolset=gcc<br>参数解释:<br>–with-libraries指定编译哪些boost库，all的话就是全部编译，只想编译部分库的话就把库的名称写上，用逗号分隔即可<br>–with-toolset指定编译时使用哪种编译器，Linux下使用gcc即可，如果系统中安装了多个版本的gcc，在这里可以指定gcc的版本，比如–with-toolset=gcc-4.4</p>
-<p>5、编译boost<br>./b2 toolset=gcc</p>
-<p>6、安装boost<br>./b2 install<br>可以加–prefix参数:用来指定boost的安装目录，不加此参数的话默认的头文件在/usr/local/include/boost目录下，库文件在/usr/local/lib/目录下</p>
-<p>7、更新系统的动态链接库<br>ldconfig</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/安装篇/">安装篇</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/boost/">boost</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2018 Jim
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
-</body>
-</html>
+block content
+    div.body__content
+        if page.tags.length > 0
+            div.body__item.post_tags
+                for tag in page.tags.toArray()
+                    a(href=url_for(tag.path) class="post_tag")= tag.name
+        if page.content.length > 0
+            div.body__item
+                != page.more
+    div#disqus_thread

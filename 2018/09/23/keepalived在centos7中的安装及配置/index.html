@@ -1,133 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>keepalived在centos7中的安装和配置文件 | Hexo</title>
+extends base
 
-  
-  <meta name="author" content="Jim">
-  
+block nav
+    - var pageName = "POST"
+    include _partial/menu
 
-  
-  <meta name="description" content="keepalived目前已经被官方收录进linux版本当中，在centos中使用yum就可以下载安装keepalivedyum info keepalived #查看系统中的keepalived版本yun install keepalived #安装keepalivedrpm -ql keepali">
-  
+block header
+    - var pageHeader = page.title
+    include _partial/body_header
 
-  
-  
-  <meta name="keywords" content="">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="keepalived在centos7中的安装和配置文件"/>
-
-  <meta property="og:site_name" content="Hexo"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-</head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Hexo</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>keepalived在centos7中的安装和配置文件</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/23/keepalived在centos7中的安装及配置/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-23T09:37:00.000Z">
-          2018-09-23
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>keepalived目前已经被官方收录进linux版本当中，在centos中使用yum就可以下载安装keepalived<br>yum info keepalived #查看系统中的keepalived版本<br>yun install keepalived #安装keepalived<br>rpm -ql keepalived #查看安装keepalived生成了哪些文件<br>cat /usr/lib/systemd/system/keepalived.service #查看keepalived的启动等配置信息<br>cat /etc/sysconfig/keepalived #查看keepalived支持的参数帮助</p>
-<p>keepalived配置文件:分为三部分<br>1、global configuration<br>2、vrrp configuration #分两段，第一段vrrp instance，第二段vrrp synchonization group<br>3、lvs configuration #根据配置文件生成lvs规则</p>
-<p>man keepalived.conf #查看keepalived配置文件的配置帮助<br>详细配置:<br>1、global_defs:<br>notification_email<br>notification_email_from<br>smtp_server<br>smtp_connection_timeout<br>router_id #即hostanme<br>vrrp_mcast_group 224.x.x.x #定义多播地址，224固定不变，后面三位可以变化</p>
-<p>2、vrrp_instance:<br>state #master或backup<br>interface #在centos7中，int dev的名字是eno16777736<br>virtual_router_id #vrid是唯一的，跟虚拟Mac相关，虚拟Mac的格式是00-00-5E-00-01-{vrid} #根据Mac格式，前面是固定的，后面补上vrid。温馨提示，master和backup的virtual_router_id必须是一样的，因为id一样说明master和backup是在同一个虚拟路由器中<br>priority #0到255的数字，数字越大，优先级越高，优先级高的是master<br>adver_init #发送心跳信息的时间间隔，默认是1<br>authentication {<br>  auth_type PASS #这里是简单字符认证<br>  auth_pass xxxx #<br>}<br>virtual_ipaddress #定义虚拟ip地址，同一个虚拟路由器中的master和backup的vip的配置是一样的<br>nopreempt #非抢占模式，默认为抢占模式</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/高可用web/">高可用web</a>, <a href="/categories/高可用web/keepalived/">keepalived</a>
-    </span>
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2018 Jim
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
-</body>
-</html>
+block content
+    div.body__content
+        if page.tags.length > 0
+            div.body__item.post_tags
+                for tag in page.tags.toArray()
+                    a(href=url_for(tag.path) class="post_tag")= tag.name
+        if page.content.length > 0
+            div.body__item
+                != page.more
+    div#disqus_thread

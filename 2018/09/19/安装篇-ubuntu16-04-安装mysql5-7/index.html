@@ -1,149 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>ubuntu16.04 源码编译安装mysql5.7 | Hexo</title>
+extends base
 
-  
-  <meta name="author" content="Jim">
-  
+block nav
+    - var pageName = "POST"
+    include _partial/menu
 
-  
-  <meta name="description" content="1、安装依赖sudo apt-get install make cmake gcc g++ bison libncurses5-dev build-essential
-2、下载mysql 5.7源码包下载地址：https://dev.mysql.com/downloads/mysql/在”selec">
-  
+block header
+    - var pageHeader = page.title
+    include _partial/body_header
 
-  
-  
-  <meta name="keywords" content="mysql">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="ubuntu16.04 源码编译安装mysql5.7"/>
-
-  <meta property="og:site_name" content="Hexo"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-</head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Hexo</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>ubuntu16.04 源码编译安装mysql5.7</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/19/安装篇-ubuntu16-04-安装mysql5-7/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-19T05:36:00.000Z">
-          2018-09-19
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>1、安装依赖<br>sudo apt-get install make cmake gcc g++ bison libncurses5-dev build-essential</p>
-<p>2、下载mysql 5.7源码包<br>下载地址：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a><br>在”select operating system”中选择”source code”，我下载的版本是mysql-5.7.23</p>
-<p>3、解压缩<br>tar zxvf mysql-5.7.23.tar.gz -C /usr/local<br>cd /usr/local/mysql-5.7.23/</p>
-<p>4、编译安装<br>cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_PERFSCHEMA_STORAGE_ENGINE=1 -DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 -DWITHOUT_FEDERATED_STORAGE_ENGINE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_EXTRA_CHARSETS=all -DENABLED_LOCAL_INFILE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DMYSQL_USER=mysql -DCOMPILATION_COMMENT=”lq-edition” -DENABLE_DTRACE=0 -DOPTIMIZER_TRACE=1 -DWITH_DEBUG=1</p>
-<p>运行到这一步，出现报错信息:<br>“CMake Error at cmake/boost.cmake:81 (MESSAGE):<br>  You can download it with -DDOWNLOAD_BOOST=1 -DWITH_BOOST=<directory><br>“<br>提示需要安装boost库，安装参考链接:<br><a href="https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/" target="_blank" rel="noopener">https://leungzj.github.io/2018/09/19/ubuntu16-04-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85boost1-59-0/</a></directory></p>
-<p>make<br>make install</p>
-<p>5、配置mysql<br>(1)创建用户和用户组<br>groupadd mysql<br>useradd -g mysql mysql</p>
-<p>(2)设置mysql安装目录的权限<br>cd /usr/local/mysql<br>chown -R mysql:mysql ./</p>
-<p>(3)mysql初始化 #这里会生成一个mysql临时登录密码，需要记下来，稍后登录mysql会用到<br>bin/mysqld –initialize –user=mysql</p>
-<p>(4)启动mysql<br>support-files/mysql.server start</p>
-<p>(5)修改mysql登录密码<br>bin/mysql -u root -p<br>SET PASSWORD FOR ‘root‘@’localhost’ = PASSWORD(‘newpassword’);</p>
-<p>6、远程连接mysql<br>用类似navicat的客户端连接mysql，如果出现提示”is not allowed to connect”，需要在mysql命令行上设置远程连接权限，检查iptables是否开放3306端口<br>(1)GRANT ALL ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘password’ WITH GRANT OPTION;<br>(2)iptables -A INPUT -P tcp –dport 3306 -j ACCEPT</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/安装篇/">安装篇</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/mysql/">mysql</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2018 Jim
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
-</body>
-</html>
+block content
+    div.body__content
+        if page.tags.length > 0
+            div.body__item.post_tags
+                for tag in page.tags.toArray()
+                    a(href=url_for(tag.path) class="post_tag")= tag.name
+        if page.content.length > 0
+            div.body__item
+                != page.more
+    div#disqus_thread
