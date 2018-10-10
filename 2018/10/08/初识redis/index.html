@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>mysql启动报错:&#34;[ERROR] Table &#39;mysql.user&#39; doesn&#39;t exist&#34; | Hexo</title>
-  <meta name="description" content="这是因为编译安装mysql时指定了”–datadir=/usr/local/mysql/data”,所以在新增加一个/etc/my.cnf文件的时候，需要在my.cnf里面指定datadir=/usr/local/mysql/data 然后重启mysql就可以正常启动了">
-<meta name="keywords" content="mysql">
+  <title>初识redis | Hexo</title>
+  <meta name="description" content="redis属于nosql的一种。首先介绍一下nosql的分类:1、key-value nosql，比如redis，memcached2、column family nosql(列式存储)，比如hbase3、documentation nosql(文档存储)，比如mongodb4、graph nosql(图形存储) redis特性:1、key-value cache and store2、in-me">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql启动报错:&quot;[ERROR] Table &#39;mysql.user&#39; doesn&#39;t exist&quot;">
-<meta property="og:url" content="http://yoursite.com/2018/09/29/mysql启动报错/index.html">
+<meta property="og:title" content="初识redis">
+<meta property="og:url" content="http://yoursite.com/2018/10/08/初识redis/index.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="这是因为编译安装mysql时指定了”–datadir=/usr/local/mysql/data”,所以在新增加一个/etc/my.cnf文件的时候，需要在my.cnf里面指定datadir=/usr/local/mysql/data 然后重启mysql就可以正常启动了">
+<meta property="og:description" content="redis属于nosql的一种。首先介绍一下nosql的分类:1、key-value nosql，比如redis，memcached2、column family nosql(列式存储)，比如hbase3、documentation nosql(文档存储)，比如mongodb4、graph nosql(图形存储) redis特性:1、key-value cache and store2、in-me">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-08T05:52:09.396Z">
+<meta property="og:updated_time" content="2018-10-08T08:18:01.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql启动报错:&quot;[ERROR] Table &#39;mysql.user&#39; doesn&#39;t exist&quot;">
-<meta name="twitter:description" content="这是因为编译安装mysql时指定了”–datadir=/usr/local/mysql/data”,所以在新增加一个/etc/my.cnf文件的时候，需要在my.cnf里面指定datadir=/usr/local/mysql/data 然后重启mysql就可以正常启动了">
+<meta name="twitter:title" content="初识redis">
+<meta name="twitter:description" content="redis属于nosql的一种。首先介绍一下nosql的分类:1、key-value nosql，比如redis，memcached2、column family nosql(列式存储)，比如hbase3、documentation nosql(文档存储)，比如mongodb4、graph nosql(图形存储) redis特性:1、key-value cache and store2、in-me">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2018/09/29/mysql启动报错/index.html">
+  <link rel="canonical" href="http://yoursite.com/2018/10/08/初识redis/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Jim&#39;s Blog" type="application/atom+xml">
   
@@ -328,14 +328,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-mysql启动报错" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-初识redis" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      mysql启动报错:&#34;[ERROR] Table &#39;mysql.user&#39; doesn&#39;t exist&#34;
+      初识redis
     </h1>
   
 
@@ -343,8 +343,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2018/09/29/mysql启动报错/" class="article-date">
-	  <time datetime="2018-09-29T09:16:00.000Z" itemprop="datePublished">2018-09-29</time>
+	<a href="/2018/10/08/初识redis/" class="article-date">
+	  <time datetime="2018-10-08T06:59:00.000Z" itemprop="datePublished">2018-10-08</time>
 	</a>
 </span>
         
@@ -356,20 +356,21 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/mysql/">mysql</a>
+	<a class="article-tag-link" href="/tags/redis/">redis</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/09/29/mysql启动报错/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/10/08/初识redis/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry markdown-body" itemprop="articleBody">
       
-        <p>这是因为编译安装mysql时指定了”–datadir=/usr/local/mysql/data”,<br>所以在新增加一个/etc/my.cnf文件的时候，需要在my.cnf里面指定<br>datadir=/usr/local/mysql/data</p>
-<p>然后重启mysql就可以正常启动了</p>
+        <p>redis属于nosql的一种。<br>首先介绍一下nosql的分类:<br>1、key-value nosql，比如redis，memcached<br>2、column family nosql(列式存储)，比如hbase<br>3、documentation nosql(文档存储)，比如mongodb<br>4、graph nosql(图形存储)</p>
+<p>redis特性:<br>1、key-value cache and store<br>2、in-memory<br>3、single threaded(单线程，因为redis占用cpu的消耗很低，因此cpu一般不会成为瓶颈)<br>4、支持持久化(snapshotting，快照方式，异步写入到磁盘:AOF，append only file)<br>5、支持主从(借助于sentinel实现一定意义上的HA:高可用)<br>6、支持分布式集群(clustering)<br>7、支持string、list、hash(关联数组)、set、sorted set(有序集合)、bitmap、hyperloglog</p>
+<p>redis与memcached比较:<br>redis优势:<br>1、支持的数据类型丰富，包括hash、lists、sets、sorted set、hyperloglog<br>2、内建replication及cluster<br>3、就地更新操作(in-place update)<br>4、支持持久化(异步写入磁盘，避免雪崩效应)<br>memcached优势:<br>1、多线程(善用多核CPU，更少的阻塞操作)<br>2、更少的内存开销<br>3、更少的内存分配压力<br>4、可能有更少的内存碎片</p>
 
       
     </div>
@@ -379,7 +380,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2018/09/29/mysql启动报错/" title="mysql启动报错:&#34;[ERROR] Table &#39;mysql.user&#39; doesn&#39;t exist&#34;" target="_blank" rel="external">http://yoursite.com/2018/09/29/mysql启动报错/</a>
+      <a href="http://yoursite.com/2018/10/08/初识redis/" title="初识redis" target="_blank" rel="external">http://yoursite.com/2018/10/08/初识redis/</a>
     </li>
     
     
@@ -427,12 +428,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2018/09/29/iptables删除已有的规则/" title="iptables删除已有的规则"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2018/10/08/redis配置及基本命令操作/" title="redis安装、配置及基本命令操作"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2018/09/26/ubuntu安装ansible/" title="ubuntu安装ansible"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2018/09/29/解决rabbitmq的web管理界面无法使用guest用户登录的问题/" title="解决rabbitmq的web管理界面无法使用guest用户登录的问题"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
