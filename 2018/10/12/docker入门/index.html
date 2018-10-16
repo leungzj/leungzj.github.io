@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>docker | Hexo</title>
+  <meta name="description" content="什么是dockerdocker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的linux机器中，也可以实现虚拟化。docker的目标是实现轻量级操作系统虚拟化的解决方案。(基于Go语言开发) docker简单原理docker的基础是linux容器(LXC)、Cgroup技术。docker是在LXC的基础上进行了进一步的封装，让用户不再需要去关">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker">
+<meta property="og:url" content="http://yoursite.com/2018/10/12/docker入门/index.html">
+<meta property="og:site_name" content="Jim&#39;s Blog">
+<meta property="og:description" content="什么是dockerdocker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的linux机器中，也可以实现虚拟化。docker的目标是实现轻量级操作系统虚拟化的解决方案。(基于Go语言开发) docker简单原理docker的基础是linux容器(LXC)、Cgroup技术。docker是在LXC的基础上进行了进一步的封装，让用户不再需要去关">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-13.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-14.png">
+<meta property="og:updated_time" content="2018-10-12T09:38:38.748Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker">
+<meta name="twitter:description" content="什么是dockerdocker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的linux机器中，也可以实现虚拟化。docker的目标是实现轻量级操作系统虚拟化的解决方案。(基于Go语言开发) docker简单原理docker的基础是linux容器(LXC)、Cgroup技术。docker是在LXC的基础上进行了进一步的封装，让用户不再需要去关">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-13.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2018/10/12/docker入门/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">大象</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">运维工程师</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux简单应用/">linux简单应用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一言/">一言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/容器技术/">容器技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术书籍/">技术书籍</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keepalived/">keepalived</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitmq/">rabbitmq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/awk/" style="font-size: 13px;">awk</a> <a href="/tags/books/" style="font-size: 13px;">books</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/iptables/" style="font-size: 13px;">iptables</a> <a href="/tags/keepalived/" style="font-size: 14px;">keepalived</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/rabbitmq/" style="font-size: 13px;">rabbitmq</a> <a href="/tags/redis/" style="font-size: 14px;">redis</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/tomcat/" style="font-size: 13px;">tomcat</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/一言/">一言</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/16/给你的情书/" class="title">给你的情书</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-16T03:00:00.000Z" itemprop="datePublished">2018-10-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux文本处理/">linux文本处理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/15/Untitled/" class="title">awk入门</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-15T08:01:00.000Z" itemprop="datePublished">2018-10-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/技术书籍/">技术书籍</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/12/技术书籍-1/" class="title">技术书籍</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-12T08:36:00.000Z" itemprop="datePublished">2018-10-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/容器技术/">容器技术</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/12/docker入门/" class="title">docker</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-12T01:26:00.000Z" itemprop="datePublished">2018-10-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/高可用web/">高可用web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/10/初识java/" class="title">初识java</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-10T08:33:00.000Z" itemprop="datePublished">2018-10-10</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-docker入门" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/10/12/docker入门/" class="article-date">
+	  <time datetime="2018-10-12T01:26:00.000Z" itemprop="datePublished">2018-10-12</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/容器技术/">容器技术</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/docker/">docker</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/10/12/docker入门/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>什么是docker<br>docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的linux机器中，也可以实现虚拟化。<br>docker的目标是实现轻量级操作系统虚拟化的解决方案。(基于Go语言开发)</p>
+<p>docker简单原理<br>docker的基础是linux容器(LXC)、Cgroup技术。<br>docker是在LXC的基础上进行了进一步的封装，让用户不再需要去关心容器的管理，使得操作更加简便。用户操作docker的容器就像操作一个快速轻量级的虚拟机一样简单。<br>与传统虚拟户(KVM、XEN等)相比较：<br>(1)docker是在操作系统层面上实现虚拟化，直接复用本地主机的操作系统<br>(由下往上:硬件-&gt;host操作系统-&gt;docker engine-&gt;应用库-&gt;应用app)</p>
+<p><img src="/images/pasted-13.png" alt="upload successful"><br>(2)传统的虚拟化方式是在硬件的基础上，虚拟出自己的系统，再在系统上部署相关的APP应用<br>(由下往上:硬件-&gt;host操作系统-&gt;hypervisor-&gt;guest操作系统-&gt;应用库-&gt;应用app)</p>
+<p><img src="/images/pasted-14.png" alt="upload successful"></p>
+<p>docker组件<br>(1)镜像:其实就是模板，跟我们常见的ISO镜像类似，是一个样板<br>(2)容器:使用镜像常见的应用或系统，我们称之为一个容器(容器相当于启动之后的镜像)<br>(3)仓库:仓库就是存放镜像的地方，分为公开仓库(public)和私有仓库(private)两种形式</p>
+<p>docker技术组件<br>linux内核的命名空间(namespace)，用于隔离文件系统、进程和网络<br>(1)文件系统隔离:每个容器都有自己的root文件系统<br>(2)进程隔离:每个容器都运行在自己的进程环境中<br>(3)网络隔离:容器间的虚拟网络接口和IP地址都是分开的<br>(4)资源隔离和分组:使用Cgroups(即control group，linux内核特性之一)将cpu和内存之类的资源独立分配给每个docker容器<br>(5)写时复制:文件系统都是通过写时复制创建的<br>(6)日志:容器产生的STDOUT、STDIN和STDERR这些IO流都会被收集并记入日志<br>(7)交互式shell:用户可以创建一个伪tty终端，为容器提供一个交互式shell</p>
+<p>docker虚拟化特点<br>(1)操作启动快<br>运行时的性能获得极大的提升，管理操作(开始、停止、重启等)都是以秒或者毫秒为单位的<br>(2)轻量级虚拟化<br>你会拥有足够的”操作系统”，仅需添加或减少镜像即可。在一台服务器上可以部署100~1000个container容器，但是传统虚拟化虚拟出10~20个虚拟机就已经很好了<br>(3)开源免费<br>(4)前景及云支持</p>
+<p>使用docker的优势<br>(1)提供一个简单、轻量的建模方式<br>用户上手docker非常快，只需要几分钟就可以将自己的程序”docker化”,docker依赖于”写时复制”(copy-on-write)模型，使得修改应用程序也非常迅速。<br>(2)职责的逻辑分离<br>使用docker，开发人员只需要关心容器中运行的应用程序，运维人员只需要关心如何管理容器，从而降低”开发时一切正常，肯定是运维问题”的风险。<br>(3)快速、高效的开发生命周期<br>docker的目标之一就是缩短代码从开发、测试到部署、上线运行的周期，让你的应用程序具备可移植性、易于构建、易于协作。<br>(4)鼓励使用面向服务的架构<br>docker推荐单个容器只运行一个应用程序，这样就形成了一个分布式的应用程序模型。在这种模型下，应用程序或服务都可以表示为一系列内部互联的容器，从而使分布式部署应用程序或者扩展应用程序变得简单。</p>
+<p>docker安装先决条件<br>(1)运行64位CPU架构的计算机，不支持32位的CPU<br>(2)运行linux3.8或更高版本的内核<br>查看内核版本:<br>uname -a<br>目前3.8内核已经可以通过apt-get来安装，内核更新步骤:<br>apt-get update<br>apt-get install linux-headers-3.8.0-27-generic<br>update-grub<br>reboot<br>(3)内核必须支持一种适合的存储驱动，默认是Device Mapper<br>检查主机是否安装Device-mapper:<br>grep device-mapper /proc/devices<br>如果没有出现device-mapper的相关信息，可以尝试加载dm_mod模块:<br>modprobe dm_mod<br>(4)内核必须支持并开启cgroup和namespace(命名空间)的功能<br>cgroup和namespace自2.6版本就已经集成到linux内核中，目前为止功能非常稳定</p>
+<p>docker安装<br>默认docker只能在centos6.5以上机器才能使用yum直接安装，如果是其他版本的话需要安装centos扩展源epel。<br>docker官方要求linux kernel至少要3.8以上。<br>在centos6.5系统上安装docker:<br>(1)关闭selinux<br>(2)安装epel源<br>wget <a href="http://ftp.riken.jp/Linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm" target="_blank" rel="noopener">http://ftp.riken.jp/Linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm</a><br>rpm -ivh  epel-release-6-8.noarch.rpm<br>(3)安装依赖<br>yum install lxc libcgroup device-mapper-event-libs<br>device-mapper* -y<br>(4)安装docker<br>yum install docker-io<br>(5)docker启动<br>/etc/init.d/docker start<br>在ubuntu 16.04安装docker:<br>(1)安装<br>wget -qO- <a href="https://get.docker.com/" target="_blank" rel="noopener">https://get.docker.com/</a> | sh<br>(2)启动<br>/etc/init.d/docker start<br>备注:在ubuntu中，如果使用UFW，需要在UFW中启用数据报文转发，才能让docker正常工作。因为UFW默认情况下会丢弃所有转发的数据包。修改/etc/default/ufw，将DEFAULT_FORWARD_POLICY=”DROP”修改为DEFAULT_FORWARD_POLICY=”ACCEPT”，保存修改内容并通过ufw reload重启UFW即可</p>
+<p>docker常用命令<br>docker version #查看docker版本<br>docker images #查看当前的docker所有镜像<br>docker info #检查docker是否已经正确安装并运行<br>docker search centos #搜索可用的docker镜像<br>docker pull centos #从公有仓库中下载镜像<br>cat centos.tar | docker import - centos6 #导入镜像，导入centos.tar镜像并重命名为centos6<br>docker export id &gt; centos6.tar #导出镜像，根据id导出镜像并重命名为centos6.tar<br>docker ps -l #查看最后一个容器的id<br>docker ps -a #查看所有容器<br>docker run centos echo “hello world” #在容器中运行”hello world”<br>docker run centos yum install ntpdate #在容器中安装ntpdate程序<br>docker run -i -t centos /bin/bash #在容器中启动一个/bin/bash shell环境，可以登入操作，-t表示打开一个终端，-i表示交互式输入<br>docker run -d centos:v1 /bin/bash #在后台启动一个/bin/bash shell环境，-d表示在后台以daemon方式启动<br>docker run -d -p 80:80 -p 8022:22 centos:v2 #-p指定容器启动后docker上运行的端口映射为容器里运行的端口，80:80中第一个80表示docker系统(本机)的80端口，第二个80表示docker虚拟机(docker容器)里面的端口。用户默认访问本机80端口，自动映射到容器里面的80端口<br>docker commit 2313132 centos:v1 #提交刚修改的容器<br>docker stop id #关闭容器<br>docker start id #启动容器<br>docker rm id #删除容器</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2018/10/12/docker入门/" title="docker" target="_blank" rel="external">http://yoursite.com/2018/10/12/docker入门/</a>
+    </li>
+    
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/" target="_blank"><span class="text-dark">大象</span><small class="ml-1x">运维工程师</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="vcomments"></div>
+
+    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/10/12/技术书籍-1/" title="技术书籍"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/10/10/初识java/" title="初识java"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,facebook" data-mobile-sites="qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipay.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpay.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/valine"></script>
+   <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+     var meta = 'nick,mail,link';
+     meta = meta.split(',').filter(function (item) {
+       return GUEST.indexOf(item)>-1;
+     });
+     new Valine({
+         el: '#vcomments' ,
+         verify: false,
+         notify: false,
+         appId: '',
+         appKey: '',
+         placeholder: 'Just go go',
+         avatar:'mm',
+         meta:meta,
+         pageSize:'10' || 10,
+         visitor: false
+     });
+   </script>
+
+    
+
+    
+    
+
+
+
+</body>
+</html>
