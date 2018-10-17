@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>awk入门 | Hexo</title>
-  <meta name="description" content="文本处理工具三剑客:grep、sed、awk(1)grep:文本过滤器，匹配模式，过滤文本(2)sed:流编辑器，能够编辑文本，默认将编辑之后的文本输出到屏幕(3)awk:报告生成器，根据输入信息，将输入信息格式化之后再显示出来(awk是以awk三个作者名字的首字母命名) awk版本:(1)awk(2)new awk，简称nawk(3)gnome awk，简称gawk(linux上的版本都是gaw">
-<meta name="keywords" content="awk">
+  <title>grep入门 | Hexo</title>
+  <meta name="description" content="grep:根据模式搜索文本，并将符合模式的文本行显示出来 模式(pattern)的概念:文本字符和正则表达式的元字符组合而成的匹配条件 grep版本:(1)grep(2)egrep(3)fgrep grep用法:grep [option] pattern [file…]备注:(1)模式(pattern)要用引号引起来。在shell中，单引号是强引用，双引号是弱引用。(2)强引用指的是单引号里面的内">
+<meta name="keywords" content="grep">
 <meta property="og:type" content="article">
-<meta property="og:title" content="awk入门">
-<meta property="og:url" content="http://yoursite.com/2018/10/15/Untitled/index.html">
+<meta property="og:title" content="grep入门">
+<meta property="og:url" content="http://yoursite.com/2018/10/17/grep/index.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="文本处理工具三剑客:grep、sed、awk(1)grep:文本过滤器，匹配模式，过滤文本(2)sed:流编辑器，能够编辑文本，默认将编辑之后的文本输出到屏幕(3)awk:报告生成器，根据输入信息，将输入信息格式化之后再显示出来(awk是以awk三个作者名字的首字母命名) awk版本:(1)awk(2)new awk，简称nawk(3)gnome awk，简称gawk(linux上的版本都是gaw">
+<meta property="og:description" content="grep:根据模式搜索文本，并将符合模式的文本行显示出来 模式(pattern)的概念:文本字符和正则表达式的元字符组合而成的匹配条件 grep版本:(1)grep(2)egrep(3)fgrep grep用法:grep [option] pattern [file…]备注:(1)模式(pattern)要用引号引起来。在shell中，单引号是强引用，双引号是弱引用。(2)强引用指的是单引号里面的内">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-15T09:24:05.011Z">
+<meta property="og:updated_time" content="2018-10-17T06:23:13.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="awk入门">
-<meta name="twitter:description" content="文本处理工具三剑客:grep、sed、awk(1)grep:文本过滤器，匹配模式，过滤文本(2)sed:流编辑器，能够编辑文本，默认将编辑之后的文本输出到屏幕(3)awk:报告生成器，根据输入信息，将输入信息格式化之后再显示出来(awk是以awk三个作者名字的首字母命名) awk版本:(1)awk(2)new awk，简称nawk(3)gnome awk，简称gawk(linux上的版本都是gaw">
+<meta name="twitter:title" content="grep入门">
+<meta name="twitter:description" content="grep:根据模式搜索文本，并将符合模式的文本行显示出来 模式(pattern)的概念:文本字符和正则表达式的元字符组合而成的匹配条件 grep版本:(1)grep(2)egrep(3)fgrep grep用法:grep [option] pattern [file…]备注:(1)模式(pattern)要用引号引起来。在shell中，单引号是强引用，双引号是弱引用。(2)强引用指的是单引号里面的内">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2018/10/15/Untitled/index.html">
+  <link rel="canonical" href="http://yoursite.com/2018/10/17/grep/index.html">
   
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -203,7 +203,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux简单应用/">linux简单应用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/容器技术/">容器技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/摘抄/">摘抄</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">5</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux简单应用/">linux简单应用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端技术/">前端技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/容器技术/">容器技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/摘抄/">摘抄</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -213,7 +213,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keepalived/">keepalived</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitmq/">rabbitmq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keepalived/">keepalived</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitmq/">rabbitmq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/疲惫生活中的英雄梦想/">疲惫生活中的英雄梦想</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/给你的情书/">给你的情书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -223,7 +223,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/awk/" style="font-size: 13px;">awk</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/iptables/" style="font-size: 13px;">iptables</a> <a href="/tags/keepalived/" style="font-size: 14px;">keepalived</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/rabbitmq/" style="font-size: 13px;">rabbitmq</a> <a href="/tags/redis/" style="font-size: 14px;">redis</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/tomcat/" style="font-size: 13px;">tomcat</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+      <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/awk/" style="font-size: 13.5px;">awk</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/grep/" style="font-size: 13.5px;">grep</a> <a href="/tags/html/" style="font-size: 13px;">html</a> <a href="/tags/iptables/" style="font-size: 13px;">iptables</a> <a href="/tags/keepalived/" style="font-size: 14px;">keepalived</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/rabbitmq/" style="font-size: 13px;">rabbitmq</a> <a href="/tags/redis/" style="font-size: 14px;">redis</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/sed/" style="font-size: 13px;">sed</a> <a href="/tags/tomcat/" style="font-size: 13px;">tomcat</a> <a href="/tags/正则/" style="font-size: 13px;">正则</a> <a href="/tags/疲惫生活中的英雄梦想/" style="font-size: 13px;">疲惫生活中的英雄梦想</a> <a href="/tags/给你的情书/" style="font-size: 13px;">给你的情书</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
     </div>
   </div>
 
@@ -232,7 +232,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">14</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">14</span></li></ul>
     </div>
   </div>
 
@@ -248,13 +248,28 @@
             
             <div class="item-inner">
               <p class="item-category">
+                <a class="category-link" href="/categories/前端技术/">前端技术</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/17/Untitled-3/" class="title">HTML基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-17T07:14:00.000Z" itemprop="datePublished">2018-10-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
                 <a class="category-link" href="/categories/摘抄/">摘抄</a>
               </p>
               <p class="item-title">
-                <a href="/2018/10/16/给你的情书/" class="title">给你的情书</a>
+                <a href="/2018/10/17/Untitled-1/" class="title">2018/10/17</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-10-16T03:00:00.000Z" itemprop="datePublished">2018-10-16</time>
+                <time datetime="2018-10-17T06:49:00.000Z" itemprop="datePublished">2018-10-17</time>
               </p>
             </div>
           </li>
@@ -266,10 +281,10 @@
                 <a class="category-link" href="/categories/linux文本处理/">linux文本处理</a>
               </p>
               <p class="item-title">
-                <a href="/2018/10/15/Untitled/" class="title">awk入门</a>
+                <a href="/2018/10/17/grep/" class="title">grep入门</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-10-15T08:01:00.000Z" itemprop="datePublished">2018-10-15</time>
+                <time datetime="2018-10-17T06:08:00.000Z" itemprop="datePublished">2018-10-17</time>
               </p>
             </div>
           </li>
@@ -278,13 +293,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/容器技术/">容器技术</a>
+                <a class="category-link" href="/categories/linux文本处理/">linux文本处理</a>
               </p>
               <p class="item-title">
-                <a href="/2018/10/12/docker入门/" class="title">docker</a>
+                <a href="/2018/10/17/正则表达式/" class="title">正则表达式</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-10-12T01:26:00.000Z" itemprop="datePublished">2018-10-12</time>
+                <time datetime="2018-10-17T03:45:00.000Z" itemprop="datePublished">2018-10-17</time>
               </p>
             </div>
           </li>
@@ -293,28 +308,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/高可用web/">高可用web</a>
+                <a class="category-link" href="/categories/linux文本处理/">linux文本处理</a>
               </p>
               <p class="item-title">
-                <a href="/2018/10/10/初识java/" class="title">初识java</a>
+                <a href="/2018/10/17/awk入门/" class="title">awk入门</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-10-10T08:33:00.000Z" itemprop="datePublished">2018-10-10</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/数据库/">数据库</a>
-              </p>
-              <p class="item-title">
-                <a href="/2018/10/08/redis高级功能/" class="title">redis高级功能</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2018-10-08T09:20:00.000Z" itemprop="datePublished">2018-10-08</time>
+                <time datetime="2018-10-17T03:37:00.000Z" itemprop="datePublished">2018-10-17</time>
               </p>
             </div>
           </li>
@@ -332,14 +332,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Untitled" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-grep" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      awk入门
+      grep入门
     </h1>
   
 
@@ -347,8 +347,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2018/10/15/Untitled/" class="article-date">
-	  <time datetime="2018-10-15T08:01:00.000Z" itemprop="datePublished">2018-10-15</time>
+	<a href="/2018/10/17/grep/" class="article-date">
+	  <time datetime="2018-10-17T06:08:00.000Z" itemprop="datePublished">2018-10-17</time>
 	</a>
 </span>
         
@@ -360,30 +360,23 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/awk/">awk</a>
+	<a class="article-tag-link" href="/tags/grep/">grep</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/10/15/Untitled/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/10/17/grep/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry markdown-body" itemprop="articleBody">
       
-        <p>文本处理工具三剑客:<br>grep、sed、awk<br>(1)grep:文本过滤器，匹配模式，过滤文本<br>(2)sed:流编辑器，能够编辑文本，默认将编辑之后的文本输出到屏幕<br>(3)awk:报告生成器，根据输入信息，将输入信息格式化之后再显示出来(awk是以awk三个作者名字的首字母命名)</p>
-<p>awk版本:<br>(1)awk<br>(2)new awk，简称nawk<br>(3)gnome awk，简称gawk(linux上的版本都是gawk，可以通过ls -l /bin/awk来查看awk指向的链接就是gawk)</p>
-<p>awk使用格式:<br>awk [options] ‘PATTERN {action}’ file1,file2…</p>
-<p>options:<br>-F 指定分隔符<br>BEGIN {OFS=””} 指定输出分隔符</p>
-<p>awk内置变量:<br>(1)记录变量<br>FS:读取文本时所使用的字段分隔符，默认是空白字符<br>RS:输入文本信息时所使用的换行符<br>OFS:输出分隔符<br>ORS:输出行分隔符<br>(2)数据变量<br>NR:awk命令所处理的记录数。如果有多个文件，这个数目会把处理的多个文件中的行统一计数<br>FNR:记录所处理的行是当前这一文件中被总共处理的行中是第几行<br>NF:用于统计正在处理的行中的字段总数($NF:正在被处理的行中的最后一个字段)</p>
-<p>常见的PATTERN类型:<br>1、regexp，正则表达式，格式为/regular expression/<br>用法示例:<br>awk -F: ‘/^r/{print $1}’ /etc/passwd #显示passwd文件中以r开头的用户名<br>2、expression，表达式，比如$1 ~ /foo/或$1 == “magedu”等<br>用法示例:<br>awk -F: ‘$3&gt;=500{print $1,$3}’ /etc/passwd #显示passwd文件中uid大于300的用户及其uid<br>awk -F: ‘$7~”bash$”{print $1,$7}’ /etc/passwd #显示passwd文件中以bash shell为shell的用户名及其对应的shell<br>3、range，指定匹配范围<br>用法示例:<br>awk -F: ‘/^r/^m/{print $1,$3}’ /etc/passwd #显示passwd文件中第一次以r开头开始到第一次以m开头的行结束的之间的所有行<br>4、BEGIN/END，特殊模式，在awk命令执行之前运行一次或结束之前运行一次<br>BEGIN:在awk处理文本第一行之前执行<br>END:在awk处理文本最后一行之前执行<br>用法示例:<br>awk -F: ‘BEGIN{print “Username ID SHELL”}{printf “%-10s%-10s%-20s\n”,$1,$3,$7}END{print “end of report”}’ /etc/passwd</p>
-<p>#在第一行打印”Username ID SHELL”，在最后一行打印”end of report”</p>
-<p>常见的action:<br>控制语句:<br>(1)if-else<br>用法示例:<br>awk -F: ‘{if ($1==”root”) print $1,”admin”;else print $1,”common user”}’ /etc/passwd<br>(2)while<br>用法示例:<br>awk -F: ‘{i=1;while(i&lt;=3) {print $i;i++}}’ /etc/passwd<br>(3)do-while<br>用法示例:<br>awk -F: ‘{i=1;do {print $i;i++}while(i&lt;=3)}’ /etc/passwd<br>(4)for<br>用法示例:<br>awk -F: ‘{for(i=1;i&lt;=3;i++)print $i}’ /etc/passwd<br>(5)case<br>(6)break、continue(跳过本字段)<br>(7)next(跳过本行)</p>
-<p>awk使用数组:<br>用法示例:<br>(1)awk -F: ‘{shell[$NF]++}END{for(A in shell){print A,shell[A]}}’ /etc/passwd  </p>
-<p>#生成一个shell数组，并统计passwd文件中各种shell的个数，A指的是下标<br>(2)netstat -tan | awk ‘/^tcp/{STATE{$NF}++}END{for (S IN STATE){print S,STATE[S]}}’ </p>
-<p>#生成一个STATE数组，并统计各种程序状态的个数，S指的是下标<br>(3)awk ‘{counts[$1]++}END{for(ip in counts){printf “%-20s:%d\n”,ip,count[ip]}}’ /var/log/httpd/access.log  </p>
-<p>#统计web日志文件中IP地址的访问量<br>备注：<br>awk中的下标很独特，可以是任意字符串</p>
+        <p>grep:根据模式搜索文本，并将符合模式的文本行显示出来</p>
+<p>模式(pattern)的概念:<br>文本字符和正则表达式的元字符组合而成的匹配条件</p>
+<p>grep版本:<br>(1)grep<br>(2)egrep<br>(3)fgrep</p>
+<p>grep用法:<br>grep [option] pattern [file…]<br>备注:<br>(1)模式(pattern)要用引号引起来。在shell中，单引号是强引用，双引号是弱引用。<br>(2)强引用指的是单引号里面的内容会原封不动<br>(3)弱引用指的是引用变量，变量会被赋值为对应的值<br>(4)在模式引用中，只要不涉及到变量的引用，单引号和双引号都可以；如果模式中没有包含正则表达式的元字符的时候，实际上不加引号也可以</p>
+<p>option:<br>-i 忽略大小写<br>–color 匹配的字符高亮显示(可以通过别名，用alias grep=’grep –color’将grep的高亮显示作为默认显示)<br>-v 反向grep<br>-o 只显示被模式匹配到的字符串(默认会显示包含模式匹配到的整行文本)<br>-E 支持扩展的正则表达式(相当于egrep)<br>-A n 显示匹配到的字符串所在行及向下的n行<br>-B n 显示匹配到的字符串所在行及向上的n行<br>-C n 显示匹配到的字符串所在行及其上和其下的n行</p>
 
       
     </div>
@@ -393,7 +386,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2018/10/15/Untitled/" title="awk入门" target="_blank" rel="external">http://yoursite.com/2018/10/15/Untitled/</a>
+      <a href="http://yoursite.com/2018/10/17/grep/" title="grep入门" target="_blank" rel="external">http://yoursite.com/2018/10/17/grep/</a>
     </li>
     
     
@@ -441,12 +434,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2018/10/16/给你的情书/" title="给你的情书"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2018/10/17/Untitled-1/" title="2018/10/17"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2018/10/12/docker入门/" title="docker"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2018/10/17/正则表达式/" title="正则表达式"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
