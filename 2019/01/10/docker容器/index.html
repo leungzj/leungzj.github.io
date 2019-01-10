@@ -18,17 +18,41 @@
   
   
   <title>docker容器篇 | Hexo</title>
-  <meta name="description" content="1、运行容器指定容器启动时执行的命令的三种方法：（1）CMD命令（2）ENTRYPOINT命令（3）在docker run命令行中指定举例：（1）在容器启动时执行pwd，返回的/是容器中的当前目录">
+  <meta name="description" content="1、运行容器指定容器启动时执行的命令的三种方法：（1）CMD命令（2）ENTRYPOINT命令（3）在docker run命令行中指定举例：（1）在容器启动时执行pwd，返回的/是容器中的当前目录 （2）执行docker ps或者docker container ls查看当前运行的容器 （3）执行docker ps -a或者docker container ls -a查看所有容器（-a会显示所有状">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker容器篇">
 <meta property="og:url" content="http://yoursite.com/2019/01/10/docker容器/index.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="1、运行容器指定容器启动时执行的命令的三种方法：（1）CMD命令（2）ENTRYPOINT命令（3）在docker run命令行中指定举例：（1）在容器启动时执行pwd，返回的/是容器中的当前目录">
+<meta property="og:description" content="1、运行容器指定容器启动时执行的命令的三种方法：（1）CMD命令（2）ENTRYPOINT命令（3）在docker run命令行中指定举例：（1）在容器启动时执行pwd，返回的/是容器中的当前目录 （2）执行docker ps或者docker container ls查看当前运行的容器 （3）执行docker ps -a或者docker container ls -a查看所有容器（-a会显示所有状">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-10T08:06:05.470Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-444.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-449.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-450.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-451.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-452.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-453.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-454.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-455.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-456.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-457.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-458.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-459.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-460.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-461.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-462.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-463.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-464.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-465.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-466.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-468.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-469.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-470.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-471.png">
+<meta property="og:updated_time" content="2019-01-10T08:58:21.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker容器篇">
-<meta name="twitter:description" content="1、运行容器指定容器启动时执行的命令的三种方法：（1）CMD命令（2）ENTRYPOINT命令（3）在docker run命令行中指定举例：（1）在容器启动时执行pwd，返回的/是容器中的当前目录">
+<meta name="twitter:description" content="1、运行容器指定容器启动时执行的命令的三种方法：（1）CMD命令（2）ENTRYPOINT命令（3）在docker run命令行中指定举例：（1）在容器启动时执行pwd，返回的/是容器中的当前目录 （2）执行docker ps或者docker container ls查看当前运行的容器 （3）执行docker ps -a或者docker container ls -a查看所有容器（-a会显示所有状">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-444.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://yoursite.com/2019/01/10/docker容器/index.html">
   
@@ -367,6 +391,50 @@
     <div class="article-entry markdown-body" itemprop="articleBody">
       
         <p>1、运行容器<br>指定容器启动时执行的命令的三种方法：<br>（1）CMD命令<br>（2）ENTRYPOINT命令<br>（3）在docker run命令行中指定<br>举例：<br>（1）在容器启动时执行pwd，返回的/是容器中的当前目录</p>
+<p><img src="/images/pasted-444.png" alt="upload successful"><br>（2）执行docker ps或者docker container ls查看当前运行的容器</p>
+<p><img src="/images/pasted-449.png" alt="upload successful"><br>（3）执行docker ps -a或者docker container ls -a查看所有容器（-a会显示所有状态的容器）</p>
+<p><img src="/images/pasted-450.png" alt="upload successful"><br>可以看到容器已经退出，状态为exited</p>
+<p>让容器保持运行状态的两种方法：<br>（1）通过执行一个长期运行的命令来保持容器的运行状态（例如循环）</p>
+<p><img src="/images/pasted-451.png" alt="upload successful"></p>
+<p><img src="/images/pasted-452.png" alt="upload successful"><br>打开另外一个终端查看容器的状态<br>缺点是：这种方法始终会占用一个终端<br>（2）加上参数-d以后台方式启动容器</p>
+<p><img src="/images/pasted-453.png" alt="upload successful"></p>
+<p><img src="/images/pasted-454.png" alt="upload successful"><br>通过docker ps看到的container id是短id，短id是长id的前12个字符</p>
+<p>停止容器：<br>docker stop “短id”</p>
+<p>指定容器名称：<br>docker run –name “my_httpd_server” -d httpd</p>
+<p><img src="/images/pasted-455.png" alt="upload successful"><br>docker ps可以看到容器运行的命令是httpd-foreground</p>
+<p><img src="/images/pasted-456.png" alt="upload successful"><br>docker history可以知道这个命令是通过CMD指定的</p>
+<p>2、进入容器<br>两种进入容器的方法：<br>（1）docker attach</p>
+<p><img src="/images/pasted-457.png" alt="upload successful"><br>通过id attach到容器的启动命令终端，然后可以看到echo每隔1秒打印hello-world<br>（2）docker exec</p>
+<p><img src="/images/pasted-458.png" alt="upload successful"><br>-it就是以交互模式打开，执行bash，其结果就是打开一个bash终端，就可以像在普通的linux中一样执行命令了。执行exit会退出容器，回到docker host<br>（3）两者的区别<br>attach直接进入容器启动命令的终端，不会启动新的进程；<br>exec则是在容器中打开新的终端，并且可以启动新的进程；<br>如果想直接在终端中查看启动命令的输出，用attach。其他情况用exec。通过docker log -f也可以查看启动命令的输出（-f与tail -f类似，能够持续打印输出）</p>
+<p>指定容器的三种方法：<br>（1）短ID<br>（2）长ID<br>（3）容器名称（通过–name为容器命名。重命名容器可以执行docker rename）</p>
+<p>3、常用命令<br>create：创建容器<br>run：运行容器<br>pause：暂停容器<br>unpause：取消暂停<br>stop：发送SIGTERM停止容器<br>kill：发送SIGKILL快速停止容器<br>start：启动容器<br>restart：重新启动容器<br>attach：attach到容器启动进程的终端<br>exec：在容器中启动新进程，通常使用”-it”参数<br>logs：显示容器启动进程的控制台输出，用”-f”持续打印<br>rm：从磁盘中删除容器</p>
+<p>4、资源限额<br>内存限额：<br>（1）内存定义：内存包含两部分，物理内存和swap<br>（2）设置命令：<br>-m或–memory：设置内存的使用限额，例如100M，2G<br>–memory-swap：设置内存+swap的使用限额（备注：不单单是指swap，而是内存和swap的总和）<br>（3）举例：<br>例子1<br>docker run -m 200M –memory-swap=300M ubuntu<br>这条指令的意思是该容器最多允许使用200M的内存和100M的swap。默认上面两组参数的值为1，即对该容器内存和swap的使用没有限制</p>
+<p>例子2<br>docker run -it -m 200M –memory-swap=300M progrium/stress –vm 1 –vm-bytes 280M<br>备注：–vm 1是指启动一个内存工作线程；–vm-bytes 280M是指每个线程分配280M内存<br>运行结果：</p>
+<p><img src="/images/pasted-459.png" alt="upload successful"><br>结论：可以正常工作<br>工作过程：<br>分配 280M 内存。<br>释放 280M 内存。<br>再分配 280M 内存。<br>再释放 280M 内存。<br>一直循环……</p>
+<p>例子3<br>docker run -it -m 200M –memory-swap=300M progrium/stress –vm 1 –vm-bytes 310M<br>运行结果：</p>
+<p><img src="/images/pasted-460.png" alt="upload successful"><br>结论：不能正常工作<br>工作过程：<br>分配的内存超过限额，stress 线程报错，容器退出</p>
+<p>备注：<br>如果在启动容器时只指定 -m 而不指定 –memory-swap，那么 –memory-swap 默认为 -m 的两倍，比如：<br>docker run -it -m 200M ubuntu<br>容器最多使用 200M 物理内存和 200M swap。</p>
+<p>CPU限额：<br>设置命令：-c或者–cpu-shares：设置容器使用cpu的权重<br>备注：<br>（1）与内存限额不同，通过 -c 设置的 cpu share 并不是 CPU 资源的绝对数量，而是一个相对的权重值。也就是说，某个容器最终能分配到的 CPU 资源取决于它的 cpu share 占所有容器 cpu share 总和的比例。<br>（2）比如说，在docker host中启动了两个容器<br>docker run –name “container_A” -c 1024 ubuntu<br>docker run –name “container_A” -c 512 ubuntu<br>container_A 的 cpu share 1024，是 container_B 的两倍。当两个容器都需要 CPU 资源时，container_A 可以得到的 CPU 是 container_B 的两倍。<br>（3）这种按权重分配cpu只会发生在cpu资源紧张的时候。如果 container_A 处于空闲状态，这时，为了充分利用 CPU 资源，container_B 也可以分配到全部可用的 CPU。</p>
+<p>举例：<br>（1）启动container_a</p>
+<p><img src="/images/pasted-461.png" alt="upload successful"><br>备注：–cpu是用来设置工作线程的数量。因为当前host只有一颗cpu，所以一个工作线程就能将cpu压满。如果host有多颗cpu，则需要相应增加–cpu的数量。<br>（2）打开另一个终端，启动container_b</p>
+<p><img src="/images/pasted-462.png" alt="upload successful"><br>（3）再打开一个终端，执行top命令</p>
+<p><img src="/images/pasted-463.png" alt="upload successful"><br>结论：container_a消耗的cpu是container_d的2倍<br>（4）暂停container_a</p>
+<p><img src="/images/pasted-464.png" alt="upload successful"><br>（5）container_b在container_a空闲的情况下可以用满整颗CPU</p>
+<p><img src="/images/pasted-465.png" alt="upload successful"></p>
+<p>IO限额：<br>（1）IO定义：block io指的是磁盘的读写，docker可以通过设置权重、限制bps和iops的方式控制容器读写磁盘的带宽<br>（2）限制IO的两种方式：<br>设置权重：通过设置–blkio-weight参数来修改权重，默认值是500<br>举例：container_a读写磁盘的带宽是container_b的两倍<br>docker run -it –name container_a –blkio-weight 600 ubuntu<br>docker run -it –name container_b –blkio-weight 300 ubuntu</p>
+<p>限制bps和iops：<br>（1）定义：<br>bps：byte per second，每秒读写的数据量<br>iops：io per second，每秒io的次数<br>（2）可以通过以下参数控制容器的bps和iops：<br>–device-read-bps：限制读某个设备的bps；<br>–device-write-bps：限制写某个设备的bps；<br>–device-read-iops：限制读某个设备的iops；<br>–device-write-iops：限制写某个设备的iops。<br>（3）举例：限制容器写/dev/sda的速率为30MB/s<br>docker run -it –device-write-bps /dev/sda:30MB ubuntu<br>限速情况下的运行结果：</p>
+<p><img src="/images/pasted-466.png" alt="upload successful"><br>对比不限速情况下的运行结果：</p>
+<p><img src="/images/pasted-468.png" alt="upload successful"><br>备注：oflag=direct 指定用 direct IO 方式写文件，这样 –device-write-bps 才能生效</p>
+<p>5、底层技术<br>cgroup<br>（1）作用：实现资源限额<br>（2）定义：全称control group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。之前设置的–cpu-shares、-m、–device-write-bps 实际上就是在配置 cgroup<br>（3）举例：<br>启动一个容器：</p>
+<p><img src="/images/pasted-469.png" alt="upload successful"><br>查看容器ID：</p>
+<p><img src="/images/pasted-470.png" alt="upload successful"><br>查看cgroup目录：</p>
+<p><img src="/images/pasted-471.png" alt="upload successful"><br>在 /sys/fs/cgroup/cpu/docker 目录中，Linux 会为每个容器创建一个 cgroup 目录，以容器长ID 命名<br>备注：<br>目录中包含所有与 cpu 相关的 cgroup 配置，文件 cpu.shares 保存的就是 –cpu-shares 的配置，值为 512；<br>同样的，/sys/fs/cgroup/memory/docker 和 /sys/fs/cgroup/blkio/docker 中保存的是内存以及 Block IO 的 cgroup 配置。</p>
+<p>namespace<br>（1）作用：实现资源隔离<br>（2）定义：在每个容器中，我们都可以看到文件系统，网卡等资源，这些资源看上去是容器自己的。拿网卡来说，每个容器都会认为自己有一块独立的网卡，即使 host 上只有一块物理网卡。这种方式非常好，它使得容器更像一个独立的计算机。Linux 实现这种方式的技术是 namespace。namespace 管理着 host 中全局唯一的资源，并可以让每个容器都觉得只有自己在使用它。<br>（3）六种namespace：六种namespace分别对应六种资源：Mount、UTS、IPC、PID、Network和User<br>（4）六种资源：<br>Mount namespace：Mount namespace 让容器看上去拥有整个文件系统。容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，不会影响到 host 和其他容器；</p>
+<p>UTS namespace：UTS namespace 让容器有自己的 hostname。 默认情况下，容器的 hostname 是它的短ID，可以通过 -h 或 –hostname 参数设置；</p>
+<p>IPC namespace：IPC namespace 让容器拥有自己的共享内存和信号量（semaphore）来实现进程间通信，而不会与 host 和其他容器的 IPC 混在一起；</p>
+<p>PID namespace：容器在 host 中以进程的形式运行。例如当前 host 中运行了两个容器；</p>
+<p>Network namespace：Network namespace 让容器拥有自己独立的网卡、IP、路由等资源；</p>
+<p>User namespace：User namespace 让容器能够管理自己的用户，host 不能看到容器中创建的用户。</p>
 
       
     </div>
