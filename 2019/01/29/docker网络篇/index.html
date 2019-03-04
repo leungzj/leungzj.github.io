@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>docker网络篇 | Hexo</title>
+  <meta name="description" content="1、四个网络定义：docker安装时会自动在host上创建三个网络，可以通过docker network ls命令查看 （1）none网络定义：顾名思义，none网络就是什么都没有的网络。挂在这个网络下的容器除了lo，没有其他任何网卡。容器创建时，可以通过–network=none指定使用none网络。 应用场景：封闭意味着隔离，一些对安全性要求高并且不需要联网的应用可以使用none网络。比如某个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker网络篇">
+<meta property="og:url" content="http://yoursite.com/2019/01/29/docker网络篇/index.html">
+<meta property="og:site_name" content="Jim&#39;s Blog">
+<meta property="og:description" content="1、四个网络定义：docker安装时会自动在host上创建三个网络，可以通过docker network ls命令查看 （1）none网络定义：顾名思义，none网络就是什么都没有的网络。挂在这个网络下的容器除了lo，没有其他任何网卡。容器创建时，可以通过–network=none指定使用none网络。 应用场景：封闭意味着隔离，一些对安全性要求高并且不需要联网的应用可以使用none网络。比如某个">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-554.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-555.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-556.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-557.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-558.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-559.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-560.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-561.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-562.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-563.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-564.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-565.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-566.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-567.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-568.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-569.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-570.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-571.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-572.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-573.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-574.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-575.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-576.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-577.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-578.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-579.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-580.png">
+<meta property="og:updated_time" content="2019-01-29T02:56:27.454Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker网络篇">
+<meta name="twitter:description" content="1、四个网络定义：docker安装时会自动在host上创建三个网络，可以通过docker network ls命令查看 （1）none网络定义：顾名思义，none网络就是什么都没有的网络。挂在这个网络下的容器除了lo，没有其他任何网卡。容器创建时，可以通过–network=none指定使用none网络。 应用场景：封闭意味着隔离，一些对安全性要求高并且不需要联网的应用可以使用none网络。比如某个">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-554.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2019/01/29/docker网络篇/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Jim</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">operation</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMI/">AMI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS免费套餐/">AWS免费套餐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS分区/">AWS分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS服务/">AWS服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EBS快照/">EBS快照</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2/">EC2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2存储/">EC2存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB/">ELB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB概念/">ELB概念</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IAM/">IAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brctl/">brctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cloudwatch/">cloudwatch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ifconfig/">ifconfig</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址/">ip地址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keepalived/">keepalived</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mstsc/">mstsc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nc/">nc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nmap/">nmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppet/">puppet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitmq/">rabbitmq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcpdump/">tcpdump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum/">yum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七层模型/">七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康检查/">健康检查</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分区/">分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卸载/">卸载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全组/">安全组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/封装/">封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/应用程序负载均衡器/">应用程序负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挂载/">挂载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件系统/">文件系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘/">磁盘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译安装/">编译安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络负载均衡器/">网络负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解封装/">解封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备发展史/">设备发展史</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备文件/">设备文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进制转换/">进制转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AMI/" style="font-size: 13.5px;">AMI</a> <a href="/tags/AWS免费套餐/" style="font-size: 13px;">AWS免费套餐</a> <a href="/tags/AWS分区/" style="font-size: 13px;">AWS分区</a> <a href="/tags/AWS服务/" style="font-size: 13px;">AWS服务</a> <a href="/tags/EBS快照/" style="font-size: 13.5px;">EBS快照</a> <a href="/tags/EC2/" style="font-size: 14px;">EC2</a> <a href="/tags/EC2存储/" style="font-size: 13px;">EC2存储</a> <a href="/tags/ELB/" style="font-size: 13px;">ELB</a> <a href="/tags/ELB概念/" style="font-size: 13px;">ELB概念</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/IAM/" style="font-size: 13px;">IAM</a> <a href="/tags/IP/" style="font-size: 13px;">IP</a> <a href="/tags/NFS/" style="font-size: 13px;">NFS</a> <a href="/tags/TCP/" style="font-size: 13px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 13px;">TCP/IP</a> <a href="/tags/UDP/" style="font-size: 13px;">UDP</a> <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/awk/" style="font-size: 13px;">awk</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/brctl/" style="font-size: 13px;">brctl</a> <a href="/tags/cloudwatch/" style="font-size: 13px;">cloudwatch</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/grep/" style="font-size: 13px;">grep</a> <a href="/tags/html/" style="font-size: 13px;">html</a> <a href="/tags/ifconfig/" style="font-size: 13px;">ifconfig</a> <a href="/tags/ip/" style="font-size: 13px;">ip</a> <a href="/tags/iptables/" style="font-size: 13px;">iptables</a> <a href="/tags/ip地址/" style="font-size: 13px;">ip地址</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/keepalived/" style="font-size: 14px;">keepalived</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mstsc/" style="font-size: 13px;">mstsc</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/nc/" style="font-size: 13px;">nc</a> <a href="/tags/nmap/" style="font-size: 13px;">nmap</a> <a href="/tags/puppet/" style="font-size: 13px;">puppet</a> <a href="/tags/rabbitmq/" style="font-size: 13px;">rabbitmq</a> <a href="/tags/redis/" style="font-size: 14px;">redis</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/tcpdump/" style="font-size: 13px;">tcpdump</a> <a href="/tags/yum/" style="font-size: 13px;">yum</a> <a href="/tags/七层模型/" style="font-size: 13px;">七层模型</a> <a href="/tags/云计算/" style="font-size: 13px;">云计算</a> <a href="/tags/健康检查/" style="font-size: 13px;">健康检查</a> <a href="/tags/分区/" style="font-size: 13px;">分区</a> <a href="/tags/卸载/" style="font-size: 13px;">卸载</a> <a href="/tags/安全组/" style="font-size: 13px;">安全组</a> <a href="/tags/封装/" style="font-size: 13px;">封装</a> <a href="/tags/应用程序负载均衡器/" style="font-size: 13px;">应用程序负载均衡器</a> <a href="/tags/挂载/" style="font-size: 13px;">挂载</a> <a href="/tags/文件系统/" style="font-size: 13px;">文件系统</a> <a href="/tags/正则/" style="font-size: 13px;">正则</a> <a href="/tags/磁盘/" style="font-size: 13px;">磁盘</a> <a href="/tags/编译安装/" style="font-size: 13px;">编译安装</a> <a href="/tags/网络负载均衡器/" style="font-size: 13px;">网络负载均衡器</a> <a href="/tags/解封装/" style="font-size: 13px;">解封装</a> <a href="/tags/设备发展史/" style="font-size: 13px;">设备发展史</a> <a href="/tags/设备文件/" style="font-size: 13px;">设备文件</a> <a href="/tags/进制转换/" style="font-size: 13px;">进制转换</a> <a href="/tags/进程/" style="font-size: 13px;">进程</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/nginx/">nginx</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/01/nginx（缓存）/" class="title">nginx（缓存）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-01T08:00:00.000Z" itemprop="datePublished">2019-03-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/nginx/">nginx</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/01/nginx（负载均衡调度状态）/" class="title">nginx（负载均衡调度状态）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-01T06:50:00.000Z" itemprop="datePublished">2019-03-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/nginx/">nginx</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/01/nginx（负载均衡算法实例）/" class="title">nginx（负载均衡算法实例）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-01T06:13:00.000Z" itemprop="datePublished">2019-03-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/01/nginx（负载均衡算法）/" class="title">nginx（负载均衡算法）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-01T06:01:31.000Z" itemprop="datePublished">2019-03-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/nginx/">nginx</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/01/nginx（负载均衡）/" class="title">nginx（负载均衡配置）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-01T03:34:00.000Z" itemprop="datePublished">2019-03-01</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-docker网络篇" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker网络篇
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/01/29/docker网络篇/" class="article-date">
+	  <time datetime="2019-01-29T01:36:00.000Z" itemprop="datePublished">2019-01-29</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </span>
+
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/01/29/docker网络篇/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>1、四个网络<br>定义：docker安装时会自动在host上创建三个网络，可以通过docker network ls命令查看</p>
+<p><img src="/images/pasted-554.png" alt="upload successful"><br>（1）none网络<br>定义：顾名思义，none网络就是什么都没有的网络。挂在这个网络下的容器除了lo，没有其他任何网卡。容器创建时，可以通过–network=none指定使用none网络。</p>
+<p>应用场景：封闭意味着隔离，一些对安全性要求高并且不需要联网的应用可以使用none网络。比如某个容器的唯一用途就是生成随机密码，就可以放到none网络中避免密码被窃取。</p>
+<p>命令：指定使用none网络</p>
+<p><img src="/images/pasted-555.png" alt="upload successful"></p>
+<p>（2）host网络<br>定义：连接到host网络的容器共享docker host的网络栈，容器的网络配置与host完全一样。可以通过–network=host来指定使用host网络。</p>
+<p>应用场景：直接使用docker host网络的最大好处就是性能，如果容器对网络传输效率有较高要求，则可以选择host网络。当然不便之处就是牺牲一些灵活性，比如要考虑端口冲突问题，docker host上已经使用的端口就不能再使用了。</p>
+<p>命令：指定使用host网络</p>
+<p><img src="/images/pasted-556.png" alt="upload successful"><br>容器的hostname也跟宿主机一样</p>
+<p><img src="/images/pasted-557.png" alt="upload successful"></p>
+<p>（3）bridge网络（默认）<br>定义：docker安装时会创建一个命名为docker0的linux bridge。如果不指定–network，创建的容器默认都会挂到docker0上。</p>
+<p>命令：一个新的网络接口vethad723e1被挂到了docker0上，vethad723e1就是新创建容器的虚拟网卡。</p>
+<p><img src="/images/pasted-558.png" alt="upload successful"><br>查看容器的网络配置</p>
+<p><img src="/images/pasted-559.png" alt="upload successful"><br>对比docker0和容器的interface，实际上vethad723e1和eth0@if109是一对veth pair。veth pair是一种成对出现的特殊网络设备，可以把它们想象成由一根虚拟网线连接起来的一对网卡，网卡的一头（eth0@if109）在容器中，另一头（vethad723e1）挂在网桥docker0上，其效果就是将eth0@if109 也挂在了 docker0 上。其中，eth0@if109的ip地址是172.17.0.3/16，这个网段的ip是由bridge网络的配置决定的。<br>查看bridge网络的配置信息</p>
+<p><img src="/images/pasted-560.png" alt="upload successful"></p>
+<p>（4）自定义网络<br>定义：除了none、host、bridge这三个自动创建的网络，用户也可以根据业务需要创建user-defined网络。docker提供了三种user-defined网络驱动：bridge、overlay和macvlan。</p>
+<p>命令：新增了一个网桥br-30ff061f03ca </p>
+<p><img src="/images/pasted-561.png" alt="upload successful"><br>查看my_net的配置信息</p>
+<p><img src="/images/pasted-562.png" alt="upload successful"><br>除了可以自动分配，还可以自定义ip网段</p>
+<p><img src="/images/pasted-563.png" alt="upload successful"><br>容器使用新的网络，使用自动分配的ip</p>
+<p><img src="/images/pasted-564.png" alt="upload successful"><br>除了可以自动分配，还可以指定ip地址</p>
+<p><img src="/images/pasted-565.png" alt="upload successful"><br>备注：<br>只有使用–subnet创建的网络才能指定静态ip。如果容器使用不是–subnet创建的网络，指定ip地址时会返回错误。</p>
+<p><img src="/images/pasted-566.png" alt="upload successful"></p>
+<p>2、容器与容器的相互访问<br>同一网络之间的容器通信：有三种通信方式<br>（1）IP<br>两个容器要能通信，必须要有属于同一网络的网卡。具体做法是在创建容器时通过–network指定相应的网络，或者通过docker network connect将现有网络加入到指定网络。参考之前的章节。<br>（2）docker dns server<br>通过ip访问会有一个问题：我们在部署应用之前有可能无法确定ip，部署之后再指定要访问的ip会比较麻烦。针对这个问题，可以通过docker自带的dns服务来解决。<br>原理：从docker1.10版本开始，docker daemon实现了一个内嵌的dns server，使容器可以直接通过容器名通信。方法很简单，只要在启动时使用–name为容器命名就可以了。<br>实验一：<br>启动两个容器：<br>docker run -it –network=my_net2 –name=bbox1 busybox<br>docker run -it –network=my_net2 –name=bbox2 busybox<br>验证ping测试：</p>
+<p><img src="/images/pasted-567.png" alt="upload successful"><br>结论：可以ping通。</p>
+<p>实验二：<br>创建两个bridge网络下的容器：<br>docker run -it –name=bbox3 busybox<br>docker run -it –name=bbox4 busybox<br>验证ping测试：</p>
+<p><img src="/images/pasted-568.png" alt="upload successful"><br>结论：使用dns有限制，只能在自定义网络（my_net2就是自定义网络）中使用。也就是说，默认的bridge网络是无法使用dns的。<br>（3）joined<br>原理：可以使两个或多个容器共享一个网络栈、网卡和配置信息，joined容器之间可以通过127.0.0.1直接通信<br>适用场景：<br>不同容器中的程序希望通过loopback高效快速的通信，比如web server与app server；希望监控其他容器的网络流量，比如运行在独立容器中的网络监控程序。<br>验证：<br>先创建一个httpd容器，名字为web1：<br>docker run -d -it –name=web1 httpd<br>然后创建busybox容器并通过–network=container:web1指定joined容器为web1</p>
+<p><img src="/images/pasted-569.png" alt="upload successful"><br>查看web1容器的网络配置信息：</p>
+<p><img src="/images/pasted-570.png" alt="upload successful"><br>结论：busybox与web1的网卡mac地址与ip地址完全一样，它们共享了相同的网络栈。</p>
+<p>不同网络之间的容器通信：<br>首先，由常识可知，同一网络中的容器、网关之间都是可以相互通信的。也可以通过实验验证。但是，自定义网络（my_net2）与默认bridge网络之间默认不能相互通信。针对这个问题，我们可以通过添加路由来达到不同网络之间的同期也能相互通信的目的。也就是说，如果host上针对每个网络都有一条路由，同时操作系统上打开了ip forwarding，host就成了一个路由器，挂接在不同网桥上的网络就能够相互通信。<br>验证：<br>首先，定义172.17.0.0/16和172.22.16.0/24两个网络的路由：</p>
+<p><img src="/images/pasted-571.png" alt="upload successful"><br>确认打开了ip转发功能：<br>sysctl net.ipv4.ip_forward<br>或者cat /proc/sys/net/ipv4/ip_forward，值为1表示打开了ip转发功能<br>为httpd容器（位于bridge网络）添加一块my_net2的网卡，添加命令：</p>
+<p><img src="/images/pasted-572.png" alt="upload successful"><br>在httpd容器中查看网络配置（红框中为新加的网卡，ip地址是my_net2端随机分配的ip，这时候就可以在位于my_net2的容器ping通httpd容器）：</p>
+<p><img src="/images/pasted-573.png" alt="upload successful"></p>
+<p>容器与外部的相互访问：<br>（1）容器访问外部<br>定义：容器默认就能访问外网（外网指的是容器网络以外的网络环境，并非特指Internet）<br>原理：最关键的就是NAT技术<br>验证<br>首先，查看一下host的iptables规则：</p>
+<p><img src="/images/pasted-574.png" alt="upload successful"><br>这条iptables规则的含义：<br>如果网桥 docker0 收到来自 172.17.0.0/16 网段的外出包，把它交给 MASQUERADE 处理。而 MASQUERADE 的处理方式是将包的源地址替换成 host 的地址发送出去，即做了一次网络地址转换（NAT）。<br>通过tcpdump查看地址转换：<br>首先，查看host的路由表：<br>默认路由通过eth0发送出去，所以我们可以通过tcpdump来监控docker0和eth0上的icmp数据包</p>
+<p><img src="/images/pasted-575.png" alt="upload successful"><br>然后，在busybox容器上ping外网（比如<a href="http://www.bing.com），tcpdump输出如图：" target="_blank" rel="noopener">www.bing.com），tcpdump输出如图：</a><br>docker0 收到 busybox 的 ping 包，源地址为容器 IP 172.17.0.4，然后交给 MASQUERADE 处理。</p>
+<p><img src="/images/pasted-576.png" alt="upload successful"><br>这时在eth0上查（发现ping包的源地址变成了144.34.204.150）</p>
+<p><img src="/images/pasted-577.png" alt="upload successful"></p>
+<p>（2）外部访问容器<br>原理：端口映射<br>验证<br>首先，docker可以将容器对外提供服务的端口映射到host的某个端口，外网通过该端口访问容器。</p>
+<p><img src="/images/pasted-578.png" alt="upload successful"><br>容器启动后，可以通过docker ps或者docker port查看到host映射的端口。在上面的例子中，httpd容器的80端口被映射到host 32769上，这样就可以通过 <host ip="">:<32769> 访问容器的 web 服务了。<br>也可以指定映射到host的某个特定端口：</32769></host></p>
+<p><img src="/images/pasted-579.png" alt="upload successful"><br>每一个映射的端口，host都会启动一个docker-proxy进程来处理访问容器的流量：</p>
+<p><img src="/images/pasted-580.png" alt="upload successful"></p>
+<p>最后，过程总结：<br>docke-proxy监听host的32769端口；<br>当访问宿主机的web服务的时候（宿主机的ip:port），docker-proxy 转发给容器(容器ip:容器port）；<br>httpd 容器响应请求并返回结果。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2019/01/29/docker网络篇/" title="docker网络篇" target="_blank" rel="external">http://yoursite.com/2019/01/29/docker网络篇/</a>
+    </li>
+    
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/" target="_blank"><span class="text-dark">Jim</span><small class="ml-1x">operation</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="vcomments"></div>
+
+    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/01/29/docker存储篇/" title="docker存储篇"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/01/25/广域网技术/" title="广域网技术"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,facebook" data-mobile-sites="qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zhifubao.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat_zanshang.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/valine"></script>
+   <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+     var meta = 'nick,mail,link';
+     meta = meta.split(',').filter(function (item) {
+       return GUEST.indexOf(item)>-1;
+     });
+     new Valine({
+         el: '#vcomments' ,
+         verify: false,
+         notify: false,
+         appId: '',
+         appKey: '',
+         placeholder: 'Just go go',
+         avatar:'mm',
+         meta:meta,
+         pageSize:'10' || 10,
+         visitor: false
+     });
+   </script>
+
+    
+
+    
+    
+
+
+
+</body>
+</html>
