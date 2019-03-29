@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>shell编程--3 | Hexo</title>
+  <meta name="description" content="1、ip1）当前网络接口配置：ifconfig2）显示ip地址信息：ifconfig wlan03）手动设置网络接口的ip地址：ifconfig wlan0 192.168.1.14）手动设置网络接口的ip地址和掩码：ifconfig wlan0 192.168.1.1 netmask 255.255.255.05）如果你连接到一个支持自动分配ip地址的有线网络中，以下命令可以主动配置网络接口：d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell编程--3">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/shell编程-3/index.html">
+<meta property="og:site_name" content="Jim&#39;s Blog">
+<meta property="og:description" content="1、ip1）当前网络接口配置：ifconfig2）显示ip地址信息：ifconfig wlan03）手动设置网络接口的ip地址：ifconfig wlan0 192.168.1.14）手动设置网络接口的ip地址和掩码：ifconfig wlan0 192.168.1.1 netmask 255.255.255.05）如果你连接到一个支持自动分配ip地址的有线网络中，以下命令可以主动配置网络接口：d">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-25T06:00:57.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell编程--3">
+<meta name="twitter:description" content="1、ip1）当前网络接口配置：ifconfig2）显示ip地址信息：ifconfig wlan03）手动设置网络接口的ip地址：ifconfig wlan0 192.168.1.14）手动设置网络接口的ip地址和掩码：ifconfig wlan0 192.168.1.1 netmask 255.255.255.05）如果你连接到一个支持自动分配ip地址的有线网络中，以下命令可以主动配置网络接口：d">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2019/03/25/shell编程-3/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Jim</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">operation</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux内核调优/">linux内核调优</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux系统调优/">linux系统调优</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql笔记/">mysql笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python编程/">python编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell编程/">shell编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tcp-ip/">tcp/ip</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMI/">AMI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS免费套餐/">AWS免费套餐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS分区/">AWS分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS服务/">AWS服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EBS快照/">EBS快照</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2/">EC2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2存储/">EC2存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB/">ELB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB概念/">ELB概念</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IAM/">IAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brctl/">brctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cloudwatch/">cloudwatch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ifconfig/">ifconfig</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址/">ip地址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keepalived/">keepalived</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mstsc/">mstsc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nc/">nc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nmap/">nmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppet/">puppet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitmq/">rabbitmq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcpdump/">tcpdump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum/">yum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七层模型/">七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康检查/">健康检查</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分区/">分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卸载/">卸载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全组/">安全组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/封装/">封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/应用程序负载均衡器/">应用程序负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挂载/">挂载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件系统/">文件系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘/">磁盘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译安装/">编译安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络负载均衡器/">网络负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解封装/">解封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备发展史/">设备发展史</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备文件/">设备文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进制转换/">进制转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AMI/" style="font-size: 13.5px;">AMI</a> <a href="/tags/AWS免费套餐/" style="font-size: 13px;">AWS免费套餐</a> <a href="/tags/AWS分区/" style="font-size: 13px;">AWS分区</a> <a href="/tags/AWS服务/" style="font-size: 13px;">AWS服务</a> <a href="/tags/EBS快照/" style="font-size: 13.5px;">EBS快照</a> <a href="/tags/EC2/" style="font-size: 14px;">EC2</a> <a href="/tags/EC2存储/" style="font-size: 13px;">EC2存储</a> <a href="/tags/ELB/" style="font-size: 13px;">ELB</a> <a href="/tags/ELB概念/" style="font-size: 13px;">ELB概念</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/IAM/" style="font-size: 13px;">IAM</a> <a href="/tags/IP/" style="font-size: 13px;">IP</a> <a href="/tags/NFS/" style="font-size: 13px;">NFS</a> <a href="/tags/TCP/" style="font-size: 13px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 13px;">TCP/IP</a> <a href="/tags/UDP/" style="font-size: 13px;">UDP</a> <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/awk/" style="font-size: 13px;">awk</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/brctl/" style="font-size: 13px;">brctl</a> <a href="/tags/cloudwatch/" style="font-size: 13px;">cloudwatch</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/grep/" style="font-size: 13px;">grep</a> <a href="/tags/html/" style="font-size: 13px;">html</a> <a href="/tags/ifconfig/" style="font-size: 13px;">ifconfig</a> <a href="/tags/ip/" style="font-size: 13px;">ip</a> <a href="/tags/iptables/" style="font-size: 13px;">iptables</a> <a href="/tags/ip地址/" style="font-size: 13px;">ip地址</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/keepalived/" style="font-size: 14px;">keepalived</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mstsc/" style="font-size: 13px;">mstsc</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/nc/" style="font-size: 13px;">nc</a> <a href="/tags/nmap/" style="font-size: 13px;">nmap</a> <a href="/tags/puppet/" style="font-size: 13px;">puppet</a> <a href="/tags/rabbitmq/" style="font-size: 13px;">rabbitmq</a> <a href="/tags/redis/" style="font-size: 14px;">redis</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/tcpdump/" style="font-size: 13px;">tcpdump</a> <a href="/tags/yum/" style="font-size: 13px;">yum</a> <a href="/tags/七层模型/" style="font-size: 13px;">七层模型</a> <a href="/tags/云计算/" style="font-size: 13px;">云计算</a> <a href="/tags/健康检查/" style="font-size: 13px;">健康检查</a> <a href="/tags/分区/" style="font-size: 13px;">分区</a> <a href="/tags/卸载/" style="font-size: 13px;">卸载</a> <a href="/tags/安全组/" style="font-size: 13px;">安全组</a> <a href="/tags/封装/" style="font-size: 13px;">封装</a> <a href="/tags/应用程序负载均衡器/" style="font-size: 13px;">应用程序负载均衡器</a> <a href="/tags/挂载/" style="font-size: 13px;">挂载</a> <a href="/tags/文件系统/" style="font-size: 13px;">文件系统</a> <a href="/tags/正则/" style="font-size: 13px;">正则</a> <a href="/tags/磁盘/" style="font-size: 13px;">磁盘</a> <a href="/tags/编译安装/" style="font-size: 13px;">编译安装</a> <a href="/tags/网络负载均衡器/" style="font-size: 13px;">网络负载均衡器</a> <a href="/tags/解封装/" style="font-size: 13px;">解封装</a> <a href="/tags/设备发展史/" style="font-size: 13px;">设备发展史</a> <a href="/tags/设备文件/" style="font-size: 13px;">设备文件</a> <a href="/tags/进制转换/" style="font-size: 13px;">进制转换</a> <a href="/tags/进程/" style="font-size: 13px;">进程</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/rpm包安装详解/" class="title">rpm包安装详解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T09:07:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/软件包管理背景知识/" class="title">软件包管理背景知识</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T08:11:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/软件包分类/" class="title">软件包分类（rpm包、二进制包、源码包）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T07:06:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux系统调优/">linux系统调优</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/linux系统调优/" class="title">linux系统调优</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T02:24:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/27/Raid详解/" class="title">Raid详解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-27T09:23:18.000Z" itemprop="datePublished">2019-03-27</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-shell编程-3" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      shell编程--3
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/25/shell编程-3/" class="article-date">
+	  <time datetime="2019-03-25T06:00:43.000Z" itemprop="datePublished">2019-03-25</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/25/shell编程-3/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>1、ip<br>1）当前网络接口配置：ifconfig<br>2）显示ip地址信息：ifconfig wlan0<br>3）手动设置网络接口的ip地址：ifconfig wlan0 192.168.1.1<br>4）手动设置网络接口的ip地址和掩码：ifconfig wlan0 192.168.1.1 netmask 255.255.255.0<br>5）如果你连接到一个支持自动分配ip地址的有线网络中，以下命令可以主动配置网络接口：dhclient eth0<br>6）打印网络接口列表：ifconfig|cut -c -10|tr -d ‘ ‘|tr -s ‘\n’</p>
+<p>#cut -c -10 提取每一行的前10个字符</p>
+<p>#tr -d ‘ ‘  删除每一行的所有空格</p>
+<p>#tr -s ‘\n’ 压缩重复的换行符<br>7）提取ip地址：ifconfig eth0|egrep -o “inet 地址:[^ ]*“|egrep -o “[0-9.]*“</p>
+<p>#模式以inet 地址:作为起始，以非空格字符序列（由[^ ]*指定）作为结束。然后在接下来的管道操作中，打印出数字与点号的组合<br>8）重写mac地址：ifconfig eth0 hw ether 00:1c:bf:87:25:d5</p>
+<p>#重启之后会失效</p>
+<p>2、dns<br>dns设置：/etc/resolv.conf<br>dns查找：<br>1）host：列出某个域名的所有ip地址<br>host google.com<br>2）nslookup：列出dns资源记录<br>nslookup google.com #server是dns解析的默认名字服务器<br>3）如果不使用dns，可以向/etc/hosts加入ip和要解析成的名称即可<br>echo 192.168.1.1 backupserver &gt;&gt;/etc/hosts</p>
+<p>#添加条目之后，任何时候解析backupserver，都会返回192.168.1.1</p>
+<p>3、路由表<br>1）显示路由表：route -n #使用-n会以数字形式的ip地址显示每一个条目，否则如果ip地址有对应的dns条目，直接使用route会显示主机名而不是ip地址<br>2）网关：route add default gw 192.168.1.1 wlan0</p>
+<p>4、ping<br>1）获取往返时间<br>rtt：网络上两台主机之间的往返时间（round trip time，rtt），它是分组从源主机到目的主机的一来一回的时间，单位是毫秒<br>2）限制发送的分组数量：-c<br>ping 192.168.1.1 -c 2 #只发送2个分组</p>
+<p>5、fping<br>可以同时ping一组ip地址，而且响应速度非常快。有以下选项：<br>-a 指定打印出所有活动主机的ip地址<br>-u 指定打印出所有无法到达的主机<br>-g 指定ip/掩码或者ip地址范围的形式来确定一组ip<br>例子：<br>fping -a 192.168.1.1/24 -g<br>或者：<br>fping -a 192.168.1.1 192.168.1.255 -g<br>还可以使用命令行参数的形式指定一组ip地址：<br>fping -a 192.168.1.1 192.168.1.5 192.168.1.6 #ip地址以参数传递<br>fping -a ip.list #ip.list是一组ip地址，表示从文件中传递一组ip地址<br>备注：<br>fping默认并没有安装在linux发行版中，需要手动安装</p>
+<p>6、traceroute<br>显示分组途经的所有网关地址（如今linux发行版还包含了一个mtr命令，类似于traceroute，但是能够显示实时刷新的数据）</p>
+<p>7、ssh<br>secure shell，使用加密通道来传输网络数据<br>ssh username@ip -p port<br>1）要想在远程主机执行命令，并将命令输出显示到本地shell中：<br>ssh username@ip ‘command’ #单条命令<br>ssh username@ip ‘command1;command2;command3’ #多条命令，命令之间用分号分隔<br>例子：<br>ssh <a href="mailto:root@192.168.1.1" target="_blank" rel="noopener">root@192.168.1.1</a> “echo user:$(whoami);echo OS:$(uname)”<br>ssh -C username@ip ‘command’ #-C支持对数据进行压缩传输<br>2）在远程主机上执行图形化命令，然后图形化输出到本地主机：<br>设置变量display:<br>ssh username@ip “export DISPLAY=:0;command1;command2” #将会启用远程主机上的图形化输出<br>使用ssh的x11转发选项：<br>ssh -x username@ip “command1;command2” #该命令将在远程主机上执行，但图形化输出会显示在本地主机上<br>3）ssh实现无密码登录：<br>原理：ssh采用了非对称加密技术，认证密钥包含两部分：一个公钥和一个私钥。我们必须通过ssh-keygen命令创建认证密钥。要想实现自动化认证，公钥必须放在服务器中（将其加入文件~/.ssh/authorized_keys），与公钥对应的私钥放在客户机的~/.ssh目录中。关于ssh相关的配置信息，可以通过修改/etc/ssh/sshd_config进行配置（比如修改authorized_keys文件的路径与名称）<br>步骤：<br>a、创建ssh密钥<br>ssh-keygen -t rsa #指定加密类型为rsa<br>在创建期间，会提示你输入口令，当然不输入口令，也可以生成公钥和私钥。id_rsa.pub是生成的公钥，id_rsa是生成的私钥<br>b、添加公钥到远程主机上<br>ssh username@ip “cat &gt;&gt;~/.ssh/authorized_keys” &lt; ~/.ssh/id_rsa_Pub<br>password:<br>在上面的命令中提供登录密码<br>备注：<br>多数linux发行版中提供了一个叫做ssh-copy-id的工具，可以自动将公钥加入到远程服务器的authorized_key文件中<br>ssh-copy-id username@ip<br>4）ssh实现交互式端口转发：<br>a、将本地主机端口8000上的流量转发到<a href="http://www.kernel.org的端口80上：" target="_blank" rel="noopener">www.kernel.org的端口80上：</a><br>ssh -L 8000:<a href="http://www.kernel.org:80" target="_blank" rel="noopener">www.kernel.org:80</a> username@ip #将上述命令的username替换成本地主机上的用户名<br>b、将远程主机上的8000端口上的流量转发到<a href="http://www.kernel.org的端口80上：" target="_blank" rel="noopener">www.kernel.org的端口80上：</a><br>ssh -L 8000:<a href="http://www.kernel.org:80" target="_blank" rel="noopener">www.kernel.org:80</a> username@remote_machine #将上述命令的remote_machine替换成远程主机的主机名或者ip，username替换成进行ssh访问的用户名<br>备注：<br>在进行转发的过程中，这个shell必须保持打开状态，什么时候想停止端口转发，只需要退出shell即可<br>c、非交互式端口转发：<br>ssh -fL 8000:<a href="http://www.kernel.org:80" target="_blank" rel="noopener">www.kernel.org:80</a> username@localhost -N #只想设置端口转发，而不希望总是保持一个打开状态的shell。<br>-f指定ssh在执行命令前转入后台运行，-N告诉ssh无需执行命令，只进行端口转发<br>d、反向端口转发：<br>适用场景：如果你有一台无法通过互联网进行访问的主机，但是又希望其他用户可以访问到这台主机上的服务，这时候就需要使用到反向端口转发<br>ssh -R 8000:localhost:80 username@remote_machine #上述命令将远程主机端口8000上的流量转发到本地主机的端口80上</p>
+<p>8、sshfs<br>将位于远程主机上的文件系统挂载到本地挂载点上：（linux发行版默认不包含sshfs，需要使用软件包管理器来自行安装）<br>sshfs -o allow_other username@remote_machine:/path /mnt/mountpoint #会提示输入密码，输入完成后就可以通过本地挂载点/mnt/mountpoint来访问/path中的数据了<br>卸载：<br>umount /mnt/mountpoint</p>
+<p>9、网络传输文件<br>1）ftp：文件传输协议，是一个古老的用于在网络主机之间传输文件的文件传输协议。只有在远程主机上安装有ftp服务器才能使用ftp<br>lftp username@ftphost<br>备注：<br>也可以使用ftp命令用于ftp文件传输。相比较而言，lftp的用法更加灵活。<br>ftp自动传输：<br>ftp -i -n $HOST &lt;&lt;EOF<br>..<br>..<br>EOF<br>2）sftp：secure ftp，是一个类似于ftp的文件传输系统，运行在ssh连接之上。不需要远端运行ftp服务器来进行文件传输，但是必须安装并运行openssh服务器。进入sftp会话之后，命令跟ftp都是一样的，比如get下载文件，put上传文件，quit退出会话等。<br>备注：<br>有时候ssh并不运行在22端口上，我们可以通过-oPort来指定端口<br>例如：sftp -oPort=422 username@hostname<br>3）rsync：利用差异计算以及压缩技术来最小化数据传输量。相对于cp而言，rsync的优势在于使用了高效的差异算法。另外，它还支持网络数据传输，在进行复制的同时，rsync会比较源文件和目的端的文件，只有当文件有更新时才进行复制。rsync也支持压缩、加密等多种特性。<br>用法：<br>rsync -av source destination</p>
+<p>#-a表示归档</p>
+<p>#-v表示在stdout上打印出细节信息和进度<br>例子：<br>a、rsync -av username@ip:/path destination</p>
+<p>#rsync命令用于ssh连接远程主机，因此必须使用username@ip这种形式来设定远程主机的地址<br>b、rsync -av /home/test/ /home/backups</p>
+<p>#将源目录中的内容（不包含目录本身）复制到现有的backup目录中<br>c、rsync -av /home/test /home/backups</p>
+<p>#将包括源目录本身在内的内容复制到现有的backup目录中（会在backup目录中创建一个test同名目录）<br>d、还可以排除部分文件：<br>–exclude：排除特定文件<br>$ rsync -avz /home/code/some_code /mnt/disk/backup/code –exclude “*.txt”<br>–exclude-from：通过一个列表文件指定需要排除的文件<br>e、在更新时，删除源端已不存在的文件：<br>默认情况下，rsync不会在目的端删除那些在源端已不存在的文件。使用–delete选项可以删除这些已经不存在的文件<br>rsync -avz source destination –delete<br>f、-z选项可以指定在网络传输时压缩数据：<br>rsync -avz source destination<br>g、定期备份：创建一个定时任务即可<br>0 */10 * * * rsync -avz /home/codeuser@IP_ADDRESS:/home/backups<br>4）scp<br>语法格式：<br>scp user@hostname:/path filename #表示将远程主机上的文件复制到当前目录，并指定文件名<br>备注：<br>如果ssh没有运行在22端口，使用-oPort指定特定端口<br>选项：<br>-r 递归复制<br>-p 复制文件的同时保留文件的权限和模式<br>5）lsof<br>-i:列出系统中的开放端口以及运行在端口上的服务的详细信息（列出本地主机和对应端口以及远程主机和对应端口）<br>只列出本地主机当前的开放端口：<br>lsof -i|grep -o “:[0-9]+-&gt;”|grep -o “[0-9]+“|sort|uniq<br>另外一个查看端口服务的命令：<br>netstat -tnp #列出开放端口与服务</p>
+<p>10、创建套接字：<br>1）设置侦听套接字：<br>nc -l 1234 #在本机的端口1234上创建一个侦听套接字<br>2）连接到该套接字：<br>nc HOST 1234 #如果是在运行着侦听套接字的主机上执行该命令，那么需要将HOST更换成localhost，否则更换成其他主机的ip或者主机名<br>3）要想发送消息，只需要在执行第2步操作的主机终端输入信息并按回车键即可：<br>消息会出现在执行第一步操作的主机终端中<br>nc除了创建套接字，还可以在网络上进行快速文件复制：<br>1）在接收端执行以下命令：<br>nc -l 1234 &gt;destination_filename<br>2）在发送端执行以下命令：<br>nc HOST 1234 &lt;source_filename</p>
+<p>11、iptables:<br>阻塞发送到特定ip地址的流量：<br>iptables -A OUTPUT -d 8.8.8.8 -j DROP<br>阻塞发送到特定端口的流量：<br>iptables -A OUTPUT -p tcp -dport 21 -j DROP</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2019/03/25/shell编程-3/" title="shell编程--3" target="_blank" rel="external">http://yoursite.com/2019/03/25/shell编程-3/</a>
+    </li>
+    
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/" target="_blank"><span class="text-dark">Jim</span><small class="ml-1x">operation</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="vcomments"></div>
+
+    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/25/python/" title="python编程（2）"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/19/22/" title="shell编程--2"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,facebook" data-mobile-sites="qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zhifubao.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat_zanshang.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/valine"></script>
+   <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+     var meta = 'nick,mail,link';
+     meta = meta.split(',').filter(function (item) {
+       return GUEST.indexOf(item)>-1;
+     });
+     new Valine({
+         el: '#vcomments' ,
+         verify: false,
+         notify: false,
+         appId: '',
+         appKey: '',
+         placeholder: 'Just go go',
+         avatar:'mm',
+         meta:meta,
+         pageSize:'10' || 10,
+         visitor: false
+     });
+   </script>
+
+    
+
+    
+    
+
+
+
+</body>
+</html>

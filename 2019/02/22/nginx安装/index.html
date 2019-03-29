@@ -18,18 +18,18 @@
   
   
   <title>nginx安装 | Hexo</title>
-  <meta name="description" content="编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）1、安装前准备1）yum grouplist（查看安装了哪些yum包组）2）yum -y groupinstall “Development Tools” “Server Platform Libraries”（安装包组）3）yum install -y pcre-devel openssl-dev">
+  <meta name="description" content="编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）1、安装前准备1）yum grouplist（查看安装了哪些yum包组）2）yum -y groupinstall “Development Tools” （安装包组）3）yum install -y pcre-devel openssl-devel gd（安装依赖，pcre是perl扩展的正则表达">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx安装">
 <meta property="og:url" content="http://yoursite.com/2019/02/22/nginx安装/index.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）1、安装前准备1）yum grouplist（查看安装了哪些yum包组）2）yum -y groupinstall “Development Tools” “Server Platform Libraries”（安装包组）3）yum install -y pcre-devel openssl-dev">
+<meta property="og:description" content="编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）1、安装前准备1）yum grouplist（查看安装了哪些yum包组）2）yum -y groupinstall “Development Tools” （安装包组）3）yum install -y pcre-devel openssl-devel gd（安装依赖，pcre是perl扩展的正则表达">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/pasted-630.png">
-<meta property="og:updated_time" content="2019-02-22T09:17:30.739Z">
+<meta property="og:updated_time" content="2019-03-20T09:30:33.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx安装">
-<meta name="twitter:description" content="编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）1、安装前准备1）yum grouplist（查看安装了哪些yum包组）2）yum -y groupinstall “Development Tools” “Server Platform Libraries”（安装包组）3）yum install -y pcre-devel openssl-dev">
+<meta name="twitter:description" content="编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）1、安装前准备1）yum grouplist（查看安装了哪些yum包组）2）yum -y groupinstall “Development Tools” （安装包组）3）yum install -y pcre-devel openssl-devel gd（安装依赖，pcre是perl扩展的正则表达">
 <meta name="twitter:image" content="http://yoursite.com/images/pasted-630.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://yoursite.com/2019/02/22/nginx安装/index.html">
@@ -204,7 +204,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux内核调优/">linux内核调优</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux系统调优/">linux系统调优</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql笔记/">mysql笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python编程/">python编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell编程/">shell编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tcp-ip/">tcp/ip</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -233,7 +233,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -249,13 +249,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（缓存）/" class="title">nginx（缓存）</a>
+                <a href="/2019/03/28/rpm包安装详解/" class="title">rpm包安装详解</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T08:00:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-28T09:07:00.000Z" itemprop="datePublished">2019-03-28</time>
               </p>
             </div>
           </li>
@@ -264,13 +264,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡调度状态）/" class="title">nginx（负载均衡调度状态）</a>
+                <a href="/2019/03/28/软件包管理背景知识/" class="title">软件包管理背景知识</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T06:50:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-28T08:11:00.000Z" itemprop="datePublished">2019-03-28</time>
               </p>
             </div>
           </li>
@@ -279,13 +279,28 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡算法实例）/" class="title">nginx（负载均衡算法实例）</a>
+                <a href="/2019/03/28/软件包分类/" class="title">软件包分类（rpm包、二进制包、源码包）</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T06:13:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-28T07:06:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux系统调优/">linux系统调优</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/linux系统调优/" class="title">linux系统调优</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T02:24:00.000Z" itemprop="datePublished">2019-03-28</time>
               </p>
             </div>
           </li>
@@ -297,25 +312,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡算法）/" class="title">nginx（负载均衡算法）</a>
+                <a href="/2019/03/27/Raid详解/" class="title">Raid详解</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T06:01:31.000Z" itemprop="datePublished">2019-03-01</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
-              </p>
-              <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡）/" class="title">nginx（负载均衡配置）</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2019-03-01T03:34:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-27T09:23:18.000Z" itemprop="datePublished">2019-03-27</time>
               </p>
             </div>
           </li>
@@ -368,11 +368,11 @@
     </div>
     <div class="article-entry markdown-body" itemprop="articleBody">
       
-        <p>编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）<br>1、安装前准备<br>1）yum grouplist（查看安装了哪些yum包组）<br>2）yum -y groupinstall “Development Tools” “Server Platform Libraries”（安装包组）<br>3）yum install -y pcre-devel openssl-devel gd（安装依赖，pcre是perl扩展的正则表达式）</p>
+        <p>编译安装nginx（如果将来需要批量部署安装nginx，可以自己做成rpm包。官方也有提供rpm包）<br>1、安装前准备<br>1）yum grouplist（查看安装了哪些yum包组）<br>2）yum -y groupinstall “Development Tools” （安装包组）<br>3）yum install -y pcre-devel openssl-devel gd（安装依赖，pcre是perl扩展的正则表达式）</p>
 <p>2、解压缩<br>1）tar xf nginx-1.4.1.tar.gz（安装软件之前需要确认下时间，如果系统时间比软件包时间靠前的话，会认为软件包是来自未来的，因此软件包是无法使用的）<br>2）groupadd -r -g 108 nginx<br>3）useradd -r -g 108 -u 108 nginx（nginx应该要以普通用户的身份运行）<br>备注:<br>-r:创建系统账户<br>-g:指定gid<br>-u:指定uid</p>
 <p>3、编译安装<br>1）cd nginx-1.4.1<br>2）./configure –help|less（查看configure的帮助文档）</p>
-<p><img src="/images/pasted-630.png" alt="upload successful"><br>3）./configure \<br>–prefix=/usr \<br>–sbin-path=/usr/sbin/nginx \<br>–conf-path=/etc/nginx/nginx.conf \<br>–error-log-path=/var/log/nginx/error.log \<br>–htp-log-path=/var/log/nginx/access.log \<br>–pid-path=/var/run/nginx/nginx/pid \<br>–lock-path=/var/lock/nginx.lock \<br>–user=nginx \<br>–group=nginx \<br>–with-http_ssl-module \<br>–with-http_flv_module \<br>–with-http_stub_status_module \<br>–with-http_gzip_static_module \<br>–http-client-body-temp-path=/var/tmp/nginx/client/ \<br>–with-proxy-temp-path=/var/tmp/nginx/proxy/ \<br>–with-fastcgi-temp-path=/var/tmp/nginx/fcgi/ \<br>–withuwsgi-temp-path=/var/tmp/nginx/uwsgi/ \<br>–with-scgi-temp-path=/var/tmp/nginx/scgi/ \<br>–with-pcre\<br>–with-file-aio<br>4）make<br>5）make install<br>备注:<br>如果编译出错需要重新编译，要先make clean一下再configure</p>
-<p>4、将nginx加入到服务列表<br>chkconfig –add nginx（加到服务列表中去）<br>chkconfig –list nginx（检查是否已经加入到服务列表）</p>
+<p><img src="/images/pasted-630.png" alt="upload successful"><br>3）./configure \<br>–prefix=/usr \<br>–sbin-path=/usr/sbin/nginx \<br>–conf-path=/etc/nginx/nginx.conf \<br>–error-log-path=/var/log/nginx/error.log \<br>–htp-log-path=/var/log/nginx/access.log \<br>–pid-path=/var/run/nginx/nginx/pid \<br>–lock-path=/var/lock/nginx.lock \<br>–user=nginx \<br>–group=nginx \<br>–with-http_ssl-module \<br>–with-http_flv_module \<br>–with-http_stub_status_module \<br>–with-http_gzip_static_module \<br>–http-client-body-temp-path=/var/tmp/nginx/client/ \<br>–with-proxy-temp-path=/var/tmp/nginx/proxy/ \<br>–with-fastcgi-temp-path=/var/tmp/nginx/fcgi/ \<br>–withuwsgi-temp-path=/var/tmp/nginx/uwsgi/ \<br>–with-scgi-temp-path=/var/tmp/nginx/scgi/ \<br>–with-pcre\<br>–with-file-aio<br>4）make<br>5）make install<br>备注:<br>如果编译出错需要重新编译，要先make clean一下再configure<br>以上编译选项都是两个横杠在前面</p>
+<p>4、将nginx加入到服务列表<br>chkconfig –add nginx（加到服务列表中去）<br>chkconfig –list nginx（检查是否已经加入到服务列表）<br>备注：两个横杠</p>
 <p>5、启动nginx<br>要想启用nginx，需要编辑一个启动脚本:/etc/rc.d/init.d/nginx #需要自己写，可以参考httpd的启动停止脚本(就是可以通过脚本来实现start|stop|reload等功能)。然后通过service nginx start来启动nginx</p>
 <p>备注:<br>会在默认安装目录下创建一个html目录，里面放的就是网页文件。如果是按照上面方法提供的路径来安装nginx的话，网页文件就放在/usr/html目录中.</p>
 

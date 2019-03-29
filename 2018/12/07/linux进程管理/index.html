@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="Jim&#39;s Blog">
 <meta property="og:description" content="1、进程的优先级：0到139,140个优先级，数字越小，表示优先级越高其中，0到99是内核决定的，100到139是可以由用户调整的用户可以通过调整nice值来进行调整，默认每个进程的nice值都是0nice值的取值范围是-20到19，对应100到139（普通用户只能调大nice值来降低优先级，管理员才有权限调大和调小nice值）调整nice值：（1）调整已经启动的进程的nice值：renice N">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-07T09:44:31.235Z">
+<meta property="og:updated_time" content="2019-03-21T08:13:25.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux进程管理">
 <meta name="twitter:description" content="1、进程的优先级：0到139,140个优先级，数字越小，表示优先级越高其中，0到99是内核决定的，100到139是可以由用户调整的用户可以通过调整nice值来进行调整，默认每个进程的nice值都是0nice值的取值范围是-20到19，对应100到139（普通用户只能调大nice值来降低优先级，管理员才有权限调大和调小nice值）调整nice值：（1）调整已经启动的进程的nice值：renice N">
@@ -203,7 +203,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux内核调优/">linux内核调优</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux系统调优/">linux系统调优</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql笔记/">mysql笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python编程/">python编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell编程/">shell编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tcp-ip/">tcp/ip</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -232,7 +232,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -248,13 +248,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（缓存）/" class="title">nginx（缓存）</a>
+                <a href="/2019/03/28/rpm包安装详解/" class="title">rpm包安装详解</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T08:00:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-28T09:07:00.000Z" itemprop="datePublished">2019-03-28</time>
               </p>
             </div>
           </li>
@@ -263,13 +263,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡调度状态）/" class="title">nginx（负载均衡调度状态）</a>
+                <a href="/2019/03/28/软件包管理背景知识/" class="title">软件包管理背景知识</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T06:50:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-28T08:11:00.000Z" itemprop="datePublished">2019-03-28</time>
               </p>
             </div>
           </li>
@@ -278,13 +278,28 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡算法实例）/" class="title">nginx（负载均衡算法实例）</a>
+                <a href="/2019/03/28/软件包分类/" class="title">软件包分类（rpm包、二进制包、源码包）</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T06:13:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-28T07:06:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux系统调优/">linux系统调优</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/linux系统调优/" class="title">linux系统调优</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T02:24:00.000Z" itemprop="datePublished">2019-03-28</time>
               </p>
             </div>
           </li>
@@ -296,25 +311,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡算法）/" class="title">nginx（负载均衡算法）</a>
+                <a href="/2019/03/27/Raid详解/" class="title">Raid详解</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-03-01T06:01:31.000Z" itemprop="datePublished">2019-03-01</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/nginx/">nginx</a>
-              </p>
-              <p class="item-title">
-                <a href="/2019/03/01/nginx（负载均衡）/" class="title">nginx（负载均衡配置）</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2019-03-01T03:34:00.000Z" itemprop="datePublished">2019-03-01</time>
+                <time datetime="2019-03-27T09:23:18.000Z" itemprop="datePublished">2019-03-27</time>
               </p>
             </div>
           </li>
@@ -379,7 +379,7 @@
 <p>BSD风格（不需要加横杠-）：<br>a:显示所有跟终端有关的进程（跟终端有关：在终端中通过命令行运行启动的）<br>x:显示所有跟终端无关的进程（跟终端无关：系统启动的时候自动启动的进程，用户还没登录就已经产生的进程）<br>u:显示进程跟哪个用户相关</p>
 <p>pstree命令:显示当前系统的进程树<br>pgrep命令:根据进程名，查找进程的进程号<br>用法:pgrep 进程，如果加上选项-u user可以指定以哪个用户的身份运行的进程<br>pidof命令:根据程序名，查找其相关进程的ID号</p>
 <p>top命令:默认根据CPU大小进行排序</p>
-<p>（1）在top命令运行过程中按键：<br>N:根据内存大小排序<br>P:根据CPU大小排序<br>T:根据占用CPU时间大小排序</p>
+<p>（1）在top命令运行过程中按键：<br>M:根据内存大小排序<br>P:根据CPU大小排序<br>T:根据占用CPU时间大小排序</p>
 <p>l:是否显示平均负载和启动时间<br>t:是否显示进程和CPU状态相关的信息<br>m:是否显示内存相关信息<br>c:是否显示完整的命令行信息<br>k:是否终止某个进程<br>q:退出top</p>
 <p>（2）运行top命令时指定选项参数:<br>-d num:指定刷新时长，单位是s<br>-b:批模式，一屏一屏向后翻<br>-n num:在批模式下，显示多少屏，显示完成之后自动退出</p>
 <p>前台作业送到后台:<br>ctrl+z:把正在前台的作业送到后台并停止运行<br>COMMAND &amp;:让命令在后台执行</p>

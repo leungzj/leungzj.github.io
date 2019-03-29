@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>mysql笔记 | Hexo</title>
+  <meta name="description" content="1、数据库（database）保存有组织的数据的容器 人们通常用户数据库这个术语来代表他们所使用的数据库软件，这是不正确的。确切来说，数据库软件应该称为DBMS（数据库管理系统）。数据库是通过DBMS创建和操纵的容器。你并不是直接访问数据库，你使用的是DBMS，它替你访问数据库。 2、表（table）某种特定类型数据的结构化清单 不应该将顾客的清单和订单的清单存储在同一个数据表当中。这样做会使以后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql笔记">
+<meta property="og:url" content="http://yoursite.com/2019/03/05/mysql笔记/index.html">
+<meta property="og:site_name" content="Jim&#39;s Blog">
+<meta property="og:description" content="1、数据库（database）保存有组织的数据的容器 人们通常用户数据库这个术语来代表他们所使用的数据库软件，这是不正确的。确切来说，数据库软件应该称为DBMS（数据库管理系统）。数据库是通过DBMS创建和操纵的容器。你并不是直接访问数据库，你使用的是DBMS，它替你访问数据库。 2、表（table）某种特定类型数据的结构化清单 不应该将顾客的清单和订单的清单存储在同一个数据表当中。这样做会使以后">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-632.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-633.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-634.png">
+<meta property="og:updated_time" content="2019-03-06T06:42:07.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql笔记">
+<meta name="twitter:description" content="1、数据库（database）保存有组织的数据的容器 人们通常用户数据库这个术语来代表他们所使用的数据库软件，这是不正确的。确切来说，数据库软件应该称为DBMS（数据库管理系统）。数据库是通过DBMS创建和操纵的容器。你并不是直接访问数据库，你使用的是DBMS，它替你访问数据库。 2、表（table）某种特定类型数据的结构化清单 不应该将顾客的清单和订单的清单存储在同一个数据表当中。这样做会使以后">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-632.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2019/03/05/mysql笔记/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Jim</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">operation</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux内核调优/">linux内核调优</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux系统调优/">linux系统调优</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql笔记/">mysql笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python编程/">python编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell编程/">shell编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tcp-ip/">tcp/ip</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMI/">AMI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS免费套餐/">AWS免费套餐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS分区/">AWS分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS服务/">AWS服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EBS快照/">EBS快照</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2/">EC2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2存储/">EC2存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB/">ELB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB概念/">ELB概念</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IAM/">IAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brctl/">brctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cloudwatch/">cloudwatch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ifconfig/">ifconfig</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址/">ip地址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keepalived/">keepalived</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mstsc/">mstsc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nc/">nc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nmap/">nmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppet/">puppet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitmq/">rabbitmq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcpdump/">tcpdump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum/">yum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七层模型/">七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康检查/">健康检查</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分区/">分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卸载/">卸载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全组/">安全组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/封装/">封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/应用程序负载均衡器/">应用程序负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挂载/">挂载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件系统/">文件系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘/">磁盘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译安装/">编译安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络负载均衡器/">网络负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解封装/">解封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备发展史/">设备发展史</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备文件/">设备文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进制转换/">进制转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AMI/" style="font-size: 13.5px;">AMI</a> <a href="/tags/AWS免费套餐/" style="font-size: 13px;">AWS免费套餐</a> <a href="/tags/AWS分区/" style="font-size: 13px;">AWS分区</a> <a href="/tags/AWS服务/" style="font-size: 13px;">AWS服务</a> <a href="/tags/EBS快照/" style="font-size: 13.5px;">EBS快照</a> <a href="/tags/EC2/" style="font-size: 14px;">EC2</a> <a href="/tags/EC2存储/" style="font-size: 13px;">EC2存储</a> <a href="/tags/ELB/" style="font-size: 13px;">ELB</a> <a href="/tags/ELB概念/" style="font-size: 13px;">ELB概念</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/IAM/" style="font-size: 13px;">IAM</a> <a href="/tags/IP/" style="font-size: 13px;">IP</a> <a href="/tags/NFS/" style="font-size: 13px;">NFS</a> <a href="/tags/TCP/" style="font-size: 13px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 13px;">TCP/IP</a> <a href="/tags/UDP/" style="font-size: 13px;">UDP</a> <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/awk/" style="font-size: 13px;">awk</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/brctl/" style="font-size: 13px;">brctl</a> <a href="/tags/cloudwatch/" style="font-size: 13px;">cloudwatch</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/grep/" style="font-size: 13px;">grep</a> <a href="/tags/html/" style="font-size: 13px;">html</a> <a href="/tags/ifconfig/" style="font-size: 13px;">ifconfig</a> <a href="/tags/ip/" style="font-size: 13px;">ip</a> <a href="/tags/iptables/" style="font-size: 13px;">iptables</a> <a href="/tags/ip地址/" style="font-size: 13px;">ip地址</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/keepalived/" style="font-size: 14px;">keepalived</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mstsc/" style="font-size: 13px;">mstsc</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/nc/" style="font-size: 13px;">nc</a> <a href="/tags/nmap/" style="font-size: 13px;">nmap</a> <a href="/tags/puppet/" style="font-size: 13px;">puppet</a> <a href="/tags/rabbitmq/" style="font-size: 13px;">rabbitmq</a> <a href="/tags/redis/" style="font-size: 14px;">redis</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/tcpdump/" style="font-size: 13px;">tcpdump</a> <a href="/tags/yum/" style="font-size: 13px;">yum</a> <a href="/tags/七层模型/" style="font-size: 13px;">七层模型</a> <a href="/tags/云计算/" style="font-size: 13px;">云计算</a> <a href="/tags/健康检查/" style="font-size: 13px;">健康检查</a> <a href="/tags/分区/" style="font-size: 13px;">分区</a> <a href="/tags/卸载/" style="font-size: 13px;">卸载</a> <a href="/tags/安全组/" style="font-size: 13px;">安全组</a> <a href="/tags/封装/" style="font-size: 13px;">封装</a> <a href="/tags/应用程序负载均衡器/" style="font-size: 13px;">应用程序负载均衡器</a> <a href="/tags/挂载/" style="font-size: 13px;">挂载</a> <a href="/tags/文件系统/" style="font-size: 13px;">文件系统</a> <a href="/tags/正则/" style="font-size: 13px;">正则</a> <a href="/tags/磁盘/" style="font-size: 13px;">磁盘</a> <a href="/tags/编译安装/" style="font-size: 13px;">编译安装</a> <a href="/tags/网络负载均衡器/" style="font-size: 13px;">网络负载均衡器</a> <a href="/tags/解封装/" style="font-size: 13px;">解封装</a> <a href="/tags/设备发展史/" style="font-size: 13px;">设备发展史</a> <a href="/tags/设备文件/" style="font-size: 13px;">设备文件</a> <a href="/tags/进制转换/" style="font-size: 13px;">进制转换</a> <a href="/tags/进程/" style="font-size: 13px;">进程</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/rpm包安装详解/" class="title">rpm包安装详解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T09:07:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/软件包管理背景知识/" class="title">软件包管理背景知识</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T08:11:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux软件管理/">linux软件管理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/软件包分类/" class="title">软件包分类（rpm包、二进制包、源码包）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T07:06:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux系统调优/">linux系统调优</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/28/linux系统调优/" class="title">linux系统调优</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-28T02:24:00.000Z" itemprop="datePublished">2019-03-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/27/Raid详解/" class="title">Raid详解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-27T09:23:18.000Z" itemprop="datePublished">2019-03-27</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-mysql笔记" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql笔记
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/05/mysql笔记/" class="article-date">
+	  <time datetime="2019-03-05T03:35:00.000Z" itemprop="datePublished">2019-03-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/mysql笔记/">mysql笔记</a>
+  </span>
+
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/05/mysql笔记/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>1、数据库（database）<br>保存有组织的数据的容器</p>
+<p>人们通常用户数据库这个术语来代表他们所使用的数据库软件，这是不正确的。确切来说，数据库软件应该称为DBMS（数据库管理系统）。数据库是通过DBMS创建和操纵的容器。你并不是直接访问数据库，你使用的是DBMS，它替你访问数据库。</p>
+<p>2、表（table）<br>某种特定类型数据的结构化清单</p>
+<p>不应该将顾客的清单和订单的清单存储在同一个数据表当中。这样做会使以后的检索和访问很困难。应该创建两个表，每个清单一个表。数据库中的每个表都有一个名字，用来标识自己。表名字是唯一的。</p>
+<p>表具有一些特性，这些特性定义了数据在数据表中如何存储，比如说可以存储什么样的数据。</p>
+<p>3、模式（schema）<br>关于数据库和表的布局及特性的信息</p>
+<p>数据如何分解，各部分信息如何命名等等。描述表的这组信息就是模式。</p>
+<p>4、列（column）<br>表中的一个字段</p>
+<p>所有表都是由一个或者多个列组成。每个列有相应的数据类型。</p>
+<p>5、行（row）<br>表中的一个记录</p>
+<p>行有时也称为记录。</p>
+<p>6、主键（primary key）<br>列或一组列，其值能够唯一区分表中的每个行。也可以一起使用多个列作为主键</p>
+<p>应该总是定义主键：<br>1）任意两行都不具有相同的主键值<br>2）每个行都应该具备一个主键值（主键值不允许null值）</p>
+<p>7、sql<br>sql是结构化查询语言的缩写，是专门用来与数据库通信的语言</p>
+<p>sql优点：<br>1）sql不是某个特定数据库供应商专用的语言。几乎所有重要的DBMS都支持sql，但事实上任意两个DBMS实现的sql都不完全相同<br>2）sql简单易学。它的语句全都是由描述性很强的英语单词组成<br>3）sql是一种强有力的语言，可以进行非常复杂和高级的数据库操作</p>
+<p>8、mysql<br>mysql、oracle和Microsoft sql server等数据库是基于客户机-服务器的数据库。</p>
+<p>服务器部分是负责所有数据访问和处理的一个软件。关于数据添加、删除和更新的所有请求都是由服务器软件完成。客户机是与用户打交道的软件。这些请求或更改来自运行客户机软件的计算机。例如，客户机软件通过网络提交请求给服务器软件，服务器软件处理这个请求，根据需要过滤、丢弃和排序数据；然后把结果送回到你的客户机软件。</p>
+<p>mysql优点：<br>1）成本 – mysql是开放源代码的，一般可以免费使用（甚至可以免费修改）<br>2）性能 – mysql执行很快<br>3）可信赖 – 某些非常重要和声望很高的公司、站点使用mysql，这些公司和站点都用mysql来处理自己的重要数据<br>4）简单 – mysql很容易安装和使用</p>
+<p>9、mysql工具<br>mysql客户机</p>
+<p>1）mysql命令行实用程序<br>应该使用mysql -u ben -p -h myserver -P 9999（指定用户名、主机、端口号），完整的命令行选项和参数列表可以用mysql –help获得<br>也可以通过help获得特定命令的帮助，比如help select可以查看使用select语句的帮助</p>
+<p>2）mysql administrator<br>mysql administrator（mysql管理器）是一个图形交互客户机，用来简化mysql服务器的管理</p>
+<p>10、show命令<br>mysql&gt;show databases; 显示可用的数据库列表<br>use zabbix; 使用zabbix数据库<br>show tables; 返回当前数据库内可用表的列表<br>show columns from zabbix; 等价于describe zabbix，显示列<br>show status; 显示服务器状态信息<br>show create database; 查看创建特定数据库的mysql语句<br>show create table; 查看创建特定表的mysql语句<br>show grants; 显示用户（所有用户或特定用户）的安全权限<br>show errors; 显示服务器错误信息<br>show warnings; 显示服务器警告信息<br>help show; 显示允许的show语句</p>
+<p>11、查询数据<br>1）查询特定列<br>2）查询所有列（select *）<br>3）去重（select distinct）<br>4）限制结果跳数<br>limit 5 指示mysql返回结果为5行数据<br>limit 5,5 指示mysql返回从行5开始的5行。第一个5是开始位置（从0开始计数），第二个5是要检索的行数</p>
+<p>12、排列数据<br>order by<br>1）order by子句可以是所检索的列，也可以是非检索的列<br>2）可以是按照单个列排序，也可以是按照多个列排序<br>3）默认是升序排列（或者显式指定asc），也可以通过desc指定降序排序</p>
+<p>13、子句顺序<br>1）select<br>2）from<br>3）where<br>4）group by<br>5）having<br>6）order by<br>7）limit</p>
+<p>14、过滤数据<br>where</p>
+<p>操作符：</p>
+<p><img src="/images/pasted-632.png" alt="upload successful"></p>
+<p>15、组合where</p>
+<p>and:where子句中使用的关键字，用来指示检索满足所有给定条件的行<br>or:where子句中使用的关键字，用来检索匹配任一给定条件的行<br>in:where子句中用来指定要匹配值的清单的关键字，功能与or相当<br>not:where子句中用来否定后跟条件的关键字<br>备注：<br>sql(像大多数sql语言一样)在处理or操作符之前，优先处理and操作符。可以使用圆括号改变默认操作顺序。</p>
+<p>16、通配过滤</p>
+<p>like操作符：为在搜索子句中使用通配符，必须使用like操作符<br>like指示mysql，后跟的搜索模式利用通配符匹配而不是直接相等匹配进行比较</p>
+<p>搜索模式：由字面值、通配符或者两者组合构成的搜索条件<br>通配符：用来匹配值的一部分的特殊字符<br>1）百分号(%)通配符<br>表示任意字符出现任意次数<br>备注：<br>虽然似乎%可以匹配任何东西，但是有一个例外，就是null。<br>例如where prod_name like ‘%’不能匹配用值null作为产品名的行<br>2）下划线(_)通配符<br>下划线只匹配单个字符而不是多个字符</p>
+<p>17、正则过滤<br>关键字like被regexp替代，其他跟使用like很像</p>
+<p>like与regexp的区别：<br>1）like匹配整个列，如果被匹配的文本在列值中出现，like将不会找到它，相应的行也不会返回（除非使用通配符）<br>2）regexp在列值内匹配，如果被匹配的文本在列值中出现，regexp将会找到它，相应的行将被返回<br>例如，<br>3）select prod_name from products where prod_name regexp ‘1000’ order by prod_name; 返回数据’jetpack 1000’，列值内匹配<br>4）select prod_name from products where prod_name like ‘1000’<br>order by prod_name; 不返回数据，要整个匹配才会返回数据</p>
+<p>18、regexp用法<br>1）匹配整个列值（使用^与$定位符，从而功能与like相同）<br>2）默认不区分大小写（使用binary关键字可以区分大小写，例如select prod_name regexp binary ‘JetPack .000’）<br>3）or匹配（使用符号’|’，表示匹配符号’|’左边或者右边的其中一个）<br>4）匹配几个字符之一（使用中括号’[]’，比如[123]ab可以匹配1ab或2ab或3ab）<br>5）匹配几个字符之一的否定写法（使用中括号，并在中括号里面的集合的开始处放置一个^，比如[^123]就是匹配除1、2、3之外的任何字符）<br>6）匹配范围<br>[1-9] 匹配1到9<br>[a-d] 匹配a到d<br>7）匹配特殊字符<br>必须以\为前导。比如\-表示查找-，\.表示查找.，\\表示查找\<br>备注：<br>多数正则表达式实现使用单个反斜杠转义特殊字符，以便能使用这些字符本身。但mysql要求使用两个反斜杠（mysql自己解释一个，正则表达式库解释另一个）<br>8）匹配字符类<br>[:alnum:] 匹配任意数字和字母<br>[:alpha:] 匹配任意字符<br>[:digit:] 匹配任意数字<br>[:lower:] 匹配小写字母<br>[:upper:] 匹配大写字母<br>[:punct:] 匹配标点符号<br>[:space:] 匹配空白字符<br>[::xdigit] 匹配十六进制数<br>9）重复元字符（匹配其前面的字符多少次）<br>* 匹配其前面的字符任意次<br>+ 匹配其前面的字符至少1次<br>?  匹配其前面的字符0次或1次<br>{n} 匹配其前面的字符n次<br>{n,} 匹配其前面的字符至少n次<br>{n,m} 匹配其前面的字符至少n次，至多m次<br>10）定位符<br>^ 匹配文本的开始位置<br>$ 匹配文本的结束位置<br>[[:&lt;:]] 匹配词的开始位置<br>[[:&gt;:]] 匹配词的结束位置<br>备注：<br>^有3种用法：<br>a、用在集合[]中表示否定该集合<br>b、用在字符串’’中指定串的开始位置<br>c、如之前所知，like匹配整个串而regexp匹配子串。利用^的定位符功能，通过用^开始每个表达式，用$结束每个表达式，可以使regexp的作用与like一样<br>11）可以在不使用数据库的情况下使用select来测试正则表达式。例如使用带文字字符串的regexp来测试正则表达式<br>select ‘hello’ regexp ‘[0-9]’ 返回0，表示不匹配<br>备注：<br>返回0表示不匹配，返回1表示匹配</p>
+<p>19、拼接字段<br>concat()函数</p>
+<p>多数的DBMS使用+或者||来实现拼接，mysql则使用concat()函数来实现。括号里面是要拼接的字符串，用逗号隔开</p>
+<p>20、删除空格<br>trim()函数，支持rtrim()和ltrim()<br>trim() 删除左右两边的空格<br>rtrim() 删除右侧多余空格<br>ltrim() 删除左侧多余空格</p>
+<p>21、使用别名<br>使用关键字as</p>
+<p>22、使用select计算（省略from语句）<br>select 3*2 返回6<br>select trim(‘ abc ‘) 返回abc，去掉空格<br>select NOW() 返回当前日期和时间</p>
+<p>23、sql函数<br>分文本处理函数、日期和时间处理函数、数值处理函数、聚集函数、分组函数等</p>
+<p>24、文本处理函数<br>1）left()  从左边返回<br>left(str,length) left()函数接受两个参数，str是要提取子字符串的字符串，length是一个正整数，指定将从左边返回的字符数<br>例如，<br>select left(‘example.com’,3); 返回exa<br>2）right()  跟left相反，从右边返回<br>3）length()  返回字符串长度<br>4）locate()<br>locate(substr,str)  返回子串substr在字串str中第一次出现的位置。如果子串substr在str中不存在，将返回0<br>5）lower()  转换为小写<br>6）upper()  转换为大写<br>7）ltrim()  删除左侧多余的空格<br>8）rtrim()  删除右侧多余的空格<br>9）substring()<br>select substring(‘example.com’,4,2); 从字符串的第4个字符位置开始取，只取2个字符<br>10）soundex()  返回类似发音的值<br>where soundex(cust_contact) = soundex(‘Y Lie’) ‘cust_contact’的值中有’Y Lee’。因为’Y Lee’和’Y Lie’发音类似，所以它们的soundex值匹配，会返回’Y Lee’</p>
+<p>25、日期和时间函数<br>1）curdate()  返回当前日期<br>2）curtime()  返回当前时间<br>3）date()  返回日期时间的日期部分<br>4）datediff  计算两个日期之差<br>5）date_format()  返回一个格式化的日期时间<br>备注：<br>可以使用的格式有，<br>a、年<br>%Y 年，4位<br>%y 年，2位</p>
+<p>b、月<br>%b 缩写月名<br>%M 月名<br>%m 月，数值（00-12）</p>
+<p>c、日<br>%D 带有英文前缀的月中的天<br>%d 月的天，数值（00-31）</p>
+<p>d、时<br>%H 小时（00-23）<br>%h 小时（01-12）</p>
+<p>e、分<br>%i 分钟（数值00-59）</p>
+<p>f、秒<br>%S 秒（00-59）<br>%s 秒（00-59）</p>
+<p>year()  返回一个日期的年部分<br>month() 返回一个日期的月部分<br>day()  返回一个日期的天数<br>dayofweek()  返回一个日期对应的星期几<br>time()  返回一个日期的时间部分<br>hour()  返回一个日期的小时部分<br>minute()  返回一个日期的分钟部分<br>second()  返回一个日期的秒部分</p>
+<p>26、数值处理函数<br>1）abs()  返回一个数的绝对值<br>2）exp()  返回一个数的指数值<br>3）mod()  返回除操作的余数<br>4）pi()  返回圆周率<br>5）rand()  返回一个随机数<br>6）sqrt()  返回一个数的平方根</p>
+<p>27、聚集函数<br>定义：运行在行组中，计算和返回单个值的函数</p>
+<p>1）avg()  返回某列的平均值<br>avg()只能用于单列，要获得多列的平均值必须使用多个avg()函数</p>
+<p>2）count()  返回某列的行数<br>count()函数有两种使用方式：<br>count(*) 对表中的数目进行计数，不管包含的是空值还是非空值<br>count(column) 对特定列中具有值的行进行计数，忽略空值</p>
+<p>3）max()  返回某列中的最大值<br>在用于文本数据时，如果数据按照相应的列排序，则max()返回最后一行</p>
+<p>4）min()  返回某列的最小值<br>在用于文本数据时，如果数据按照相应的列排序，则min()返回最前面的一行</p>
+<p>5）sum()  返回某某列值之和</p>
+<p>28、分组函数<br>group by</p>
+<p>1）group by子句中列出的每个列必须是检索列或有效的表达式（但不能是聚集函数）<br>2）如果在select中使用表达式，则必须在group by子句中指定相同的表达式<br>3）不能使用别名<br>4）group by子句必须出现在order by子句之前<br>5）在分组函数中，不能使用where来过滤，而是用having来过滤。因为where过滤的是行而不是分组。having用在group by之后</p>
+<p>29、with rollup<br>可以实现在分组统计数据的基础上再做统计（sum,avg，count…）<br>用法示例：<br>例如我们将数据表按照名字进行分组，再统计每个人登录的次数</p>
+<p><img src="/images/pasted-633.png" alt="upload successful"></p>
+<p>30、子查询和相关子查询<br>子查询：嵌套在其他查询中的查询<br>相关子查询：涉及外部查询的子查询。可能会涉及到列名有多义性，这时候必须使用完全限定列名（表名和列名由一个句点分割）<br>备注：<br>子查询最常见的使用是在where子句的in操作符中</p>
+<p>31、外键<br>外键是某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系。可以用来连接两个表</p>
+<p>32、连接关系<br>1）内连接（等值连接）：inner join<br>select vend_name,prod_name,prod_price from vendors,products<br>where vendors.vend_id = products.vend_id order by vend_name,prod_name<br>也可以用规范的语法：<br>select vend_name,prod_name,prod_price from vendors inner join products on vendors.vend_id = products.vend_id<br>备注：<br>至于使用哪种语法，sql规范首选inner join语法</p>
+<p>2）自连接<br>select p1.prod_id,p1.prod_name from products as p1,products as p2 where p1.vend_id = p2.vend_id and p2.prod_id = ‘DTNTR’<br>等同于子查询：<br>select prod_id,prod_name from produtcs where vend_id = (select vend_id from products where prod_id = ‘DTNTR’)<br>备注：<br>有时候处理连接比处理子查询要快得多</p>
+<p>3）左外连接：left join或left outer join<br>包含左边表的所有行（不管右边的表中是否存在与它们匹配的行），以及右表中全部匹配的行</p>
+<p>4）右外连接：right join或right outer join<br>包含右边表的所有行（不管左边的表中是否存在与它们匹配的行），以及左表中全部匹配的行</p>
+<p>5）全外连接：full join或full outer join<br>包含左、右两个表的全部行，不管另外一边的表中是否存在与它们匹配的行</p>
+<p>6）交叉连接：没有连接关系（没有where子句）<br>生成笛卡尔积<br>备注：<br>笛卡尔积，是指由没有联结关系的表关系返回的结果称为笛卡尔积</p>
+<p>33、组合查询<br>union关键字</p>
+<p>union规则：<br>1）union必须有两条或者两条以上的select语句组成，语句之间用关键字union分隔<br>2）union的每个查询必须包含相同的列、表达式或聚集函数（不过各个列不需要以相同的次序列出）<br>3）列数据类型必须兼容：类型不必完全相同，但必须是DBMS可以隐含的转换的类型（例如，不同的数值类型或不同的日期类型）<br>备注：<br>1）union从查询结果集中自动的去除了重复的行；如果想返回所有行，可以使用union all而不是union<br>2）union几乎总是完成与多个where条件相同的工作。union all为union的一种形式，它完成where子句完成不了的工作。如果确实需要每个条件的匹配行全部出现（包括重复行），则必须使用union all而不是where</p>
+<p>34、全文本搜索功能<br>mysql最常用的搜索引擎是myisam和innodeDB，但是只有myisam支持全文本搜索，innodeDB不支持</p>
+<p>为什么需要全文本搜索功能：<br>mysql支持使用like运算符和正则表达式进行文本搜索。但是，当文本列较大并且表中的行数增加时，使用这些方法有一些限制：<br>1）性能问题：mysql必须扫描整个表以根据like或正则表达式的模式查找文本<br>2）灵活搜索：使用like或者正则表达式搜索，很难进行灵活的搜索查询。例如，查找描述包含car但不是classic的产品<br>3）没有办法指定结果集中的哪一行与搜索字词更相关</p>
+<p>由于这些限制，mysql扩展了一个非常好的功能，叫做全文搜索。从技术上讲，mysql从启用的全文搜索列的单词中创建一个索引，并对该索引进行搜索。mysql使用复杂的算法来确定与搜索查询匹配的行。</p>
+<p>35、全文本搜索示例<br>1）启用全文本搜索支持：在创建表的时候通过fulltext子句启用<br>create table productnotes(<br>  note_id int not null auto_increment,<br>  prod_id char(10) not null,<br>  note_date datetime not null,<br>  note_text text,<br>  primary_key(note_id),<br>  fulltext(note_text),<br>)engine=myisam;<br>以上例子中，mysql根据子句fulltext(note_text)对它进行索引。在定义之后，mysql自动维护该索引。在增加、更新、删除行时，索引随之更新。可以在创建的时候指定fulltext，也可以在稍后指定。</p>
+<p>2）进行全文本搜索<br>在索引之后，使用两个函数match()和against()执行全文本搜索，其中match()指定被搜索的列，against指定要使用的搜索表达式<br>select note_text from productnotes where match(note_text) against(‘rabbit’)<br>以上例子中，match(note_text)指示mysql针对指定的列进行搜索，against(‘rabbit’)指定词rabbit作为搜索文本<br>备注：<br>a、传递给match()的值必须与fulltext()定义中的相同。如果指定多个列，则必须列出它们（并且次序要相同）<br>b、搜索不区分大小写（除非使用binary方式，否则全文本搜索不区分大小写）<br>c、全文本搜索提供了简单like搜索不能提供的功能。而且，数据是索引的，全文本搜索还相当快</p>
+<p>3）查询扩展<br>使用全文本搜索，但是没有查询扩展：<br>select note_text from productnotes where match(note_text) against(‘anvils’);<br>使用全文本搜索，并且使用查询扩展：<br>select note_text from productnotes where match(note_text) against(‘anvils’ with query expansion);<br>这行返回的行数比较多。<br>第一行包含词anvils，因此等级最高；<br>第二行与anvils无关，但因为它包含第一行中的两个词（customer和recommend），所以也被检索出来<br>第三行也包含这两个相同的词，但它们在文本中的位置更靠后且分开得更远，因此也包含这一行，但等级为三。</p>
+<p>4）布尔文本搜索<br>布尔文本搜索与全文本搜索不同的地方在于：<br>1）可以排除指定的关键字<br>2）即使没有定义fulltext索引，也可以使用它</p>
+<p>select note_text from productnotes where match(note_text) against(‘heavy -rope*‘ in boolean mode);<br>以上例子中，表示匹配词heavy，但-rope*指示mysql排除包含rope的行</p>
+<p>select note_text from productnotes where match(note_text) against(‘rabbit bait’ in boolean mode);<br>以上例子中，没有指定关键字，这个搜索匹配包含rabbit和bait中的至少一个词的行</p>
+<p>备注：<br>布尔操作符：</p>
+<p><img src="/images/pasted-634.png" alt="upload successful"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2019/03/05/mysql笔记/" title="mysql笔记" target="_blank" rel="external">http://yoursite.com/2019/03/05/mysql笔记/</a>
+    </li>
+    
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/" target="_blank"><span class="text-dark">Jim</span><small class="ml-1x">operation</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="vcomments"></div>
+
+    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/06/mysql笔记2/" title="mysql"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/01/nginx（缓存）/" title="nginx（缓存）"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,facebook" data-mobile-sites="qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zhifubao.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat_zanshang.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/valine"></script>
+   <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+     var meta = 'nick,mail,link';
+     meta = meta.split(',').filter(function (item) {
+       return GUEST.indexOf(item)>-1;
+     });
+     new Valine({
+         el: '#vcomments' ,
+         verify: false,
+         notify: false,
+         appId: '',
+         appKey: '',
+         placeholder: 'Just go go',
+         avatar:'mm',
+         meta:meta,
+         pageSize:'10' || 10,
+         visitor: false
+     });
+   </script>
+
+    
+
+    
+    
+
+
+
+</body>
+</html>
