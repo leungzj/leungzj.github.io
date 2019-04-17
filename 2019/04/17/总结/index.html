@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>EC2总结 | Hexo</title>
+  <meta name="description" content="EC2 (Elastic Cloud Compute)了解不同EC2实例类型的区别，要知道在不同的使用场景需要使用哪一种类型的EC21、按需实例（On Demand Instance）- 用多少时间付费多少，费用精确到秒，不用则可以随时关闭/终止并停止费用的产生2、竞价实例（Spot Instance）- 以低于按需实例的价格竞得实例，但价格高于设定的价格后会自动被终止3、保留实例（Reserve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EC2总结">
+<meta property="og:url" content="http://yoursite.com/2019/04/17/总结/index.html">
+<meta property="og:site_name" content="Jim&#39;s Blog">
+<meta property="og:description" content="EC2 (Elastic Cloud Compute)了解不同EC2实例类型的区别，要知道在不同的使用场景需要使用哪一种类型的EC21、按需实例（On Demand Instance）- 用多少时间付费多少，费用精确到秒，不用则可以随时关闭/终止并停止费用的产生2、竞价实例（Spot Instance）- 以低于按需实例的价格竞得实例，但价格高于设定的价格后会自动被终止3、保留实例（Reserve">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-17T02:40:52.114Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EC2总结">
+<meta name="twitter:description" content="EC2 (Elastic Cloud Compute)了解不同EC2实例类型的区别，要知道在不同的使用场景需要使用哪一种类型的EC21、按需实例（On Demand Instance）- 用多少时间付费多少，费用精确到秒，不用则可以随时关闭/终止并停止费用的产生2、竞价实例（Spot Instance）- 以低于按需实例的价格竞得实例，但价格高于设定的价格后会自动被终止3、保留实例（Reserve">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2019/04/17/总结/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Jim</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">operation</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">37</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git-Github/">Git && Github</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/QA/">QA</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iptables/">iptables</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jenkins/">jenkins</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/keepalived/">keepalived</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux共享服务/">linux共享服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux内核调优/">linux内核调优</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux抓包管理/">linux抓包管理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux文本处理/">linux文本处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux磁盘管理/">linux磁盘管理</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux系统调优/">linux系统调优</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux网络管理/">linux网络管理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux软件管理/">linux软件管理</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux进程管理/">linux进程管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql笔记/">mysql笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python编程/">python编程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell编程/">shell编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tcp-ip/">tcp/ip</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安装篇/">安装篇</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具篇/">工具篇</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/搭建篇/">搭建篇</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/通信原理/">通信原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/项目管理/">项目管理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/高可用web/">高可用web</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMI/">AMI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS免费套餐/">AWS免费套餐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS分区/">AWS分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS服务/">AWS服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EBS快照/">EBS快照</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2/">EC2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EC2存储/">EC2存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB/">ELB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELB概念/">ELB概念</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IAM/">IAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brctl/">brctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cloudwatch/">cloudwatch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ifconfig/">ifconfig</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址/">ip地址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keepalived/">keepalived</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mstsc/">mstsc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nc/">nc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nmap/">nmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppet/">puppet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitmq/">rabbitmq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/secureCRT/">secureCRT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcpdump/">tcpdump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum/">yum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七层模型/">七层模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康检查/">健康检查</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分区/">分区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卸载/">卸载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全组/">安全组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/封装/">封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/应用程序负载均衡器/">应用程序负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挂载/">挂载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件系统/">文件系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘/">磁盘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译安装/">编译安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络负载均衡器/">网络负载均衡器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解封装/">解封装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备发展史/">设备发展史</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备文件/">设备文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进制转换/">进制转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AMI/" style="font-size: 13.5px;">AMI</a> <a href="/tags/AWS免费套餐/" style="font-size: 13px;">AWS免费套餐</a> <a href="/tags/AWS分区/" style="font-size: 13px;">AWS分区</a> <a href="/tags/AWS服务/" style="font-size: 13px;">AWS服务</a> <a href="/tags/EBS快照/" style="font-size: 13.5px;">EBS快照</a> <a href="/tags/EC2/" style="font-size: 14px;">EC2</a> <a href="/tags/EC2存储/" style="font-size: 13px;">EC2存储</a> <a href="/tags/ELB/" style="font-size: 13px;">ELB</a> <a href="/tags/ELB概念/" style="font-size: 13px;">ELB概念</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/IAM/" style="font-size: 13px;">IAM</a> <a href="/tags/IP/" style="font-size: 13px;">IP</a> <a href="/tags/NFS/" style="font-size: 13px;">NFS</a> <a href="/tags/TCP/" style="font-size: 13px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 13px;">TCP/IP</a> <a href="/tags/UDP/" style="font-size: 13px;">UDP</a> <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/awk/" style="font-size: 13px;">awk</a> <a href="/tags/boost/" style="font-size: 13px;">boost</a> <a href="/tags/brctl/" style="font-size: 13px;">brctl</a> <a href="/tags/cloudwatch/" style="font-size: 13px;">cloudwatch</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/grep/" style="font-size: 13px;">grep</a> <a href="/tags/html/" style="font-size: 13px;">html</a> <a href="/tags/ifconfig/" style="font-size: 13px;">ifconfig</a> <a href="/tags/ip/" style="font-size: 13px;">ip</a> <a href="/tags/iptables/" style="font-size: 13px;">iptables</a> <a href="/tags/ip地址/" style="font-size: 13px;">ip地址</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/keepalived/" style="font-size: 14px;">keepalived</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mstsc/" style="font-size: 13px;">mstsc</a> <a href="/tags/mysql/" style="font-size: 13.5px;">mysql</a> <a href="/tags/nc/" style="font-size: 13px;">nc</a> <a href="/tags/nmap/" style="font-size: 13px;">nmap</a> <a href="/tags/puppet/" style="font-size: 13px;">puppet</a> <a href="/tags/rabbitmq/" style="font-size: 13px;">rabbitmq</a> <a href="/tags/redis/" style="font-size: 14px;">redis</a> <a href="/tags/secureCRT/" style="font-size: 13px;">secureCRT</a> <a href="/tags/tcpdump/" style="font-size: 13px;">tcpdump</a> <a href="/tags/yum/" style="font-size: 13px;">yum</a> <a href="/tags/七层模型/" style="font-size: 13px;">七层模型</a> <a href="/tags/云计算/" style="font-size: 13px;">云计算</a> <a href="/tags/健康检查/" style="font-size: 13px;">健康检查</a> <a href="/tags/分区/" style="font-size: 13px;">分区</a> <a href="/tags/卸载/" style="font-size: 13px;">卸载</a> <a href="/tags/安全组/" style="font-size: 13px;">安全组</a> <a href="/tags/封装/" style="font-size: 13px;">封装</a> <a href="/tags/应用程序负载均衡器/" style="font-size: 13px;">应用程序负载均衡器</a> <a href="/tags/挂载/" style="font-size: 13px;">挂载</a> <a href="/tags/文件系统/" style="font-size: 13px;">文件系统</a> <a href="/tags/正则/" style="font-size: 13px;">正则</a> <a href="/tags/磁盘/" style="font-size: 13px;">磁盘</a> <a href="/tags/编译安装/" style="font-size: 13px;">编译安装</a> <a href="/tags/网络负载均衡器/" style="font-size: 13px;">网络负载均衡器</a> <a href="/tags/解封装/" style="font-size: 13px;">解封装</a> <a href="/tags/设备发展史/" style="font-size: 13px;">设备发展史</a> <a href="/tags/设备文件/" style="font-size: 13px;">设备文件</a> <a href="/tags/进制转换/" style="font-size: 13px;">进制转换</a> <a href="/tags/进程/" style="font-size: 13px;">进程</a> <a href="/tags/集群/" style="font-size: 13px;">集群</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">53</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AWS/">AWS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/17/EFS/" class="title">EFS &amp;&amp; EBS &amp;&amp; S3的区别</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-17T02:46:00.000Z" itemprop="datePublished">2019-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AWS/">AWS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/17/总结/" class="title">EC2总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-17T02:18:00.000Z" itemprop="datePublished">2019-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AWS/">AWS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/17/无服务/" class="title">无服务lambda</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-17T02:02:00.000Z" itemprop="datePublished">2019-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/通信原理/">通信原理</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/17/通信基础/" class="title">通信基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-17T01:29:00.000Z" itemprop="datePublished">2019-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/mysql/">mysql</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/15/权限/" class="title">mysql用户和权限管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-15T08:43:00.000Z" itemprop="datePublished">2019-04-15</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      EC2总结
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/04/17/总结/" class="article-date">
+	  <time datetime="2019-04-17T02:18:00.000Z" itemprop="datePublished">2019-04-17</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/AWS/">AWS</a>
+  </span>
+
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/17/总结/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>EC2 (Elastic Cloud Compute)<br>了解不同EC2实例类型的区别，要知道在不同的使用场景需要使用哪一种类型的EC2<br>1、按需实例（On Demand Instance）- 用多少时间付费多少，费用精确到秒，不用则可以随时关闭/终止并停止费用的产生<br>2、竞价实例（Spot Instance）- 以低于按需实例的价格竞得实例，但价格高于设定的价格后会自动被终止<br>3、保留实例（Reserved Instance） – 相当于买断一个实例1年/3年，期间不管实例开不开都需要付总得费用，但平均下来费用会比按需实例便宜<br>4、专用主机实例（Dedicated Hosts）- 涉及到软件许可证的时候，会考虑使用专用主机实例</p>
+<p>终止一个竞价实例：<br>1、如果主动终止一个竞价实例，需要为当前这个完整小时付费<br>2、如果因为价格上涨，AWS终止了你的竞价实例，那么这个小时的费用会被免费<br>备注：<br>1、实例的终止保护（Termination Protection）功能是默认关闭的，有需要必须手动开启。开启后实例将无法被终止，除非先将终止保护关闭<br>2、使用EBS为存储的实例，默认情况下如果该实例被终止，这个根EBS卷也会被随之删除（但也可以设置为实例被终止的时候保留根EBS卷）</p>
+<p>EBS (Elastic Block Storage)<br>EBS的不同类型，需要了解不同类型的EBS主要的使用场景<br>1、通用型SSD – GP2 (高达10,000 IOPS)，适用于启动盘，低延迟的应用程序<br>2、预配置型SSD – IO1 (超过10,000 IOPS)，适用于IO密集型的数据库<br>3、吞吐量优化型HDD -ST1，适用于数据仓库，日志处理<br>4、HDD Cold – SC1 – 适合较少使用的冷数据<br>5、HDD, Magnetic</p>
+<p>备注：<br>1、不能将EBS挂载到多个EC2实例上，一个EBS只能挂载到1个EC2实例上。<br>2、如果有共享数据盘的需求，请使用EFS (Elastic File System)<br>3、根EBS卷默认是不能进行加密的，但可以使用第三方的加密工具（例如BitLocker）对其进行加密。除了根磁盘外的其他卷是可以加密的</p>
+<p>EBS快照<br>1、EBS的快照会被保存到S3（Simple Storage System）上<br>2、你可以对一个EBS卷创建一个快照，这个快照会被保存到S3上<br>3、快照实际上是增量备份，只有在上次进行快照之后更改的数据才会被添加的S3上。因此第一次快照所花费的时间比较长，而第二次以后的快照所花费的时间相对短很多<br>4、对加密的EBS卷创建快照，创建后的快照也会是加密的<br>5、从加密的快照恢复的EBS卷也会是加密的<br>6、你可以分享快照给其他账户或AWS市场，但仅限于这个快照是没有进行过加密的<br>7、要为一个作为根设备的EBS卷创建快照的话，建议停止这个实例再做快照</p>
+<p>实例存储（Instance Store）<br>1、实例存储也叫做短暂性存储（Ephemeral Storage）<br>2、实例存储的实例不能被停止（只能重启或终止），如果这个实例出现故障，那么在上面的所有数据将会丢失<br>3、使用EBS的实例可以被停止，停止后EBS上的数据不会丢失<br>4、重启使用实例存储的实例或者重启使用EBS的实例都不会导致数据丢失</p>
+<p>亚马逊系统镜像（AMI）<br>1、AMI是区域化的，只能使用本区域的AMI来创建实例<br>2、但你可以将AMI从一个区域复制到另一个区域</p>
+<p>CloudWatch监控<br>1、标准监控 = 5 分钟<br>2、详细监控 = 1 分钟 （需要额外付费）<br>3、CloudWatch是用来监控系统性能的<br>4、CloudTrail是用来做审计的（查看日志信息等）</p>
+<p>角色（Role）<br>1、使用角色（Role）比使用Access Key和Secret Access Key要安全很多<br>2、角色更容易管理和变更<br>3、角色可以在EC2实例启动之后再分配，并且可以随时更改角色以及角色关联的策略。在旧版本中，角色只能在EC2创建的时候分配，并且实例启动之后不能对角色进行任何更改<br>4、角色是跨区域的，创建的角色可以在任何区域中使用</p>
+<p>EFS (Elastic File System)<br>1、支持Network File System vesion 4 (NFSv4) 协议<br>2、只为使用的EFS份额付费<br>3、容量可以扩展到PB级别<br>4、可以同时间支持成千上万的NFS连接<br>5、EFS的数据会保存在一个区域内的多个可用区<br>6、读写一致性（Read After Write Consistency）</p>
+<p>Lambda<br>了解Lambda的无服务概念和可以使用的场景。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2019/04/17/总结/" title="EC2总结" target="_blank" rel="external">http://yoursite.com/2019/04/17/总结/</a>
+    </li>
+    
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/" target="_blank"><span class="text-dark">Jim</span><small class="ml-1x">operation</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="vcomments"></div>
+
+    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/04/17/EFS/" title="EFS &amp;&amp; EBS &amp;&amp; S3的区别"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/04/17/无服务/" title="无服务lambda"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,facebook" data-mobile-sites="qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/zhifubao.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat_zanshang.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/leungzj" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://juejin.im/" target="_blank" title="Juejin" data-toggle=tooltip data-placement=top><i class="icon icon-juejin"></i></a></li>
+        
+        <li><a href="https://readhub.cn/daily/" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/valine"></script>
+   <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+     var meta = 'nick,mail,link';
+     meta = meta.split(',').filter(function (item) {
+       return GUEST.indexOf(item)>-1;
+     });
+     new Valine({
+         el: '#vcomments' ,
+         verify: false,
+         notify: false,
+         appId: '',
+         appKey: '',
+         placeholder: 'Just go go',
+         avatar:'mm',
+         meta:meta,
+         pageSize:'10' || 10,
+         visitor: false
+     });
+   </script>
+
+    
+
+    
+    
+
+
+
+</body>
+</html>
